@@ -15,15 +15,11 @@
   <style>
     :root{
       --bg:#000;
-      --panel:#161413;
-      --panel2:#0d0c0b;
       --ink:#f2ede3;
       --muted:rgba(242,237,227,.78);
       --line:rgba(242,237,227,.14);
       --gold:#b89457;
       --gold2:#d2b07a;
-      --shadow:0 18px 45px rgba(0,0,0,.55);
-      --radius:12px;
     }
 
     *{ box-sizing:border-box; }
@@ -92,18 +88,18 @@
       grid-template-columns: 1.08fr .92fr;
       align-items:center;
       gap: 44px;
-      padding: 60px 0 48px; /* slightly tighter to reduce dead space */
-      min-height: 480px;     /* slightly shorter to reduce dead space */
+      padding: 60px 0 48px;
+      min-height: 480px;
     }
 
-    /* Center the logo block and keep SHOP directly under it */
+    /* Logo centered w/ SHOP directly under */
     .hero-content{
       max-width: 560px;
-      text-align:center;             /* key change */
-      margin: 0 auto;                /* key change */
-      display:flex;                  /* key change */
-      flex-direction:column;         /* key change */
-      align-items:center;            /* key change */
+      text-align:center;
+      margin: 0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
     .hero-logo{
       width: min(520px, 100%);
@@ -112,9 +108,7 @@
       margin: 0;
       filter: drop-shadow(0 24px 40px rgba(0,0,0,.75));
     }
-    .hero-cta{
-      margin-top: 10px;              /* closer to logo */
-    }
+    .hero-cta{ margin-top: 10px; }
 
     .hero-athlete{
       display:flex;
@@ -129,10 +123,10 @@
       background: rgba(0,0,0,.18);
     }
 
-    /* Featured section */
+    /* Featured */
     main{
       background:#000;
-      padding: 34px 0 10px; /* slightly tighter */
+      padding: 34px 0 10px;
     }
     .section-title{
       display:flex;
@@ -155,53 +149,59 @@
       background: linear-gradient(90deg, transparent, rgba(242,237,227,.25), transparent);
     }
 
-    /* Bigger cards + bigger images + less whitespace */
+    /* NEW: borderless product layout (no boxes) */
     .product-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
-      margin: 10px 0 18px;
+      gap: 40px;              /* more breathing room between items */
+      margin: 18px 0 10px;
+      align-items:start;
     }
-    .card{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        #0c0b0a;
-      border: 1px solid rgba(242,237,227,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+
+    .product{
+      text-align:center;
     }
-    .card-media{
-      background: rgba(255,255,255,.05);
-      border-bottom: 1px solid rgba(242,237,227,.10);
-      padding: 18px;
+
+    /* Make the image fill the space */
+    .product-media{
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height: 330px;  /* bigger */
+      width:100%;
+      min-height: 360px;      /* bigger visual footprint */
+      padding: 0;             /* no frame padding */
+      margin-bottom: 14px;
     }
-    .card-media img{
-      max-width: 100%;
-      max-height: 310px; /* bigger */
-      height:auto;
+    .product-media img{
+      width: 100%;
+      max-width: 360px;       /* keeps balance */
+      height: auto;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 10px;    /* subtle, not a box */
+      filter: drop-shadow(0 22px 45px rgba(0,0,0,.65));
     }
-    .card-body{
-      padding: 18px 18px 20px;
-      text-align:center;
-    }
-    .card-title{
-      margin: 6px 0 12px;
+
+    .product-title{
+      margin: 0 0 8px;
       font-family: Cinzel, serif;
       font-size: 16px;
-      letter-spacing:.04em;
+      letter-spacing:.06em;
       text-transform: uppercase;
       color: rgba(242,237,227,.90);
     }
 
+    /* NEW: Price between title and button */
+    .product-price{
+      margin: 0 0 14px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color: rgba(210,176,122,.95);
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
     .tagline{
-      margin: 18px 0 14px; /* tighter */
+      margin: 18px 0 14px;
       text-align:center;
       font-family: Cinzel, serif;
       font-size: 20px;
@@ -218,7 +218,6 @@
       width:min(560px, 100%);
     }
 
-    /* Footer */
     footer{
       margin-top: 18px;
       padding: 22px 0 32px;
@@ -246,7 +245,6 @@
       text-transform: uppercase;
     }
 
-    /* Responsive */
     @media (max-width: 920px){
       .hero-inner{
         grid-template-columns: 1fr;
@@ -254,15 +252,13 @@
         padding: 48px 0 30px;
         min-height: unset;
       }
-      .hero-content{
-        margin: 0 auto;
-      }
       .hero-athlete{
         justify-content:center;
         margin-top: 18px;
       }
-      .product-grid{ grid-template-columns: 1fr; }
-      .card-media{ min-height: 310px; }
+      .product-grid{ grid-template-columns: 1fr; gap: 28px; }
+      .product-media{ min-height: 320px; }
+      .product-media img{ max-width: 420px; }
       .rule{ width: 16vw; }
     }
   </style>
@@ -274,20 +270,17 @@
     <div class="hero-bg" aria-hidden="true"></div>
 
     <div class="wrap hero-inner">
-      <!-- LEFT: LOGO + SHOP directly under -->
       <div class="hero-content">
         <img
           src="./assets/unashamed_logo_white.png"
           alt="Unashamed Strength"
           class="hero-logo"
         />
-
         <div class="hero-cta">
           <a class="btn btn-gold" href="#featured">SHOP</a>
         </div>
       </div>
 
-      <!-- RIGHT: ATHLETE -->
       <div class="hero-athlete">
         <img
           src="./assets/home_page_male_athlete.png"
@@ -306,38 +299,35 @@
       </div>
 
       <div class="product-grid">
-        <!-- 1) Driven By Faith Tee -->
-        <article class="card">
-          <div class="card-media">
+        <!-- 1 -->
+        <section class="product">
+          <div class="product-media">
             <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee" />
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Driven By Faith Tee</h3>
-            <a class="btn btn-dark" href="#">ADD TO CART</a>
-          </div>
-        </article>
+          <h3 class="product-title">Driven By Faith Tee</h3>
+          <div class="product-price">$34.00</div>
+          <a class="btn btn-dark" href="#">ADD TO CART</a>
+        </section>
 
-        <!-- 2) Shaker Bottle -->
-        <article class="card">
-          <div class="card-media">
+        <!-- 2 -->
+        <section class="product">
+          <div class="product-media">
             <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle" />
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Unashamed Shaker Bottle</h3>
-            <a class="btn btn-dark" href="#">ADD TO CART</a>
-          </div>
-        </article>
+          <h3 class="product-title">Unashamed Shaker Bottle</h3>
+          <div class="product-price">$24.00</div>
+          <a class="btn btn-dark" href="#">ADD TO CART</a>
+        </section>
 
-        <!-- 3) Built By Faith Hoodie -->
-        <article class="card">
-          <div class="card-media">
+        <!-- 3 -->
+        <section class="product">
+          <div class="product-media">
             <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie" />
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Built By Faith Hoodie</h3>
-            <a class="btn btn-dark" href="#">ADD TO CART</a>
-          </div>
-        </article>
+          <h3 class="product-title">Built By Faith Hoodie</h3>
+          <div class="product-price">$54.00</div>
+          <a class="btn btn-dark" href="#">ADD TO CART</a>
+        </section>
       </div>
 
       <p class="tagline">Wear your faith. Train with purpose. Live unashamed.</p>
