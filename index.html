@@ -68,7 +68,7 @@
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btn:active{ transform: translateY(0px); }
 
-    /* HERO (no boxes, full-bleed background) */
+    /* HERO */
     .hero{
       position:relative;
       overflow:hidden;
@@ -92,12 +92,18 @@
       grid-template-columns: 1.08fr .92fr;
       align-items:center;
       gap: 44px;
-      padding: 74px 0 64px;
-      min-height: 520px;
+      padding: 60px 0 48px; /* slightly tighter to reduce dead space */
+      min-height: 480px;     /* slightly shorter to reduce dead space */
     }
 
+    /* Center the logo block and keep SHOP directly under it */
     .hero-content{
       max-width: 560px;
+      text-align:center;             /* key change */
+      margin: 0 auto;                /* key change */
+      display:flex;                  /* key change */
+      flex-direction:column;         /* key change */
+      align-items:center;            /* key change */
     }
     .hero-logo{
       width: min(520px, 100%);
@@ -106,10 +112,8 @@
       margin: 0;
       filter: drop-shadow(0 24px 40px rgba(0,0,0,.75));
     }
-
-    /* Shop button directly under logo */
     .hero-cta{
-      margin-top: 16px;
+      margin-top: 10px;              /* closer to logo */
     }
 
     .hero-athlete{
@@ -125,17 +129,17 @@
       background: rgba(0,0,0,.18);
     }
 
-    /* Featured section (black below hero) */
+    /* Featured section */
     main{
       background:#000;
-      padding: 44px 0 10px;
+      padding: 34px 0 10px; /* slightly tighter */
     }
     .section-title{
       display:flex;
       align-items:center;
       justify-content:center;
       gap:18px;
-      margin: 0 0 26px;
+      margin: 0 0 22px;
     }
     .section-title h2{
       margin:0;
@@ -151,12 +155,12 @@
       background: linear-gradient(90deg, transparent, rgba(242,237,227,.25), transparent);
     }
 
-    /* Make product cards + images larger */
+    /* Bigger cards + bigger images + less whitespace */
     .product-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin: 10px 0 22px;
+      gap: 26px;
+      margin: 10px 0 18px;
     }
     .card{
       background:
@@ -174,11 +178,11 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height: 290px; /* bigger */
+      min-height: 330px;  /* bigger */
     }
     .card-media img{
       max-width: 100%;
-      max-height: 270px; /* bigger */
+      max-height: 310px; /* bigger */
       height:auto;
       object-fit: contain;
       border-radius: 12px;
@@ -197,7 +201,7 @@
     }
 
     .tagline{
-      margin: 22px 0 16px;
+      margin: 18px 0 14px; /* tighter */
       text-align:center;
       font-family: Cinzel, serif;
       font-size: 20px;
@@ -208,7 +212,7 @@
     .cta{
       display:flex;
       justify-content:center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .cta .btn{
       width:min(560px, 100%);
@@ -216,8 +220,8 @@
 
     /* Footer */
     footer{
-      margin-top: 22px;
-      padding: 26px 0 34px;
+      margin-top: 18px;
+      padding: 22px 0 32px;
       border-top: 1px solid rgba(242,237,227,.12);
       text-align:center;
     }
@@ -247,26 +251,18 @@
       .hero-inner{
         grid-template-columns: 1fr;
         text-align:center;
-        padding: 54px 0 34px;
+        padding: 48px 0 30px;
         min-height: unset;
       }
       .hero-content{
         margin: 0 auto;
-      }
-      .hero-logo{
-        margin-left:auto;
-        margin-right:auto;
-      }
-      .hero-cta{
-        display:flex;
-        justify-content:center;
       }
       .hero-athlete{
         justify-content:center;
         margin-top: 18px;
       }
       .product-grid{ grid-template-columns: 1fr; }
-      .card-media{ min-height: 270px; }
+      .card-media{ min-height: 310px; }
       .rule{ width: 16vw; }
     }
   </style>
