@@ -14,17 +14,16 @@
 
   <style>
     :root{
-      --black:#000;
-      --bg:#050505;
-      --panel:#101010;
-      --panel2:#0b0b0b;
+      --bg:#000;
+      --panel:#161413;
+      --panel2:#0d0c0b;
       --ink:#f2ede3;
       --muted:rgba(242,237,227,.78);
       --line:rgba(242,237,227,.14);
       --gold:#b89457;
       --gold2:#d2b07a;
       --shadow:0 18px 45px rgba(0,0,0,.55);
-      --radius:14px;
+      --radius:12px;
     }
 
     *{ box-sizing:border-box; }
@@ -32,40 +31,38 @@
     body{
       margin:0;
       color:var(--ink);
-      background: var(--black); /* EVERYTHING DEFAULTS TO BLACK */
+      background: var(--bg);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
-    img{ max-width:100%; display:block; }
 
-    .wrap{ width:min(1120px, calc(100% - 44px)); margin:0 auto; }
+    .wrap{ width:min(1100px, calc(100% - 44px)); margin:0 auto; }
 
     /* Top bar */
     .topbar{
       position:sticky;
       top:0;
-      z-index:50;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
+      z-index:10;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(8px);
       border-bottom:1px solid rgba(242,237,227,.10);
     }
     .topbar-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding: 12px 0;
+      padding: 14px 0;
     }
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
       text-decoration:none;
       color:var(--ink);
-      min-height: 40px;
     }
-    .brand-mark{
+    .brand-badge{
       width:34px;height:34px;
-      border-radius:10px;
-      border:1px solid rgba(242,237,227,.12);
+      border-radius:9px;
+      border:1px solid rgba(242,237,227,.14);
       background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
       box-shadow: 0 10px 24px rgba(0,0,0,.35);
       overflow:hidden;
@@ -73,10 +70,11 @@
       align-items:center;
       justify-content:center;
     }
-    .brand-mark img{
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
+    .brand-badge img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
       opacity:.95;
     }
     .brand-name{
@@ -85,9 +83,8 @@
       font-weight:800;
       text-transform:uppercase;
       font-size: 13px;
-      opacity:.92;
+      opacity:.9;
     }
-
     .icon-btn{
       width:40px;height:40px;
       display:inline-flex;
@@ -116,103 +113,13 @@
       border-radius:3px 3px 0 0;
     }
 
-    /* HERO (background ONLY here) */
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border-bottom:1px solid rgba(242,237,227,.10);
-      background: #000;
-    }
-
-    /* Motion-blur background + vignette ONLY in hero */
-    .hero::before{
-      content:"";
-      position:absolute; inset:-40px;
-      background: url("./assets/background_element.png") center/cover no-repeat;
-      filter: blur(12px) saturate(.90) contrast(1.05);
-      transform: scale(1.08);
-      opacity:.85;
-      z-index:0;
-    }
-    .hero::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 520px at 22% 55%, rgba(0,0,0,.20), rgba(0,0,0,.82) 70%),
-        linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.66) 45%, rgba(0,0,0,.30) 70%, rgba(0,0,0,.84) 100%);
-      z-index:1;
-    }
-
-    .hero-inner{
-      position:relative;
-      z-index:2;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 28px;
-      align-items:center;
-      padding: 56px 0 54px;
-      min-height: 520px;
-    }
-
-    /* Framed “poster” panel like your mockup */
-    .hero-panel{
-      position:relative;
-      border-radius: 18px;
-      border:1px solid rgba(242,237,227,.14);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
-        rgba(0,0,0,.35);
-      box-shadow: 0 26px 70px rgba(0,0,0,.60);
-      overflow:hidden;
-    }
-    .hero-panel::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(900px 420px at 20% 20%, rgba(210,176,122,.14), transparent 55%),
-        radial-gradient(800px 420px at 80% 60%, rgba(255,255,255,.06), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .hero-panel::after{
-      /* subtle grit */
-      content:"";
-      position:absolute; inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.02), rgba(255,255,255,0)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity:.35;
-      pointer-events:none;
-    }
-
-    .hero-panel-inner{
-      position:relative;
-      padding: 30px 30px 26px;
-    }
-
-    /* BIG LOGO (replaces typed “Unashamed Strength”) */
-    .hero-logo-img{
-      width: min(460px, 95%);
-      height:auto;
-      margin: 2px 0 14px;
-      filter: drop-shadow(0 18px 28px rgba(0,0,0,.55));
-    }
-
-    .hero-sub{
-      margin: 10px 0 16px;
-      font-size: 18px;
-      color: rgba(242,237,227,.86);
-      font-family: Cinzel, serif;
-      letter-spacing:.02em;
-    }
-
+    /* Buttons */
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       padding: 12px 22px;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration:none;
       font-weight: 800;
       letter-spacing:.08em;
@@ -220,7 +127,7 @@
       border: 1px solid transparent;
       user-select:none;
       cursor:pointer;
-      transition: transform .15s ease, filter .15s ease;
+      transition: transform .12s ease, filter .12s ease;
     }
     .btn-gold{
       background: linear-gradient(180deg, var(--gold2), var(--gold));
@@ -229,46 +136,85 @@
       box-shadow: 0 18px 40px rgba(0,0,0,.45);
     }
     .btn-dark{
-      background: linear-gradient(180deg, #141414, #0a0a0a);
+      background: linear-gradient(180deg, #151312, #0c0b0a);
       color: rgba(242,237,227,.92);
-      border-color: rgba(242,237,227,.12);
+      border-color: rgba(242,237,227,.10);
       box-shadow: 0 14px 30px rgba(0,0,0,.35);
     }
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btn:active{ transform: translateY(0px); }
 
-    /* Athlete “poster” on the right */
-    .hero-visual{
+    /* HERO (no boxes, full-bleed background) */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(242,237,227,.10);
+      background:#000;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.22) 70%, rgba(0,0,0,.88) 100%),
+        url("./assets/background_element.png") center / cover no-repeat;
+      filter: blur(10px) saturate(.9);
+      transform: scale(1.06);
+      z-index:0;
+    }
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      align-items:center;
+      gap: 44px;
+      padding: 74px 0 64px;
+      min-height: 520px;
+    }
+
+    .hero-content{
+      max-width: 560px;
+    }
+    .hero-logo{
+      width: min(520px, 100%);
+      height:auto;
+      display:block;
+      margin: 0 0 18px;
+      filter: drop-shadow(0 24px 40px rgba(0,0,0,.75));
+    }
+    .hero-tagline{
+      margin: 0 0 22px;
+      font-family: Cinzel, serif;
+      font-size: 20px;
+      letter-spacing: .04em;
+      color: rgba(242,237,227,.90);
+      text-shadow: 0 12px 28px rgba(0,0,0,.7);
+    }
+
+    .hero-athlete{
       display:flex;
       justify-content:flex-end;
     }
-    .hero-visual .athlete{
-      width: min(430px, 100%);
+    .hero-athlete img{
+      width: min(440px, 100%);
+      height:auto;
       border-radius: 18px;
-      border: 1px solid rgba(242,237,227,.14);
-      box-shadow: 0 26px 70px rgba(0,0,0,.60);
-      overflow:hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.75);
+      border: 1px solid rgba(242,237,227,.10);
       background: rgba(0,0,0,.18);
     }
-    .hero-visual .athlete img{
-      width:100%;
-      height:auto;
-      display:block;
-      transform: translateY(2px);
-    }
 
-    /* BELOW HERO = BLACK ONLY */
+    /* Featured section (black below hero) */
     main{
-      background: #000;
-      padding: 42px 0 14px;
+      background:#000;
+      padding: 44px 0 10px;
     }
-
     .section-title{
       display:flex;
       align-items:center;
       justify-content:center;
       gap:18px;
-      margin: 10px 0 28px;
+      margin: 0 0 26px;
     }
     .section-title h2{
       margin:0;
@@ -276,25 +222,25 @@
       font-size: 28px;
       letter-spacing:.10em;
       text-transform: uppercase;
-      color: rgba(242,237,227,.92);
+      color: rgba(242,237,227,.88);
     }
     .rule{
       height:1px;
-      width:min(260px, 18vw);
-      background: linear-gradient(90deg, transparent, rgba(242,237,227,.35), transparent);
+      width:min(240px, 18vw);
+      background: linear-gradient(90deg, transparent, rgba(242,237,227,.25), transparent);
     }
 
     .product-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
-      margin: 10px 0 18px;
+      margin: 10px 0 22px;
     }
     .card{
       background:
         linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        #0d0d0d;
-      border: 1px solid rgba(242,237,227,.12);
+        #0c0b0a;
+      border: 1px solid rgba(242,237,227,.10);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -302,7 +248,7 @@
     .card-media{
       background: rgba(255,255,255,.05);
       border-bottom: 1px solid rgba(242,237,227,.10);
-      padding: 16px;
+      padding: 18px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -314,11 +260,9 @@
       height:auto;
       object-fit: contain;
       border-radius: 10px;
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(242,237,227,.10);
     }
     .card-body{
-      padding: 16px 16px 18px;
+      padding: 16px 18px 18px;
       text-align:center;
     }
     .card-title{
@@ -326,29 +270,32 @@
       font-family: Cinzel, serif;
       font-size: 16px;
       letter-spacing:.04em;
-      color: rgba(242,237,227,.92);
       text-transform: uppercase;
+      color: rgba(242,237,227,.90);
     }
 
     .tagline{
-      margin: 22px 0 14px;
+      margin: 22px 0 16px;
       text-align:center;
       font-family: Cinzel, serif;
       font-size: 20px;
-      color: rgba(242,237,227,.80);
+      color: rgba(242,237,227,.78);
       letter-spacing:.02em;
     }
 
     .cta{
       display:flex;
       justify-content:center;
-      margin: 8px 0 18px;
+      margin-bottom: 14px;
     }
-    .cta .btn{ width:min(560px, 100%); }
+    .cta .btn{
+      width:min(560px, 100%);
+    }
 
+    /* Footer */
     footer{
-      margin-top: 16px;
-      padding: 22px 0 34px;
+      margin-top: 22px;
+      padding: 26px 0 34px;
       border-top: 1px solid rgba(242,237,227,.12);
       text-align:center;
     }
@@ -374,17 +321,27 @@
     }
 
     /* Responsive */
-    @media (max-width: 980px){
+    @media (max-width: 920px){
       .hero-inner{
         grid-template-columns: 1fr;
-        padding: 40px 0 34px;
+        text-align:center;
+        padding: 54px 0 34px;
         min-height: unset;
       }
-      .hero-visual{ justify-content:center; }
-      .hero-panel-inner{ padding: 24px; }
-      .hero-logo-img{ width: min(520px, 100%); }
+      .hero-content{
+        margin: 0 auto;
+      }
+      .hero-logo{
+        margin-left:auto;
+        margin-right:auto;
+      }
+      .hero-athlete{
+        justify-content:center;
+        margin-top: 18px;
+      }
       .product-grid{ grid-template-columns: 1fr; }
-      .card-media{ min-height: 230px; }
+      .card-media{ min-height: 220px; }
+      .rule{ width: 16vw; }
     }
   </style>
 </head>
@@ -394,41 +351,46 @@
   <div class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="#">
-        <span class="brand-mark" aria-hidden="true">
-          <img src="./assets/unashamed_logo_white.png" alt="">
+        <span class="brand-badge" aria-hidden="true">
+          <!-- Optional tiny badge image; safe if it fails to load -->
+          <img src="./assets/unashamed_logo_white.png" alt="" />
         </span>
         <span class="brand-name">Unashamed Strength</span>
       </a>
+
       <a class="icon-btn" href="#" aria-label="Cart">
         <span class="cart" aria-hidden="true"></span>
       </a>
     </div>
   </div>
 
-  <!-- HERO (motion blur background only here) -->
   <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+
     <div class="wrap hero-inner">
+      <!-- LEFT: LOGO + COPY (no boxes) -->
+      <div class="hero-content">
+        <img
+          src="./assets/unashamed_logo_white.png"
+          alt="Unashamed Strength"
+          class="hero-logo"
+        />
 
-      <!-- Left “poster” with BIG logo -->
-      <div class="hero-panel">
-        <div class="hero-panel-inner">
-          <img class="hero-logo-img" src="./assets/unashamed_logo_white.png" alt="Unashamed Strength — Romans 1:16" />
-          <p class="hero-sub">Unashamed of the Gospel.</p>
-          <a class="btn btn-gold" href="#featured">SHOP</a>
-        </div>
+        <p class="hero-tagline">Unashamed of the Gospel.</p>
+
+        <a class="btn btn-gold" href="#featured">SHOP</a>
       </div>
 
-      <!-- Right athlete image -->
-      <div class="hero-visual">
-        <div class="athlete">
-          <img src="./assets/home_page_male_athlete.png" alt="Athlete wearing Unashamed Strength" />
-        </div>
+      <!-- RIGHT: ATHLETE -->
+      <div class="hero-athlete">
+        <img
+          src="./assets/home_page_male_athlete.png"
+          alt="Unashamed Strength athlete wearing the Unashamed Strength shirt"
+        />
       </div>
-
     </div>
   </header>
 
-  <!-- BELOW HERO MUST BE BLACK -->
   <main id="featured">
     <div class="wrap">
       <div class="section-title">
@@ -438,7 +400,7 @@
       </div>
 
       <div class="product-grid">
-
+        <!-- 1) Driven By Faith Tee -->
         <article class="card">
           <div class="card-media">
             <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee" />
@@ -449,6 +411,7 @@
           </div>
         </article>
 
+        <!-- 2) Shaker Bottle -->
         <article class="card">
           <div class="card-media">
             <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle" />
@@ -459,6 +422,7 @@
           </div>
         </article>
 
+        <!-- 3) Built By Faith Hoodie -->
         <article class="card">
           <div class="card-media">
             <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie" />
@@ -468,7 +432,6 @@
             <a class="btn btn-dark" href="#">ADD TO CART</a>
           </div>
         </article>
-
       </div>
 
       <p class="tagline">Wear your faith. Train with purpose. Live unashamed.</p>
