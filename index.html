@@ -14,17 +14,17 @@
 
   <style>
     :root{
-      --bg:#000000;                /* everything below hero is BLACK */
-      --heroBase:#0b0b0b;
-      --panel:#151515;
-      --panel2:#0f0f0f;
+      --black:#000;
+      --bg:#050505;
+      --panel:#101010;
+      --panel2:#0b0b0b;
       --ink:#f2ede3;
       --muted:rgba(242,237,227,.78);
       --line:rgba(242,237,227,.14);
       --gold:#b89457;
       --gold2:#d2b07a;
       --shadow:0 18px 45px rgba(0,0,0,.55);
-      --radius:12px;
+      --radius:14px;
     }
 
     *{ box-sizing:border-box; }
@@ -32,40 +32,52 @@
     body{
       margin:0;
       color:var(--ink);
-      background: var(--bg);
+      background: var(--black); /* EVERYTHING DEFAULTS TO BLACK */
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
+    img{ max-width:100%; display:block; }
 
-    .wrap{ width:min(1100px, calc(100% - 44px)); margin:0 auto; }
+    .wrap{ width:min(1120px, calc(100% - 44px)); margin:0 auto; }
 
     /* Top bar */
     .topbar{
       position:sticky;
       top:0;
-      z-index:10;
-      background: rgba(0,0,0,.45);
-      backdrop-filter: blur(8px);
-      border-bottom:1px solid rgba(255,255,255,.08);
+      z-index:50;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(242,237,227,.10);
     }
     .topbar-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding: 14px 0;
+      padding: 12px 0;
     }
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
+      gap:10px;
       text-decoration:none;
       color:var(--ink);
+      min-height: 40px;
     }
-    .brand-badge{
+    .brand-mark{
       width:34px;height:34px;
       border-radius:10px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(242,237,227,.12);
       background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
       box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .brand-mark img{
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      opacity:.95;
     }
     .brand-name{
       font-family: Cinzel, serif;
@@ -75,13 +87,14 @@
       font-size: 13px;
       opacity:.92;
     }
+
     .icon-btn{
-      width:42px;height:42px;
+      width:40px;height:40px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(242,237,227,.14);
       background: rgba(255,255,255,.06);
       text-decoration:none;
       color:var(--ink);
@@ -103,34 +116,30 @@
       border-radius:3px 3px 0 0;
     }
 
-    /* HERO (background only applies here) */
+    /* HERO (background ONLY here) */
     .hero{
       position:relative;
       overflow:hidden;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      background: var(--heroBase);
+      border-bottom:1px solid rgba(242,237,227,.10);
+      background: #000;
     }
 
-    /* Motion blur element behind hero content ONLY */
-    .hero-bg{
+    /* Motion-blur background + vignette ONLY in hero */
+    .hero::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background: url("./assets/background_element.png") center/cover no-repeat;
+      filter: blur(12px) saturate(.90) contrast(1.05);
+      transform: scale(1.08);
+      opacity:.85;
+      z-index:0;
+    }
+    .hero::after{
+      content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.70) 48%, rgba(0,0,0,.82) 100%),
-        url("./assets/background_element.png");
-      background-size: cover;
-      background-position: center;
-      filter: blur(10px) contrast(1.05) saturate(.95);
-      transform: scale(1.08);
-      opacity: .92;
-    }
-
-    /* subtle vignette to keep hero premium */
-    .hero-vignette{
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(900px 520px at 50% 40%, rgba(0,0,0,.10), rgba(0,0,0,.72) 70%),
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.50));
-      pointer-events:none;
+        radial-gradient(900px 520px at 22% 55%, rgba(0,0,0,.20), rgba(0,0,0,.82) 70%),
+        linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(0,0,0,.66) 45%, rgba(0,0,0,.30) 70%, rgba(0,0,0,.84) 100%);
       z-index:1;
     }
 
@@ -139,37 +148,63 @@
       z-index:2;
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: 30px;
+      gap: 28px;
       align-items:center;
-      padding: 64px 0 44px;
+      padding: 56px 0 54px;
       min-height: 520px;
     }
 
-    /* Logo box (glass panel like your mockup) */
-    .hero-box{
-      max-width: 520px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
+    /* Framed “poster” panel like your mockup */
+    .hero-panel{
+      position:relative;
+      border-radius: 18px;
+      border:1px solid rgba(242,237,227,.14);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
-      padding: 26px 26px 22px;
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        rgba(0,0,0,.35);
+      box-shadow: 0 26px 70px rgba(0,0,0,.60);
+      overflow:hidden;
+    }
+    .hero-panel::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 420px at 20% 20%, rgba(210,176,122,.14), transparent 55%),
+        radial-gradient(800px 420px at 80% 60%, rgba(255,255,255,.06), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .hero-panel::after{
+      /* subtle grit */
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02), rgba(255,255,255,0)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.35;
+      pointer-events:none;
     }
 
+    .hero-panel-inner{
+      position:relative;
+      padding: 30px 30px 26px;
+    }
+
+    /* BIG LOGO (replaces typed “Unashamed Strength”) */
     .hero-logo-img{
-      display:block;
-      width:min(420px, 100%);
+      width: min(460px, 95%);
       height:auto;
-      filter: drop-shadow(0 14px 36px rgba(0,0,0,.70));
-      margin-bottom: 14px;
+      margin: 2px 0 14px;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,.55));
     }
 
     .hero-sub{
-      margin: 6px 0 18px;
-      font-size: 16px;
-      color: rgba(242,237,227,.80);
-      font-weight: 600;
-      letter-spacing:.01em;
+      margin: 10px 0 16px;
+      font-size: 18px;
+      color: rgba(242,237,227,.86);
+      font-family: Cinzel, serif;
+      letter-spacing:.02em;
     }
 
     .btn{
@@ -177,7 +212,7 @@
       align-items:center;
       justify-content:center;
       padding: 12px 22px;
-      border-radius: 9px;
+      border-radius: 8px;
       text-decoration:none;
       font-weight: 800;
       letter-spacing:.08em;
@@ -189,38 +224,43 @@
     }
     .btn-gold{
       background: linear-gradient(180deg, var(--gold2), var(--gold));
-      color:#120c08;
+      color:#1a1411;
       border-color: rgba(0,0,0,.35);
       box-shadow: 0 18px 40px rgba(0,0,0,.45);
     }
     .btn-dark{
-      background: linear-gradient(180deg, #171717, #0c0c0c);
+      background: linear-gradient(180deg, #141414, #0a0a0a);
       color: rgba(242,237,227,.92);
-      border-color: rgba(242,237,227,.10);
+      border-color: rgba(242,237,227,.12);
       box-shadow: 0 14px 30px rgba(0,0,0,.35);
     }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btn:active{ transform: translateY(0px); }
 
-    /* Athlete card */
+    /* Athlete “poster” on the right */
     .hero-visual{
       display:flex;
       justify-content:flex-end;
-      align-items:center;
     }
-    .athlete{
-      width:min(430px, 100%);
-      height:auto;
+    .hero-visual .athlete{
+      width: min(430px, 100%);
       border-radius: 18px;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: var(--shadow);
-      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(242,237,227,.14);
+      box-shadow: 0 26px 70px rgba(0,0,0,.60);
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+    }
+    .hero-visual .athlete img{
+      width:100%;
+      height:auto;
+      display:block;
+      transform: translateY(2px);
     }
 
-    /* FEATURED (BLACK section) */
+    /* BELOW HERO = BLACK ONLY */
     main{
-      background: var(--bg);
-      padding: 44px 0 10px;
+      background: #000;
+      padding: 42px 0 14px;
     }
 
     .section-title{
@@ -228,88 +268,88 @@
       align-items:center;
       justify-content:center;
       gap:18px;
-      margin: 4px 0 26px;
+      margin: 10px 0 28px;
     }
     .section-title h2{
       margin:0;
       font-family: Cinzel, serif;
       font-size: 28px;
-      letter-spacing:.08em;
+      letter-spacing:.10em;
       text-transform: uppercase;
       color: rgba(242,237,227,.92);
     }
     .rule{
       height:1px;
-      width:min(240px, 18vw);
-      background: linear-gradient(90deg, transparent, rgba(242,237,227,.22), transparent);
+      width:min(260px, 18vw);
+      background: linear-gradient(90deg, transparent, rgba(242,237,227,.35), transparent);
     }
 
     .product-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
-      margin: 10px 0 22px;
+      margin: 10px 0 18px;
     }
-
     .card{
       background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid rgba(242,237,227,.10);
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        #0d0d0d;
+      border: 1px solid rgba(242,237,227,.12);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
     .card-media{
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.05);
       border-bottom: 1px solid rgba(242,237,227,.10);
-      padding: 18px;
+      padding: 16px;
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height: 250px;
+      min-height: 240px;
     }
     .card-media img{
       max-width: 100%;
-      max-height: 230px;
+      max-height: 220px;
       height:auto;
       object-fit: contain;
       border-radius: 10px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(242,237,227,.10);
     }
     .card-body{
-      padding: 16px 18px 18px;
+      padding: 16px 16px 18px;
       text-align:center;
     }
     .card-title{
-      margin: 4px 0 14px;
+      margin: 6px 0 12px;
       font-family: Cinzel, serif;
       font-size: 16px;
-      letter-spacing:.03em;
+      letter-spacing:.04em;
       color: rgba(242,237,227,.92);
       text-transform: uppercase;
     }
 
     .tagline{
-      margin: 22px 0 16px;
+      margin: 22px 0 14px;
       text-align:center;
       font-family: Cinzel, serif;
       font-size: 20px;
-      color: rgba(242,237,227,.78);
+      color: rgba(242,237,227,.80);
       letter-spacing:.02em;
     }
 
     .cta{
       display:flex;
       justify-content:center;
-      margin-bottom: 14px;
+      margin: 8px 0 18px;
     }
-    .cta .btn{
-      width:min(560px, 100%);
-    }
+    .cta .btn{ width:min(560px, 100%); }
 
     footer{
-      margin-top: 22px;
+      margin-top: 16px;
       padding: 22px 0 34px;
-      border-top: 1px solid rgba(242,237,227,.10);
+      border-top: 1px solid rgba(242,237,227,.12);
       text-align:center;
     }
     .footer-nav{
@@ -321,7 +361,7 @@
       flex-wrap:wrap;
     }
     .footer-nav a{
-      color: rgba(242,237,227,.75);
+      color: rgba(242,237,227,.78);
       text-decoration:none;
       font-weight:600;
     }
@@ -334,26 +374,29 @@
     }
 
     /* Responsive */
-    @media (max-width: 920px){
+    @media (max-width: 980px){
       .hero-inner{
         grid-template-columns: 1fr;
-        padding: 44px 0 22px;
+        padding: 40px 0 34px;
         min-height: unset;
       }
       .hero-visual{ justify-content:center; }
-      .hero-box{ margin: 0 auto; }
+      .hero-panel-inner{ padding: 24px; }
+      .hero-logo-img{ width: min(520px, 100%); }
       .product-grid{ grid-template-columns: 1fr; }
       .card-media{ min-height: 230px; }
-      .hero-logo-img{ width: min(360px, 100%); }
     }
   </style>
 </head>
 
 <body>
+
   <div class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="#">
-        <span class="brand-badge" aria-hidden="true"></span>
+        <span class="brand-mark" aria-hidden="true">
+          <img src="./assets/unashamed_logo_white.png" alt="">
+        </span>
         <span class="brand-name">Unashamed Strength</span>
       </a>
       <a class="icon-btn" href="#" aria-label="Cart">
@@ -362,31 +405,30 @@
     </div>
   </div>
 
+  <!-- HERO (motion blur background only here) -->
   <header class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-vignette" aria-hidden="true"></div>
-
     <div class="wrap hero-inner">
-      <div class="hero-box">
-        <img
-          src="./assets/unashamed_logo_white.png"
-          alt="Unashamed Strength"
-          class="hero-logo-img"
-        />
-        <p class="hero-sub">Unashamed of the Gospel.</p>
-        <a class="btn btn-gold" href="#featured">SHOP</a>
+
+      <!-- Left “poster” with BIG logo -->
+      <div class="hero-panel">
+        <div class="hero-panel-inner">
+          <img class="hero-logo-img" src="./assets/unashamed_logo_white.png" alt="Unashamed Strength — Romans 1:16" />
+          <p class="hero-sub">Unashamed of the Gospel.</p>
+          <a class="btn btn-gold" href="#featured">SHOP</a>
+        </div>
       </div>
 
+      <!-- Right athlete image -->
       <div class="hero-visual">
-        <img
-          class="athlete"
-          src="./assets/home_page_male_athlete.png"
-          alt="Athlete wearing Unashamed Strength apparel"
-        />
+        <div class="athlete">
+          <img src="./assets/home_page_male_athlete.png" alt="Athlete wearing Unashamed Strength" />
+        </div>
       </div>
+
     </div>
   </header>
 
+  <!-- BELOW HERO MUST BE BLACK -->
   <main id="featured">
     <div class="wrap">
       <div class="section-title">
@@ -396,7 +438,7 @@
       </div>
 
       <div class="product-grid">
-        <!-- Driven By Faith Tee -->
+
         <article class="card">
           <div class="card-media">
             <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee" />
@@ -407,7 +449,6 @@
           </div>
         </article>
 
-        <!-- Shaker Bottle -->
         <article class="card">
           <div class="card-media">
             <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle" />
@@ -418,7 +459,6 @@
           </div>
         </article>
 
-        <!-- Built By Faith Hoodie -->
         <article class="card">
           <div class="card-media">
             <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie" />
@@ -428,6 +468,7 @@
             <a class="btn btn-dark" href="#">ADD TO CART</a>
           </div>
         </article>
+
       </div>
 
       <p class="tagline">Wear your faith. Train with purpose. Live unashamed.</p>
@@ -448,5 +489,6 @@
       </footer>
     </div>
   </main>
+
 </body>
 </html>
