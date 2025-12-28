@@ -2,471 +2,226 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Unashamed Strength</title>
-  <meta name="description" content="Wear your faith. Train with purpose. Live unashamed. Romans 1:16" />
-  <meta name="robots" content="index,follow" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0f0e0d;
-      --panel:#23201e;
-      --panel2:#1b1816;
-      --ink:#f2ede3;
-      --muted:rgba(242,237,227,.78);
-      --line:rgba(242,237,227,.14);
-      --gold:#b89457;
-      --gold2:#d2b07a;
-      --shadow:0 18px 45px rgba(0,0,0,.45);
-      --radius:10px;
+      --bg:#000;
+      --panel:#121212;
+      --gold:#d2b06b;
+      --gold-dark:#b89652;
+      --text:#f2f2f2;
+      --muted:#bcbcbc;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
     body{
       margin:0;
-      color:var(--ink);
-      background: var(--bg); /* ✅ everything below hero stays black */
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#000;
+      color:var(--text);
+      font-family:Inter,system-ui,Arial;
     }
 
-    .wrap{ width:min(1100px, calc(100% - 44px)); margin:0 auto; }
-
-    /* Top bar */
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:10;
-      background: rgba(0,0,0,.35);
-      backdrop-filter: blur(8px);
-      border-bottom:1px solid var(--line);
+    /* HEADER */
+    .header{
+      position:relative;
+      min-height:520px;
+      background:
+        linear-gradient(to right, rgba(0,0,0,.85), rgba(0,0,0,.55), rgba(0,0,0,.9)),
+        url("./assets/home_page_athlete.png") center/cover no-repeat;
+      border-bottom:1px solid rgba(255,255,255,.1);
     }
-    .topbar-inner{
+
+    .nav{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      padding: 14px 0;
-    }
-    .brand{
-      display:flex;
       align-items:center;
-      gap:12px;
-      text-decoration:none;
-      color:var(--ink);
+      padding:18px 48px;
     }
-    .brand-badge{
-      width:34px;height:34px;
-      border-radius:9px;
-      border:1px solid var(--line);
-      background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+
+    .logo img{
+      height:52px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.8));
     }
-    .brand-name{
-      font-family: Cinzel, serif;
-      letter-spacing:.10em;
-      font-weight:800;
-      text-transform:uppercase;
-      font-size: 13px;
-      opacity:.9;
-    }
-    .icon-btn{
-      width:40px;height:40px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      text-decoration:none;
-      color:var(--ink);
-    }
+
     .cart{
-      width:16px;height:16px;
-      border:2px solid rgba(242,237,227,.85);
-      border-top-left-radius:3px;
-      border-top-right-radius:3px;
-      position:relative;
-    }
-    .cart:before{
-      content:"";
-      position:absolute;
-      top:-8px; left:2px;
-      width:12px; height:10px;
-      border:2px solid rgba(242,237,227,.85);
-      border-bottom:none;
-      border-radius:3px 3px 0 0;
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:8px;
+      padding:8px 10px;
     }
 
-    /* HERO (✅ only place we use background image) */
     .hero{
-      position:relative;
-      overflow:hidden;
-      border-bottom:1px solid var(--line);
-      background: #000;
-    }
-    .hero-bg{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.70) 45%, rgba(0,0,0,.18) 75%, rgba(0,0,0,.80) 100%),
-        radial-gradient(1100px 700px at 30% 20%, rgba(185,148,87,.16), transparent 55%),
-        url("./assets/background_element.png");
-      background-size: cover;
-      background-position: center;
-      filter: contrast(1.05) saturate(.95);
-      transform: scale(1.03);
-    }
-    .hero-inner{
-      position:relative;
-      z-index:2;
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 28px;
+      grid-template-columns: 1.1fr .9fr;
+      gap:40px;
       align-items:center;
-      padding: 56px 0 38px;
-      min-height: 480px;
+      padding:60px 48px 80px;
+      max-width:1300px;
+      margin:auto;
     }
 
-    .hero-card{
-      max-width: 520px;
-      border:1px solid rgba(242,237,227,.10);
-      border-radius: 14px;
-      background: rgba(0,0,0,.34);
-      box-shadow: 0 18px 55px rgba(0,0,0,.55);
-      padding: 26px 26px 24px;
+    .hero h1{
+      font-family:Cinzel,serif;
+      font-size:54px;
+      letter-spacing:.05em;
+      margin:0;
     }
 
-    .logo-lockup{
-      display:flex;
-      align-items:center;
-      gap:18px;
+    .hero h1 span{
+      color:var(--gold);
     }
 
-    /* ✅ real image logo (fixes “logo not working”) */
-    .logo-img{
-      width: 92px;
-      height: 92px;
-      object-fit: contain;
-      border-radius: 14px;
-      border:1px solid rgba(185,148,87,.35);
-      background:
-        radial-gradient(circle at 35% 30%, rgba(255,255,255,.14), transparent 55%),
-        linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
-      box-shadow: 0 12px 30px rgba(0,0,0,.50);
-      padding: 10px;
-    }
-
-    .logo-text{ line-height:1; }
-    .logo-title{
-      font-family: Cinzel, serif;
-      font-weight: 800;
-      letter-spacing: .06em;
-      font-size: 54px;
-      text-transform: uppercase;
-    }
-    .logo-title.gold{ color: var(--gold2); margin-top: 6px; }
-    .logo-tag{
-      display:inline-block;
-      margin-top: 12px;
-      padding: 8px 12px;
-      font-weight: 700;
-      letter-spacing:.12em;
-      border:1px solid rgba(185,148,87,.55);
-      color: rgba(242,237,227,.92);
-      background: rgba(0,0,0,.35);
-      border-radius: 999px;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-
-    .hero-sub{
-      margin: 16px 0 18px;
-      font-size: 20px;
-      color: rgba(242,237,227,.82);
-      font-family: Cinzel, serif;
-      letter-spacing:.02em;
+    .hero p{
+      margin:18px 0;
+      font-size:20px;
+      color:#ddd;
     }
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 12px 22px;
-      border-radius: 8px;
+      display:inline-block;
+      padding:14px 36px;
+      background:linear-gradient(#e0bf78,#b08a44);
+      color:#000;
       text-decoration:none;
-      font-weight: 800;
+      font-weight:800;
       letter-spacing:.08em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      user-select:none;
-      cursor:pointer;
-      transition: transform .12s ease, filter .12s ease;
-    }
-    .btn-gold{
-      background: linear-gradient(180deg, var(--gold2), var(--gold));
-      color:#1a1411;
-      border-color: rgba(0,0,0,.35);
-      box-shadow: 0 18px 40px rgba(0,0,0,.45);
-    }
-    .btn-dark{
-      background: linear-gradient(180deg, #1f1c1a, #141110);
-      color: rgba(242,237,227,.92);
-      border-color: rgba(242,237,227,.10);
-      box-shadow: 0 14px 30px rgba(0,0,0,.35);
-    }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
-    .btn:active{ transform: translateY(0px); }
-
-    .hero-visual{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-    }
-    .hero-visual .athlete{
-      width:min(420px, 100%);
-      height:auto;
-      border-radius: 14px;
-      border:1px solid rgba(242,237,227,.10);
-      box-shadow: var(--shadow);
-      background: rgba(0,0,0,.20);
+      border-radius:6px;
+      box-shadow:0 10px 30px rgba(0,0,0,.6);
     }
 
-    /* MAIN (✅ solid black background) */
-    main{
-      background: var(--bg);
-      padding: 42px 0 10px;
+    .hero-image img{
+      width:100%;
+      max-width:420px;
+      border-radius:14px;
+      box-shadow:0 20px 50px rgba(0,0,0,.6);
     }
 
-    .section-title{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      margin: 6px 0 28px;
-    }
-    .section-title h2{
-      margin:0;
-      font-family: Cinzel, serif;
-      font-size: 30px;
-      letter-spacing:.06em;
-      text-transform: uppercase;
-      color: rgba(242,237,227,.92);
-    }
-    .rule{
-      height:1px;
-      width:min(260px, 20vw);
-      background: linear-gradient(90deg, transparent, rgba(242,237,227,.35), transparent);
+    /* FEATURED */
+    .featured{
+      background:#000;
+      padding:70px 40px;
+      text-align:center;
     }
 
-    .product-grid{
+    .featured h2{
+      font-family:Cinzel,serif;
+      letter-spacing:.08em;
+      margin-bottom:40px;
+    }
+
+    .grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin: 10px 0 26px;
-    }
-    .card{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)),
-        var(--panel);
-      border: 1px solid rgba(242,237,227,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .card-media{
-      background: rgba(255,255,255,.06);
-      border-bottom: 1px solid rgba(242,237,227,.10);
-      padding: 18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height: 250px;
-    }
-    .card-media img{
-      max-width: 100%;
-      max-height: 240px;
-      height:auto;
-      object-fit: contain;
-      border-radius: 10px;
-      background: rgba(0,0,0,.10);
-    }
-    .card-body{
-      padding: 18px 18px 20px;
-      text-align:center;
-    }
-    .card-title{
-      margin: 6px 0 14px;
-      font-family: Cinzel, serif;
-      font-size: 18px;
-      letter-spacing:.02em;
-      color: rgba(242,237,227,.92);
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:32px;
+      max-width:1200px;
+      margin:auto;
     }
 
-    .tagline{
-      margin: 26px 0 18px;
-      text-align:center;
-      font-family: Cinzel, serif;
-      font-size: 22px;
-      color: rgba(242,237,227,.80);
-      letter-spacing:.02em;
+    .card{
+      background:#111;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
+      padding:22px;
+      box-shadow:0 15px 40px rgba(0,0,0,.7);
+    }
+
+    .card img{
+      max-width:100%;
+      border-radius:8px;
+      margin-bottom:14px;
+    }
+
+    .card h3{
+      font-family:Cinzel,serif;
+      margin:12px 0;
+    }
+
+    .card a{
+      display:inline-block;
+      margin-top:10px;
+      padding:10px 26px;
+      background:#1c1c1c;
+      border:1px solid rgba(255,255,255,.2);
+      color:#fff;
+      text-decoration:none;
+      border-radius:6px;
     }
 
     .cta{
-      display:flex;
-      justify-content:center;
-      margin-bottom: 14px;
-    }
-    .cta .btn{
-      width:min(560px, 100%);
+      margin-top:50px;
     }
 
-    /* Footer */
     footer{
-      margin-top: 24px;
-      padding: 26px 0 34px;
-      border-top: 1px solid rgba(242,237,227,.12);
+      padding:40px 0;
       text-align:center;
-    }
-    .footer-nav{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap: 12px;
-      margin-bottom: 10px;
-      flex-wrap:wrap;
-    }
-    .footer-nav a{
-      color: rgba(242,237,227,.78);
-      text-decoration:none;
-      font-weight:600;
-    }
-    .sep{ opacity:.35; }
-    .footer-sub{
-      opacity:.70;
-      font-size: 13px;
-      letter-spacing:.10em;
-      text-transform: uppercase;
-    }
-
-    /* Responsive */
-    @media (max-width: 920px){
-      .hero-inner{
-        grid-template-columns: 1fr;
-        padding: 44px 0 18px;
-        min-height: unset;
-      }
-      .hero-visual{
-        justify-content:center;
-      }
-      .logo-title{ font-size: 42px; }
-      .product-grid{ grid-template-columns: 1fr; }
-      .card-media{ min-height: 230px; }
-      .hero-card{ max-width: 100%; }
+      color:#aaa;
+      font-size:14px;
     }
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="brand" href="#">
-        <span class="brand-badge" aria-hidden="true"></span>
-        <span class="brand-name">Unashamed Strength</span>
-      </a>
-      <a class="icon-btn" href="#" aria-label="Cart">
-        <span class="cart" aria-hidden="true"></span>
-      </a>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="nav">
+    <div class="logo">
+      <img src="./assets/unashamed_logo_white.png" alt="Unashamed Strength">
+    </div>
+    <div class="cart">🛒</div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>UNASHAMED <span>STRENGTH</span></h1>
+      <p>Unashamed of the Gospel.</p>
+      <a class="btn" href="#shop">SHOP</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="./assets/home_page_athlete.png" alt="Athlete">
+    </div>
+  </div>
+</header>
+
+<!-- FEATURED -->
+<section class="featured" id="shop">
+  <h2>FEATURED PRODUCTS</h2>
+
+  <div class="grid">
+    <div class="card">
+      <img src="./assets/driven_by_faith_tee.png">
+      <h3>Driven By Faith Tee</h3>
+      <a href="#">ADD TO CART</a>
+    </div>
+
+    <div class="card">
+      <img src="./assets/shaker_bottle.png">
+      <h3>Unashamed Shaker Bottle</h3>
+      <a href="#">ADD TO CART</a>
+    </div>
+
+    <div class="card">
+      <img src="./assets/built_by_faith_black_hoodie.png">
+      <h3>Built By Faith Hoodie</h3>
+      <a href="#">ADD TO CART</a>
     </div>
   </div>
 
-  <header class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
+  <div class="cta">
+    <a class="btn" href="#">SHOP UNASHAMED STRENGTH</a>
+  </div>
+</section>
 
-    <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <div class="hero-card">
-          <div class="logo-lockup">
-            <!-- ✅ IMPORTANT: filename must match EXACTLY -->
-            <img class="logo-img" src="./assets/unashamed_logo.png" alt="Unashamed Strength logo" />
-            <div class="logo-text">
-              <div class="logo-title">UNASHAMED</div>
-              <div class="logo-title gold">STRENGTH</div>
-              <div class="logo-tag">ROMANS 1:16</div>
-            </div>
-          </div>
+<footer>
+  Shop • About • Contact<br>
+  Faith • Discipline • Purpose
+</footer>
 
-          <p class="hero-sub">Unashamed of the Gospel.</p>
-          <a class="btn btn-gold" href="#featured">SHOP</a>
-        </div>
-      </div>
-
-      <div class="hero-visual" aria-hidden="true">
-        <img class="athlete" src="./assets/home_page_athlete.png" alt="" />
-      </div>
-    </div>
-  </header>
-
-  <main id="featured">
-    <div class="wrap">
-      <div class="section-title">
-        <span class="rule"></span>
-        <h2>Featured Products</h2>
-        <span class="rule"></span>
-      </div>
-
-      <div class="product-grid">
-        <article class="card">
-          <div class="card-media">
-            <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee" />
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Driven By Faith Tee</h3>
-            <a class="btn btn-dark" href="#">ADD TO CART</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-media">
-            <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle" />
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Unashamed Shaker Bottle</h3>
-            <a class="btn btn-dark" href="#">ADD TO CART</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-media">
-            <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie" />
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Built By Faith Hoodie</h3>
-            <a class="btn btn-dark" href="#">ADD TO CART</a>
-          </div>
-        </article>
-      </div>
-
-      <p class="tagline">Wear your faith. Train with purpose. Live unashamed.</p>
-
-      <div class="cta">
-        <a class="btn btn-gold" href="#">SHOP UNASHAMED STRENGTH</a>
-      </div>
-
-      <footer>
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="#">Shop</a>
-          <span class="sep">|</span>
-          <a href="#">About</a>
-          <span class="sep">|</span>
-          <a href="#">Contact</a>
-        </nav>
-        <div class="footer-sub">Faith • Discipline • Purpose</div>
-      </footer>
-    </div>
-  </main>
 </body>
 </html>
