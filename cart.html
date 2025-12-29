@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Cart — Unashamed Strength</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,21 +13,19 @@
     :root{
       --bg:#000;
       --ink:#e9e6df;
-      --muted:rgba(233,230,223,.80);
-      --muted2:rgba(233,230,223,.62);
+      --muted:rgba(233,230,223,.75);
       --gold:#caa45a;
       --gold2:#b48d45;
-      --radius:20px;
-      --shadow:0 18px 60px rgba(0,0,0,.62);
+      --radius:18px;
+      --shadow:0 18px 60px rgba(0,0,0,.6);
     }
 
-    *{box-sizing:border-box;}
+    *{box-sizing:border-box}
     body{
       margin:0;
       background:#000;
       color:var(--ink);
       font-family:Inter,system-ui;
-      overflow-x:hidden;
     }
 
     body::before{
@@ -36,43 +34,64 @@
       inset:0;
       background:url("./assets/background_element.png") center/cover no-repeat;
       filter:blur(18px);
-      opacity:.78;
+      opacity:.75;
       z-index:-2;
     }
     body::after{
       content:"";
       position:fixed;
       inset:0;
-      background:radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
+      background:radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.25), rgba(0,0,0,.92));
       z-index:-1;
     }
 
-    .wrap{width:min(1100px,92vw);margin:0 auto;padding:20px 0 70px;}
+    a{color:var(--gold);text-decoration:none}
+    a:hover{color:#fff}
+
+    .wrap{width:min(1100px,92vw);margin:auto;padding:20px 0 70px}
 
     /* NAV */
-    .topbar{display:flex;justify-content:flex-end;padding:14px 6px 16px;border-bottom:1px solid rgba(233,230,223,.1)}
-    .navlinks{display:flex;gap:18px;font-size:13px;color:var(--muted)}
-    .navlinks a{padding:10px;border-radius:12px}
-    .navlinks a:hover,.navlinks a.active{background:rgba(255,255,255,.06);color:var(--ink)}
-    .cartbadge{padding:2px 8px;border-radius:999px;border:1px solid rgba(202,164,90,.5)}
+    .topbar{display:flex;justify-content:flex-end;border-bottom:1px solid rgba(255,255,255,.1)}
+    .navlinks{display:flex;gap:18px;font-size:13px}
+    .navlinks a{padding:10px;border-radius:10px}
+    .navlinks a.active{background:rgba(255,255,255,.08)}
+    .cartbadge{
+      border:1px solid var(--gold);
+      padding:2px 7px;
+      border-radius:999px;
+      font-weight:700;
+      margin-left:6px;
+    }
 
-    .page-title{text-align:center;font-family:Cinzel;letter-spacing:.14em;font-size:56px;margin:10px 0}
+    .page-title{
+      text-align:center;
+      font-family:Cinzel;
+      letter-spacing:.15em;
+      font-size:56px;
+      margin:20px 0 6px;
+    }
+
     .sub{text-align:center;color:var(--muted);margin-bottom:30px}
 
     .layout{display:grid;grid-template-columns:1.4fr .6fr;gap:24px}
 
     .panel{
-      border:1px solid rgba(233,230,223,.12);
+      background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
       border-radius:20px;
-      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
       box-shadow:var(--shadow);
-      overflow:hidden;
     }
 
-    .panel-head{padding:16px;border-bottom:1px solid rgba(233,230,223,.1);display:flex;justify-content:space-between}
-    .panel-head .h{font-family:Cinzel;letter-spacing:.12em;font-size:13px}
+    .panel-head{
+      padding:16px;
+      border-bottom:1px solid rgba(255,255,255,.1);
+      display:flex;
+      justify-content:space-between;
+      font-family:Cinzel;
+      letter-spacing:.12em;
+      font-size:13px;
+    }
 
-    /* ITEMS */
     .items{padding:12px;display:flex;flex-direction:column;gap:12px}
 
     .item{
@@ -81,34 +100,64 @@
       gap:12px;
       padding:12px;
       border-radius:16px;
-      border:1px solid rgba(233,230,223,.12);
-      background:rgba(0,0,0,.2);
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.12);
     }
 
     .thumb{
-      width:72px;
-      height:72px;
-      border-radius:12px;
-      overflow:hidden;
-      border:1px solid rgba(233,230,223,.2);
+      width:72px;height:72px;border-radius:12px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.2)
     }
     .thumb img{width:100%;height:100%;object-fit:cover}
 
     .item-name{font-family:Cinzel;font-size:13px;letter-spacing:.1em}
-    .item-sub{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
-    .pill{border:1px solid rgba(202,164,90,.5);padding:4px 8px;border-radius:999px}
+    .item-sub{font-size:12px;color:var(--muted);display:flex;gap:10px}
 
-    .item-right{display:flex;align-items:center;gap:10px}
+    .pill{
+      border:1px solid var(--gold);
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:11px;
+    }
 
-    .qty{display:flex;gap:6px;align-items:center}
-    .qbtn{width:26px;height:26px;border-radius:8px;border:1px solid rgba(202,164,90,.5);background:transparent;color:white;cursor:pointer}
+    .item-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
 
-    .remove{border:1px solid rgba(233,230,223,.2);background:none;color:white;padding:6px 10px;border-radius:10px;cursor:pointer}
+    .qty{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
 
-    /* SUMMARY */
+    .qbtn{
+      width:30px;height:30px;
+      border-radius:8px;
+      border:1px solid var(--gold);
+      background:transparent;
+      color:white;
+      font-weight:900;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .remove{
+      padding:7px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.25);
+      background:none;
+      color:#fff;
+      cursor:pointer;
+      font-size:11px;
+    }
+
     .summary{padding:16px}
     .row{display:flex;justify-content:space-between;margin-bottom:10px}
-    .total{border-top:1px solid rgba(233,230,223,.1);padding-top:10px}
+    .total{border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
 
     .btn{
       width:100%;
@@ -122,9 +171,15 @@
       cursor:pointer;
     }
 
-    .btn.secondary{background:none;border:1px solid rgba(233,230,223,.2);color:white}
+    .btn.secondary{
+      background:none;
+      border:1px solid rgba(255,255,255,.3);
+      color:white;
+    }
 
-    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr}
+    }
   </style>
 </head>
 
@@ -137,17 +192,17 @@
       <a href="./shop.html">Shop</a>
       <a href="./about.html">About</a>
       <a href="./index.html#contact">Contact</a>
-      <a class="active" href="./cart.html">Cart <span class="cartbadge" id="cartCount">0</span></a>
+      <a class="active" href="./cart.html">Cart <span id="cartCount" class="cartbadge">0</span></a>
     </div>
   </div>
 
-  <div class="page-title">Cart</div>
-  <div class="sub">Review your items below. Update sizes and quantities before checkout.</div>
+  <div class="page-title">CART</div>
+  <div class="sub">Review your items before checkout.</div>
 
   <div class="layout">
     <div class="panel">
       <div class="panel-head">
-        <div class="h">Your Items</div>
+        <div>YOUR ITEMS</div>
         <div id="itemsMeta"></div>
       </div>
       <div class="items" id="items"></div>
@@ -155,8 +210,8 @@
 
     <div class="panel">
       <div class="panel-head">
-        <div class="h">Summary</div>
-        <div>Taxes/shipping later</div>
+        <div>SUMMARY</div>
+        <div>Taxes later</div>
       </div>
       <div class="summary">
         <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
@@ -169,39 +224,35 @@
 </div>
 
 <script>
-const ORDER_EMAIL = "maresdonny5@gmail.com";
-const CART_KEY = "us_cart_v1";
-
-const IMAGE_MAP = {
-  "Built By Faith Tee": "./assets/built_by_faith_tee.png",
-  "Driven By Faith Tee": "./assets/driven_by_faith_tee.png",
-  "Built To Endure Tee": "./assets/built_to_endure_tee.png",
-  "Faith Over Fear Tee": "./assets/faith_over_fear_tee.png",
-  "Faith Strength Purpose Tee": "./assets/faith_strength_purpose_tee.png",
-  "Logo Front/Back Tee": "./assets/logo_front_back_tee.png",
-  "Unashamed Shaker Bottle": "./assets/shaker_bottle.png",
-  "Built By Faith Hoodie": "./assets/built_by_faith_black_hoodie.png",
-  "Unashamed Hoodie": "./assets/unashamed_black_white_hoodie.png"
+const CART_KEY="us_cart_v1";
+const IMAGE_MAP={
+  "Built By Faith Tee":"./assets/built_by_faith_tee.png",
+  "Driven By Faith Tee":"./assets/driven_by_faith_tee.png",
+  "Built To Endure Tee":"./assets/built_to_endure_tee.png",
+  "Faith Over Fear Tee":"./assets/faith_over_fear_tee.png",
+  "Faith Strength Purpose Tee":"./assets/faith_strength_purpose_tee.png",
+  "Logo Front/Back Tee":"./assets/logo_front_back_tee.png",
+  "Unashamed Shaker Bottle":"./assets/shaker_bottle.png",
+  "Built By Faith Hoodie":"./assets/built_by_faith_black_hoodie.png",
+  "Unashamed Hoodie":"./assets/unashamed_black_white_hoodie.png"
 };
 
-const getCart = () => JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-const setCart = c => localStorage.setItem(CART_KEY, JSON.stringify(c));
-const money = n => `$${Number(n).toFixed(2)}`;
+const getCart=()=>JSON.parse(localStorage.getItem(CART_KEY)||"[]");
+const setCart=c=>localStorage.setItem(CART_KEY,JSON.stringify(c));
+const money=n=>"$"+n.toFixed(2);
 
 function render(){
-  const cart = getCart();
-  document.getElementById("cartCount").textContent =
+  const cart=getCart();
+  document.getElementById("cartCount").textContent=
     cart.reduce((a,i)=>a+i.qty,0);
 
-  document.getElementById("itemsMeta").textContent =
-    `${cart.length} item${cart.length===1?"":"s"}`;
+  document.getElementById("itemsMeta").textContent=
+    `${cart.length} item${cart.length!==1?"s":""}`;
 
-  const items = document.getElementById("items");
-  items.innerHTML = cart.map((i,idx)=>`
+  const items=document.getElementById("items");
+  items.innerHTML=cart.map((i,idx)=>`
     <div class="item">
-      <div class="thumb">
-        <img src="${IMAGE_MAP[i.product] || "./assets/placeholder.png"}">
-      </div>
+      <div class="thumb"><img src="${IMAGE_MAP[i.product]||"./assets/placeholder.png"}"></div>
       <div>
         <div class="item-name">${i.product}</div>
         <div class="item-sub">
@@ -220,23 +271,22 @@ function render(){
     </div>
   `).join("");
 
-  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  document.getElementById("subtotal").textContent = money(total);
-  document.getElementById("total").textContent = money(total);
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("subtotal").textContent=money(total);
+  document.getElementById("total").textContent=money(total);
 }
 
-function updateQty(i,delta){
-  const cart = getCart();
-  cart[i].qty += delta;
-  if(cart[i].qty<=0) cart.splice(i,1);
-  setCart(cart);
+function updateQty(i,d){
+  const c=getCart();
+  c[i].qty+=d;
+  if(c[i].qty<=0)c.splice(i,1);
+  setCart(c);
   render();
 }
-
 function removeItem(i){
-  const cart = getCart();
-  cart.splice(i,1);
-  setCart(cart);
+  const c=getCart();
+  c.splice(i,1);
+  setCart(c);
   render();
 }
 
@@ -246,27 +296,9 @@ document.getElementById("clearBtn").onclick=()=>{
 };
 
 document.getElementById("checkoutBtn").onclick=()=>{
-  const cart = getCart();
-  if(!cart.length) return;
-
-  const lines = cart.map(i=>`- ${i.product} (Size ${i.size}) x${i.qty}`);
-  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-
-  const subject = `Unashamed Strength Order — ${cart.length} item(s)`;
-  const body = `Hello Unashamed Strength,
-
-I'd like to place an order:
-
-${lines.join("\n")}
-
-Total: $${total.toFixed(2)}
-
-Name:
-Shipping Address:
-Phone:`;
-
-  window.location.href =
-    `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const cart=getCart();
+  const body=cart.map(i=>`${i.product} (${i.size}) x${i.qty}`).join("\n");
+  window.location.href=`mailto:maresdonny5@gmail.com?subject=Unashamed Strength Order&body=${encodeURIComponent(body)}`;
 };
 
 render();
