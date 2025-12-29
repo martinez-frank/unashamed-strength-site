@@ -16,7 +16,6 @@
       --muted:rgba(233,230,223,.78);
       --muted2:rgba(233,230,223,.62);
       --line:rgba(233,230,223,.14);
-
       --gold:#caa45a;
       --gold2:#b48d45;
 
@@ -48,6 +47,7 @@
       transform:scale(1.06);
       opacity:.78;
       z-index:-2;
+      pointer-events:none;
     }
     body::after{
       content:"";
@@ -55,6 +55,7 @@
       inset:0;
       background:radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.90));
       z-index:-1;
+      pointer-events:none;
     }
 
     .wrap{
@@ -81,7 +82,6 @@
       padding:10px 0;
     }
 
-    /* If you have a logo image file, use it here */
     .logo{
       width:min(520px, 92%);
       height:auto;
@@ -94,7 +94,7 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:8px 16px;
+      padding:10px 18px;
       border-radius:10px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
       color:#0a0a0a;
@@ -172,7 +172,9 @@
       box-shadow:var(--shadow2);
       overflow:hidden;
       text-align:center;
+      transition:transform .2s ease, box-shadow .2s ease;
     }
+    .product:hover{ transform:translateY(-2px); box-shadow:0 14px 32px rgba(0,0,0,.55); }
 
     .pimg{
       margin:12px;
@@ -226,7 +228,6 @@
       text-align:center;
       margin:16px auto 10px;
       color:rgba(233,230,223,.72);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       font-size:12px;
       letter-spacing:.06em;
       text-transform:uppercase;
@@ -236,6 +237,8 @@
       display:flex;
       justify-content:center;
       margin: 10px 0 12px;
+      position:relative;
+      z-index:1;
     }
 
     .cta .big{
@@ -255,12 +258,36 @@
     }
     .cta .big:hover{ transform:translateY(-1px); filter:brightness(1.03); }
 
+    /* CONTACT (so the footer Contact link has somewhere to go) */
+    .contact{
+      width:min(720px, 92vw);
+      margin:18px auto 0;
+      border-top:1px solid rgba(233,230,223,.10);
+      padding-top:16px;
+      text-align:center;
+    }
+    .contact .label{
+      font-family:Cinzel, serif;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(233,230,223,.70);
+      margin-bottom:8px;
+    }
+    .contact .email{
+      color:rgba(233,230,223,.92);
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
     .footer{
       width:min(720px, 92vw);
       margin:14px auto 0;
       text-align:center;
       padding-top:14px;
       border-top:1px solid rgba(233,230,223,.10);
+      position:relative;
+      z-index:2;
     }
 
     .footlinks{
@@ -316,22 +343,15 @@
     <section class="hero">
 
       <div class="brand">
-        <!-- IMPORTANT:
-             Replace this src with YOUR logo file name (the one you used in the screenshot).
-             Example: ./assets/unashamed_logo.png
-        -->
-        <img class="logo" src="./assets/unashamed_logo.png" alt="Unashamed Strength logo">
-
+        <!-- Use the WHITE logo -->
+        <img class="logo" src="./assets/unashamed_logo_white.png" alt="Unashamed Strength logo">
         <a class="shop-mini" href="./shop.html">Shop</a>
       </div>
 
       <div class="hero-card">
         <div class="imgwrap">
-          <!-- IMPORTANT:
-               Replace this with your lifestyle/athlete image file name.
-               Example: ./assets/hero_lifter.png
-          -->
-          <img src="./assets/hero_lifter.png" alt="Unashamed Strength athlete">
+          <!-- Use your existing athlete image -->
+          <img src="./assets/home_page_male_athlete.png" alt="Unashamed Strength athlete">
         </div>
       </div>
 
@@ -350,7 +370,7 @@
         </div>
         <div class="pmeta">
           <div class="pname">Driven By Faith Tee</div>
-          <a class="btn" href="./shop.html">Add to Cart</a>
+          <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
 
@@ -360,7 +380,7 @@
         </div>
         <div class="pmeta">
           <div class="pname">Unashamed Shaker Bottle</div>
-          <a class="btn" href="./shop.html">Add to Cart</a>
+          <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
 
@@ -370,7 +390,7 @@
         </div>
         <div class="pmeta">
           <div class="pname">Built By Faith Hoodie</div>
-          <a class="btn" href="./shop.html">Add to Cart</a>
+          <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
 
@@ -382,11 +402,19 @@
       <a class="big" href="./shop.html">Shop Unashamed Strength</a>
     </div>
 
+    <!-- Contact anchor so footer contact works -->
+    <div id="contact" class="contact">
+      <div class="label">Contact</div>
+      <div class="email">
+        <a href="mailto:info@unashamedstrength.com">info@unashamedstrength.com</a>
+      </div>
+    </div>
+
     <div class="footer">
       <div class="footlinks">
         <a href="./shop.html">Shop</a>
         <a href="./about.html">About</a>
-        <a href="./about.html#contact" onclick="return false;">Contact</a>
+        <a href="#contact">Contact</a>
       </div>
       <div class="footnote">Faith • Discipline • Purpose</div>
     </div>
