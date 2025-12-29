@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shop — Unashamed Strength</title>
+  <title>Home — Unashamed Strength</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,12 +14,12 @@
       --bg:#000;
       --ink:#e9e6df;
       --muted:rgba(233,230,223,.78);
+      --muted2:rgba(233,230,223,.62);
       --line:rgba(233,230,223,.14);
       --gold:#caa45a;
       --gold2:#b48d45;
       --shadow:0 18px 60px rgba(0,0,0,.65);
       --radius:18px;
-      --imgRadius:14px; /* image rounding */
     }
 
     *{box-sizing:border-box;}
@@ -56,17 +56,17 @@
     .wrap{
       width:min(1200px, 92vw);
       margin:0 auto;
-      padding:18px 0 60px;
+      padding:18px 0 70px;
     }
 
-    /* Top nav (NO logo / NO brand text) */
+    /* Top nav */
     .topbar{
       display:flex;
       justify-content:flex-end;
       align-items:center;
       padding:14px 6px 16px;
       border-bottom:1px solid rgba(233,230,223,.10);
-      margin-bottom:22px;
+      margin-bottom:28px;
     }
     .navlinks{
       display:flex;
@@ -78,137 +78,143 @@
     .navlinks a{
       padding:10px 10px;
       border-radius:10px;
-      transition:background .2s ease, color .2s ease;
+      transition:background .2s ease, color .2s ease, transform .2s ease;
     }
     .navlinks a:hover{
       background:rgba(255,255,255,.06);
       color:var(--ink);
+      transform:translateY(-1px);
+    }
+    .navlinks a.active{
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
     }
 
-    /* Page Title */
-    .page-title{
+    /* Hero */
+    .hero{
       text-align:center;
-      margin:10px 0 8px;
+      padding:54px 0 10px;
+    }
+    .title{
+      font-family:Cinzel, serif;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:clamp(40px, 6vw, 72px);
+      line-height:1.05;
+      margin:0 0 14px;
+      opacity:.98;
+      text-shadow:0 10px 40px rgba(0,0,0,.55);
+    }
+    .sub{
+      margin:0 auto;
+      color:var(--muted);
+      font-size:20px;
+      max-width:900px;
+      line-height:1.65;
+      text-shadow:0 10px 35px rgba(0,0,0,.55);
+    }
+
+    .cta{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:26px 0 0;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:170px;
+      background:linear-gradient(180deg, var(--gold), var(--gold2));
+      color:#0a0a0a;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+      padding:12px 18px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.35);
+      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      transition:transform .2s ease, filter .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
+
+    .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:170px;
+      background:rgba(255,255,255,.06);
+      color:rgba(233,230,223,.92);
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+      padding:12px 18px;
+      border-radius:12px;
+      border:1px solid rgba(233,230,223,.14);
+      box-shadow:0 14px 28px rgba(0,0,0,.45);
+      transition:transform .2s ease, background .2s ease;
+    }
+    .btn-ghost:hover{transform:translateY(-1px); background:rgba(255,255,255,.08);}
+
+    /* Sections */
+    .card{
+      margin:34px auto 0;
+      width:min(980px, 92vw);
+      border-radius:22px;
+      border:1px solid rgba(233,230,223,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card-inner{
+      padding:28px 26px;
+      text-align:left;
+    }
+    .kicker{
       font-family:Cinzel, serif;
       letter-spacing:.14em;
       text-transform:uppercase;
-      font-size:64px;
-      line-height:1.05;
-      opacity:.98;
+      font-size:12px;
+      color:rgba(233,230,223,.78);
+      margin:0 0 10px;
     }
-
-    /* Subtitle (increase ~30%) */
-    .sub{
-      text-align:center;
-      margin:0 auto 26px;
-      color:var(--muted);
-      font-size: 23px; /* was 18px -> ~28% bigger */
-      max-width:780px;
-      line-height:1.55;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:22px;
-      align-items:stretch;
-    }
-
-    .product{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid rgba(233,230,223,.12);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-
-    /* Full-bleed image area WITH rounded corners */
-    .imgwrap{
-      margin:0;
-      padding:0;
-      background:rgba(0,0,0,.40);
-      aspect-ratio:16/10;
-      overflow:hidden;               /* key: clip image */
-      border-radius: var(--imgRadius); /* rounded corners */
-      border: 1px solid rgba(233,230,223,.12);
-      margin: 14px;                  /* gives a premium inset without “double box” look */
-    }
-
-    .imgwrap img{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:contain; /* no cropping */
-      background:rgba(255,255,255,.02);
-      border-radius: var(--imgRadius); /* ensures the bitmap itself rounds */
-      transition:transform .22s ease, filter .22s ease;
-      transform:scale(1.0);
-    }
-
-    .product:hover .imgwrap img{
-      transform:scale(1.03);
-      filter:brightness(1.02);
-    }
-
-    .meta{
-      padding: 6px 18px 18px; /* top reduced since image now has margin */
-      text-align:center;
-      border-top:1px solid rgba(233,230,223,.10);
-      background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.22));
-    }
-
-    .name{
+    .h2{
       font-family:Cinzel, serif;
       letter-spacing:.10em;
       text-transform:uppercase;
-      font-size:13px;
-      margin:10px 0 8px;
-      opacity:.96;
+      font-size:22px;
+      margin:0 0 10px;
     }
-    .price{
-      color:var(--gold);
-      font-weight:700;
-      margin:0 0 12px;
+    .p{
+      margin:0;
+      color:rgba(233,230,223,.82);
+      line-height:1.8;
+      font-size:16px;
     }
 
-    .btn{
-      display:inline-block;
-      background:linear-gradient(180deg, var(--gold), var(--gold2));
-      color:#0a0a0a;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size:12px;
-      padding:11px 18px;
-      border-radius:10px;
-      border:1px solid rgba(0,0,0,.35);
-      box-shadow:0 14px 30px rgba(0,0,0,.55);
-      transition:transform .2s ease, filter .2s ease;
-    }
-    .btn:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.03);
-    }
+    /* Contact anchor */
+    #contact{ scroll-margin-top: 90px; }
 
     .note{
-      margin:30px auto 0;
+      margin:34px auto 0;
       text-align:center;
-      color:rgba(233,230,223,.70);
+      color:var(--muted2);
       font-family:Cinzel, serif;
-      letter-spacing:.12em;
+      letter-spacing:.14em;
       text-transform:uppercase;
       font-size:12px;
       padding-top:18px;
       border-top:1px solid rgba(233,230,223,.10);
-      width:min(900px, 92vw);
+      width:min(920px, 92vw);
     }
 
-    @media (max-width:980px){
-      .grid{grid-template-columns:1fr;}
-      .page-title{font-size:46px;}
-      .sub{font-size:20px;}
-      .imgwrap{margin:12px;}
+    @media (max-width:700px){
+      .hero{padding:42px 0 10px;}
+      .sub{font-size:18px;}
+      .card-inner{padding:22px 18px;}
     }
   </style>
 </head>
@@ -218,115 +224,45 @@
 
     <div class="topbar">
       <div class="navlinks">
-        <a href="./index.html">Home</a>
+        <a class="active" href="./index.html">Home</a>
         <a href="./shop.html">Shop</a>
-        <a href="./index.html#about">About</a>
+        <a href="./about.html">About</a>
         <a href="./index.html#contact">Contact</a>
       </div>
     </div>
 
-    <div class="page-title">Shop</div>
-    <div class="sub">Wear your faith. Train with purpose. Live unashamed.</div>
+    <section class="hero">
+      <h1 class="title">Unashamed Strength</h1>
+      <p class="sub">Wear your faith. Train with purpose. Live unashamed.</p>
 
-    <div class="grid">
-
-      <!-- TEES -->
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee"></div>
-        <div class="meta">
-          <div class="name">Driven By Faith Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+      <div class="cta">
+        <a class="btn" href="./shop.html">Shop Now</a>
+        <a class="btn-ghost" href="./about.html">Read Our Story</a>
       </div>
+    </section>
 
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee"></div>
-        <div class="meta">
-          <div class="name">Built By Faith Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+    <section class="card">
+      <div class="card-inner">
+        <div class="kicker">About Unashamed</div>
+        <div class="h2">A brand built on faith</div>
+        <p class="p">
+          Unashamed is for the ones who train not just their bodies, but their character.
+          For those who’ve been knocked down and chose to stand back up — and refuse to be defined by the past.
+        </p>
       </div>
+    </section>
 
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee"></div>
-        <div class="meta">
-          <div class="name">Built To Endure Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+    <section class="card" id="contact">
+      <div class="card-inner">
+        <div class="kicker">Contact</div>
+        <div class="h2">Let’s connect</div>
+        <p class="p">
+          Add your contact info here (email / IG / phone). This section is the target for the “Contact” nav link.
+        </p>
       </div>
-
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee"></div>
-        <div class="meta">
-          <div class="name">Faith Over Fear Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee"></div>
-        <div class="meta">
-          <div class="name">Faith • Strength • Purpose Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee"></div>
-        <div class="meta">
-          <div class="name">Logo Front/Back Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-      <!-- SHAKER -->
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle"></div>
-        <div class="meta">
-          <div class="name">Unashamed Shaker Bottle</div>
-          <div class="price">$24.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-      <!-- HOODIES -->
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie"></div>
-        <div class="meta">
-          <div class="name">Built By Faith Hoodie</div>
-          <div class="price">$54.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie"></div>
-        <div class="meta">
-          <div class="name">Unashamed Hoodie</div>
-          <div class="price">$54.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie"></div>
-        <div class="meta">
-          <div class="name">Unashamed Unbroken Hoodie</div>
-          <div class="price">$54.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
-
-    </div>
+    </section>
 
     <div class="note">Faith • Discipline • Purpose</div>
-
   </div>
 </body>
 </html>
