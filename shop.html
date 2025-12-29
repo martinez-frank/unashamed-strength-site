@@ -15,7 +15,6 @@
       --ink:#e9e6df;
       --muted:rgba(233,230,223,.80);
       --muted2:rgba(233,230,223,.62);
-      --line:rgba(233,230,223,.14);
 
       --gold:#caa45a;
       --gold2:#b48d45;
@@ -38,7 +37,6 @@
     }
     a{color:inherit;text-decoration:none;}
 
-    /* Background */
     body::before{
       content:"";
       position:fixed;
@@ -53,8 +51,7 @@
       content:"";
       position:fixed;
       inset:0;
-      background:
-        radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
+      background: radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
       z-index:-1;
     }
 
@@ -64,7 +61,6 @@
       padding:18px 0 70px;
     }
 
-    /* Top nav (clean / minimal) */
     .topbar{
       display:flex;
       justify-content:flex-end;
@@ -90,8 +86,11 @@
       color:var(--ink);
       transform:translateY(-1px);
     }
+    .navlinks a.active{
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+    }
 
-    /* Title */
     .page-title{
       text-align:center;
       margin:10px 0 10px;
@@ -104,7 +103,6 @@
       text-shadow:0 10px 40px rgba(0,0,0,.55);
     }
 
-    /* Subtitle (already boosted) */
     .sub{
       text-align:center;
       margin:0 auto 30px;
@@ -115,7 +113,6 @@
       text-shadow:0 10px 35px rgba(0,0,0,.55);
     }
 
-    /* Grid */
     .grid{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
@@ -123,25 +120,14 @@
       align-items:stretch;
     }
 
-    /* Card */
     .product{
       border-radius:var(--radius);
       border:1px solid rgba(233,230,223,.12);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       box-shadow:var(--shadow);
       overflow:hidden;
       position:relative;
-      transform:translateY(0);
       transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-    .product::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.10), rgba(255,255,255,0));
-      pointer-events:none;
-      opacity:.55;
     }
     .product:hover{
       transform:translateY(-3px);
@@ -149,7 +135,6 @@
       border-color:rgba(233,230,223,.18);
     }
 
-    /* Image: premium “full-bleed” inside one clean frame */
     .imgwrap{
       margin:16px;
       border-radius:var(--imgRadius);
@@ -159,20 +144,12 @@
       position:relative;
       aspect-ratio:16/10;
     }
-    .imgwrap::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
-      pointer-events:none;
-    }
     .imgwrap img{
       width:100%;
       height:100%;
       display:block;
-      object-fit:cover; /* more retail/premium (fills frame) */
-      background:rgba(255,255,255,.02);
+      object-fit:cover;
+      border-radius:var(--imgRadius);
       transform:scale(1);
       transition:transform .25s ease, filter .25s ease;
     }
@@ -181,7 +158,6 @@
       filter:brightness(1.03);
     }
 
-    /* Meta */
     .meta{
       padding:12px 18px 18px;
       text-align:center;
@@ -236,7 +212,6 @@
       width:min(920px, 92vw);
     }
 
-    /* Responsive */
     @media (max-width:1020px){
       .grid{grid-template-columns:repeat(2, 1fr);}
       .page-title{font-size:52px;}
@@ -257,8 +232,8 @@
     <div class="topbar">
       <div class="navlinks">
         <a href="./index.html">Home</a>
-        <a href="./shop.html">Shop</a>
-        <a href="./index.html#about">About</a>
+        <a class="active" href="./shop.html">Shop</a>
+        <a href="./about.html">About</a>
         <a href="./index.html#contact">Contact</a>
       </div>
     </div>
@@ -267,100 +242,55 @@
     <div class="sub">Wear your faith. Train with purpose. Live unashamed.</div>
 
     <div class="grid">
-
-      <!-- TEES -->
       <div class="product">
         <div class="imgwrap"><img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee"></div>
-        <div class="meta">
-          <div class="name">Driven By Faith Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Driven By Faith Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee"></div>
-        <div class="meta">
-          <div class="name">Built By Faith Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Built By Faith Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee"></div>
-        <div class="meta">
-          <div class="name">Built To Endure Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Built To Endure Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee"></div>
-        <div class="meta">
-          <div class="name">Faith Over Fear Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Faith Over Fear Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee"></div>
-        <div class="meta">
-          <div class="name">Faith • Strength • Purpose Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Faith • Strength • Purpose Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee"></div>
-        <div class="meta">
-          <div class="name">Logo Front/Back Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Logo Front/Back Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
-      <!-- SHAKER -->
       <div class="product">
         <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle"></div>
-        <div class="meta">
-          <div class="name">Unashamed Shaker Bottle</div>
-          <div class="price">$24.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Unashamed Shaker Bottle</div><div class="price">$24.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
-      <!-- HOODIES -->
       <div class="product">
         <div class="imgwrap"><img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie"></div>
-        <div class="meta">
-          <div class="name">Built By Faith Hoodie</div>
-          <div class="price">$54.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Built By Faith Hoodie</div><div class="price">$54.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie"></div>
-        <div class="meta">
-          <div class="name">Unashamed Hoodie</div>
-          <div class="price">$54.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Unashamed Hoodie</div><div class="price">$54.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
 
       <div class="product">
         <div class="imgwrap"><img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie"></div>
-        <div class="meta">
-          <div class="name">Unashamed Unbroken Hoodie</div>
-          <div class="price">$54.00</div>
-          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-        </div>
+        <div class="meta"><div class="name">Unashamed Unbroken Hoodie</div><div class="price">$54.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
       </div>
-
     </div>
 
     <div class="note">Faith • Discipline • Purpose</div>
