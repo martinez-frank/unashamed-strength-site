@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home — Unashamed Strength</title>
+  <title>Unashamed Strength</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,10 +16,15 @@
       --muted:rgba(233,230,223,.78);
       --muted2:rgba(233,230,223,.62);
       --line:rgba(233,230,223,.14);
+
       --gold:#caa45a;
       --gold2:#b48d45;
+
       --shadow:0 18px 60px rgba(0,0,0,.65);
+      --shadow2:0 10px 28px rgba(0,0,0,.55);
+
       --radius:18px;
+      --imgRadius:16px;
     }
 
     *{box-sizing:border-box;}
@@ -33,7 +38,7 @@
     }
     a{color:inherit;text-decoration:none;}
 
-    /* Background image layer */
+    /* Background */
     body::before{
       content:"";
       position:fixed;
@@ -44,177 +49,262 @@
       opacity:.78;
       z-index:-2;
     }
-    /* Dark vignette overlay */
     body::after{
       content:"";
       position:fixed;
       inset:0;
-      background:radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.88));
+      background:radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.90));
       z-index:-1;
     }
 
     .wrap{
       width:min(1200px, 92vw);
       margin:0 auto;
-      padding:18px 0 70px;
+      padding:34px 0 60px;
     }
 
-    /* Top nav */
-    .topbar{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      padding:14px 6px 16px;
-      border-bottom:1px solid rgba(233,230,223,.10);
-      margin-bottom:28px;
-    }
-    .navlinks{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .navlinks a{
-      padding:10px 10px;
-      border-radius:10px;
-      transition:background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .navlinks a:hover{
-      background:rgba(255,255,255,.06);
-      color:var(--ink);
-      transform:translateY(-1px);
-    }
-    .navlinks a.active{
-      background:rgba(255,255,255,.06);
-      color:var(--ink);
-    }
-
-    /* Hero */
+    /* HERO */
     .hero{
-      text-align:center;
-      padding:54px 0 10px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:42px;
+      align-items:center;
+      padding: 28px 0 26px;
     }
-    .title{
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:10px 0;
+    }
+
+    /* If you have a logo image file, use it here */
+    .logo{
+      width:min(520px, 92%);
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 12px 32px rgba(0,0,0,.55));
+    }
+
+    .shop-mini{
+      margin-top:18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:10px;
+      background:linear-gradient(180deg, var(--gold), var(--gold2));
+      color:#0a0a0a;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+      border:1px solid rgba(0,0,0,.35);
+      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      transition:transform .2s ease, filter .2s ease;
+    }
+    .shop-mini:hover{ transform:translateY(-1px); filter:brightness(1.03); }
+
+    .hero-card{
+      width:min(420px, 100%);
+      margin-left:auto;
+      border-radius:18px;
+      border:1px solid rgba(233,230,223,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      padding:10px;
+    }
+
+    .hero-card .imgwrap{
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(233,230,223,.12);
+      background:rgba(0,0,0,.35);
+      aspect-ratio: 4/5;
+    }
+    .hero-card img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transform:scale(1);
+      transition:transform .25s ease, filter .25s ease;
+    }
+    .hero-card:hover img{
+      transform:scale(1.03);
+      filter:brightness(1.02);
+    }
+
+    .divider{
+      height:1px;
+      background:rgba(233,230,223,.10);
+      margin:26px 0 22px;
+    }
+
+    /* FEATURED */
+    .section-title{
+      text-align:center;
       font-family:Cinzel, serif;
       letter-spacing:.18em;
       text-transform:uppercase;
-      font-size:clamp(40px, 6vw, 72px);
-      line-height:1.05;
+      font-size:13px;
+      color:rgba(233,230,223,.85);
       margin:0 0 14px;
-      opacity:.98;
-      text-shadow:0 10px 40px rgba(0,0,0,.55);
     }
-    .sub{
+
+    .grid{
+      width:min(720px, 92vw);
       margin:0 auto;
-      color:var(--muted);
-      font-size:20px;
-      max-width:900px;
-      line-height:1.65;
-      text-shadow:0 10px 35px rgba(0,0,0,.55);
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .product{
+      border-radius:14px;
+      border:1px solid rgba(233,230,223,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      text-align:center;
+    }
+
+    .pimg{
+      margin:12px;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(233,230,223,.12);
+      background:rgba(0,0,0,.40);
+      aspect-ratio: 16/10;
+    }
+    .pimg img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .pmeta{
+      padding: 4px 12px 14px;
+      border-top:1px solid rgba(233,230,223,.10);
+      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18));
+    }
+
+    .pname{
+      font-family:Cinzel, serif;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:11px;
+      margin:10px 0 10px;
+      opacity:.95;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:120px;
+      padding:9px 12px;
+      border-radius:10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(233,230,223,.14);
+      color:rgba(233,230,223,.90);
+      font-weight:800;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:10px;
+      transition:transform .2s ease, background .2s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.08); }
+
+    .tagline{
+      text-align:center;
+      margin:16px auto 10px;
+      color:rgba(233,230,223,.72);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
     }
 
     .cta{
       display:flex;
       justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin:26px 0 0;
+      margin: 10px 0 12px;
     }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:170px;
+
+    .cta .big{
+      min-width:min(520px, 92vw);
+      padding:12px 18px;
+      border-radius:12px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
       color:#0a0a0a;
       font-weight:900;
-      letter-spacing:.10em;
+      letter-spacing:.12em;
       text-transform:uppercase;
-      font-size:12px;
-      padding:12px 18px;
-      border-radius:12px;
+      font-size:11px;
       border:1px solid rgba(0,0,0,.35);
       box-shadow:0 14px 28px rgba(0,0,0,.55);
+      text-align:center;
       transition:transform .2s ease, filter .2s ease;
     }
-    .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
+    .cta .big:hover{ transform:translateY(-1px); filter:brightness(1.03); }
 
-    .btn-ghost{
-      display:inline-flex;
-      align-items:center;
+    .footer{
+      width:min(720px, 92vw);
+      margin:14px auto 0;
+      text-align:center;
+      padding-top:14px;
+      border-top:1px solid rgba(233,230,223,.10);
+    }
+
+    .footlinks{
+      display:flex;
+      gap:14px;
       justify-content:center;
-      min-width:170px;
+      font-size:12px;
+      color:rgba(233,230,223,.72);
+      margin-bottom:6px;
+    }
+    .footlinks a{
+      padding:6px 10px;
+      border-radius:10px;
+      transition:background .2s ease, color .2s ease;
+    }
+    .footlinks a:hover{
       background:rgba(255,255,255,.06);
       color:rgba(233,230,223,.92);
-      font-weight:900;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:12px;
-      padding:12px 18px;
-      border-radius:12px;
-      border:1px solid rgba(233,230,223,.14);
-      box-shadow:0 14px 28px rgba(0,0,0,.45);
-      transition:transform .2s ease, background .2s ease;
     }
-    .btn-ghost:hover{transform:translateY(-1px); background:rgba(255,255,255,.08);}
 
-    /* Sections */
-    .card{
-      margin:34px auto 0;
-      width:min(980px, 92vw);
-      border-radius:22px;
-      border:1px solid rgba(233,230,223,.12);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .card-inner{
-      padding:28px 26px;
-      text-align:left;
-    }
-    .kicker{
+    .footnote{
       font-family:Cinzel, serif;
       letter-spacing:.14em;
       text-transform:uppercase;
-      font-size:12px;
-      color:rgba(233,230,223,.78);
-      margin:0 0 10px;
-    }
-    .h2{
-      font-family:Cinzel, serif;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:22px;
-      margin:0 0 10px;
-    }
-    .p{
-      margin:0;
-      color:rgba(233,230,223,.82);
-      line-height:1.8;
-      font-size:16px;
+      font-size:11px;
+      color:rgba(233,230,223,.55);
     }
 
-    /* Contact anchor */
-    #contact{ scroll-margin-top: 90px; }
-
-    .note{
-      margin:34px auto 0;
-      text-align:center;
-      color:var(--muted2);
-      font-family:Cinzel, serif;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-size:12px;
-      padding-top:18px;
-      border-top:1px solid rgba(233,230,223,.10);
-      width:min(920px, 92vw);
-    }
-
-    @media (max-width:700px){
-      .hero{padding:42px 0 10px;}
-      .sub{font-size:18px;}
-      .card-inner{padding:22px 18px;}
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{
+        grid-template-columns: 1fr;
+        gap:22px;
+      }
+      .hero-card{
+        margin:0 auto;
+      }
+      .grid{
+        grid-template-columns:1fr;
+        width:min(420px, 92vw);
+      }
+      .cta .big{
+        min-width:min(420px, 92vw);
+      }
     }
   </style>
 </head>
@@ -222,47 +312,85 @@
 <body>
   <div class="wrap">
 
-    <div class="topbar">
-      <div class="navlinks">
-        <a class="active" href="./index.html">Home</a>
-        <a href="./shop.html">Shop</a>
-        <a href="./about.html">About</a>
-        <a href="./index.html#contact">Contact</a>
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="brand">
+        <!-- IMPORTANT:
+             Replace this src with YOUR logo file name (the one you used in the screenshot).
+             Example: ./assets/unashamed_logo.png
+        -->
+        <img class="logo" src="./assets/unashamed_logo.png" alt="Unashamed Strength logo">
+
+        <a class="shop-mini" href="./shop.html">Shop</a>
       </div>
+
+      <div class="hero-card">
+        <div class="imgwrap">
+          <!-- IMPORTANT:
+               Replace this with your lifestyle/athlete image file name.
+               Example: ./assets/hero_lifter.png
+          -->
+          <img src="./assets/hero_lifter.png" alt="Unashamed Strength athlete">
+        </div>
+      </div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FEATURED PRODUCTS -->
+    <div class="section-title">Featured Products</div>
+
+    <section class="grid">
+
+      <div class="product">
+        <div class="pimg">
+          <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee">
+        </div>
+        <div class="pmeta">
+          <div class="pname">Driven By Faith Tee</div>
+          <a class="btn" href="./shop.html">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="pimg">
+          <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle">
+        </div>
+        <div class="pmeta">
+          <div class="pname">Unashamed Shaker Bottle</div>
+          <a class="btn" href="./shop.html">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="pimg">
+          <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie">
+        </div>
+        <div class="pmeta">
+          <div class="pname">Built By Faith Hoodie</div>
+          <a class="btn" href="./shop.html">Add to Cart</a>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="tagline">Wear your faith. Train with purpose. Live unashamed.</div>
+
+    <div class="cta">
+      <a class="big" href="./shop.html">Shop Unashamed Strength</a>
     </div>
 
-    <section class="hero">
-      <h1 class="title">Unashamed Strength</h1>
-      <p class="sub">Wear your faith. Train with purpose. Live unashamed.</p>
-
-      <div class="cta">
-        <a class="btn" href="./shop.html">Shop Now</a>
-        <a class="btn-ghost" href="./about.html">Read Our Story</a>
+    <div class="footer">
+      <div class="footlinks">
+        <a href="./shop.html">Shop</a>
+        <a href="./about.html">About</a>
+        <a href="./about.html#contact" onclick="return false;">Contact</a>
       </div>
-    </section>
+      <div class="footnote">Faith • Discipline • Purpose</div>
+    </div>
 
-    <section class="card">
-      <div class="card-inner">
-        <div class="kicker">About Unashamed</div>
-        <div class="h2">A brand built on faith</div>
-        <p class="p">
-          Unashamed is for the ones who train not just their bodies, but their character.
-          For those who’ve been knocked down and chose to stand back up — and refuse to be defined by the past.
-        </p>
-      </div>
-    </section>
-
-    <section class="card" id="contact">
-      <div class="card-inner">
-        <div class="kicker">Contact</div>
-        <div class="h2">Let’s connect</div>
-        <p class="p">
-          Add your contact info here (email / IG / phone). This section is the target for the “Contact” nav link.
-        </p>
-      </div>
-    </section>
-
-    <div class="note">Faith • Discipline • Purpose</div>
   </div>
 </body>
 </html>
