@@ -60,7 +60,7 @@
     .wrap{
       width:min(1200px, 92vw);
       margin:0 auto;
-      padding:34px 0 64px;
+      padding:34px 0 70px;
     }
 
     /* HERO */
@@ -72,16 +72,14 @@
       padding: 18px 0 18px;
     }
 
+    /* IMPORTANT: no border box around logo */
     .brand{
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:18px 10px;
-      border:1px solid rgba(233,230,223,.12);           /* faint rectangle like your screenshot */
-      background:rgba(0,0,0,.10);
-      border-radius:16px;
+      padding: 10px 0;
     }
 
     .logo{
@@ -194,7 +192,7 @@
     }
 
     .pmeta{
-      padding: 4px 12px 14px;
+      padding: 6px 12px 14px;
       border-top:1px solid rgba(233,230,223,.10);
       background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18));
     }
@@ -204,9 +202,18 @@
       letter-spacing:.10em;
       text-transform:uppercase;
       font-size:11px;
-      margin:10px 0 10px;
+      margin:10px 0 6px;
       opacity:.95;
       line-height: 1.35;
+    }
+
+    /* NEW: price line inside cards */
+    .price{
+      color: rgba(202,164,90,.95);
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.04em;
+      margin:0 0 10px;
     }
 
     .btn{
@@ -239,7 +246,7 @@
     .cta{
       display:flex;
       justify-content:center;
-      margin: 10px 0 14px;
+      margin: 10px 0 12px;
     }
 
     .cta .big{
@@ -258,28 +265,6 @@
       transition:transform .2s ease, filter .2s ease;
     }
     .cta .big:hover{ transform:translateY(-1px); filter:brightness(1.03); }
-
-    /* CONTACT block like your screenshot */
-    .contact{
-      width:min(760px, 92vw);
-      margin: 10px auto 0;
-      text-align:center;
-      padding: 16px 0 8px;
-      border-top:1px solid rgba(233,230,223,.10);
-    }
-    .contact .label{
-      font-family:Cinzel, serif;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-size:12px;
-      color:rgba(233,230,223,.70);
-      margin-bottom:8px;
-    }
-    .contact a{
-      color: rgba(233,230,223,.88);
-      font-weight:600;
-    }
-    .contact a:hover{ color: var(--ink); }
 
     .footer{
       width:min(760px, 92vw);
@@ -315,22 +300,11 @@
       color:rgba(233,230,223,.55);
     }
 
-    /* Responsive */
     @media (max-width: 980px){
-      .hero{
-        grid-template-columns: 1fr;
-        gap:22px;
-      }
-      .hero-card{
-        margin:0 auto;
-      }
-      .grid{
-        grid-template-columns:1fr;
-        width:min(420px, 92vw);
-      }
-      .cta .big{
-        min-width:min(420px, 92vw);
-      }
+      .hero{ grid-template-columns: 1fr; gap:22px; }
+      .hero-card{ margin:0 auto; }
+      .grid{ grid-template-columns:1fr; width:min(420px, 92vw); }
+      .cta .big{ min-width:min(420px, 92vw); }
     }
   </style>
 </head>
@@ -340,20 +314,16 @@
 
     <!-- HERO -->
     <section class="hero">
-
       <div class="brand">
-        <!-- Use the WHITE logo file -->
         <img class="logo" src="./assets/unashamed_logo_white.png" alt="Unashamed Strength logo">
         <a class="shop-mini" href="./shop.html">Shop</a>
       </div>
 
       <div class="hero-card">
         <div class="imgwrap">
-          <!-- Use the correct athlete image file -->
           <img src="./assets/home_page_male_athlete.png" alt="Unashamed Strength athlete">
         </div>
       </div>
-
     </section>
 
     <div class="divider"></div>
@@ -362,13 +332,13 @@
     <div class="section-title">Featured Products</div>
 
     <section class="grid">
-
       <div class="product">
         <div class="pimg">
           <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee">
         </div>
         <div class="pmeta">
           <div class="pname">Driven By Faith<br/>Tee</div>
+          <div class="price">$34.00</div>
           <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
@@ -379,6 +349,7 @@
         </div>
         <div class="pmeta">
           <div class="pname">Unashamed<br/>Shaker Bottle</div>
+          <div class="price">$24.00</div>
           <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
@@ -389,10 +360,10 @@
         </div>
         <div class="pmeta">
           <div class="pname">Built By Faith<br/>Hoodie</div>
+          <div class="price">$54.00</div>
           <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
-
     </section>
 
     <div class="tagline">Wear your faith. Train with purpose. Live unashamed.</div>
@@ -401,17 +372,12 @@
       <a class="big" href="./shop.html">Shop Unashamed Strength</a>
     </div>
 
-    <!-- CONTACT (on homepage) -->
-    <section id="contact" class="contact">
-      <div class="label">Contact</div>
-      <a href="mailto:info@unashamedstrength.com">info@unashamedstrength.com</a>
-    </section>
-
+    <!-- Footer (no email / no contact block) -->
     <div class="footer">
       <div class="footlinks">
         <a href="./shop.html">Shop</a>
         <a href="./about.html">About</a>
-        <a href="#contact">Contact</a>
+        <a href="./about.html#contact">Contact</a>
       </div>
       <div class="footnote">Faith • Discipline • Purpose</div>
     </div>
