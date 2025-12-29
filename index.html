@@ -21,10 +21,10 @@
       --gold2:#b48d45;
 
       --shadow:0 18px 60px rgba(0,0,0,.65);
-      --shadow2:0 10px 28px rgba(0,0,0,.55);
+      --shadow2:0 14px 42px rgba(0,0,0,.58);
 
-      --radius:18px;
-      --imgRadius:16px;
+      --radius:22px;
+      --imgRadius:18px;
     }
 
     *{box-sizing:border-box;}
@@ -53,55 +53,53 @@
       content:"";
       position:fixed;
       inset:0;
-      background:radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.90));
+      background:radial-gradient(70% 85% at 50% 24%, rgba(0,0,0,.30), rgba(0,0,0,.92));
       z-index:-1;
     }
 
     .wrap{
       width:min(1200px, 92vw);
       margin:0 auto;
-      padding:34px 0 70px;
+      padding:26px 0 74px;
     }
 
     /* HERO */
     .hero{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
-      gap:56px;
+      gap:34px;
       align-items:center;
       padding: 18px 0 18px;
     }
 
-    /* IMPORTANT: no border box around logo */
     .brand{
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding: 10px 0;
+      padding:8px 0;
     }
 
+    /* NO boundary box — just the logo */
     .logo{
-      width:min(560px, 92%);
-      max-width:560px;
+      width:min(500px, 92%);
       height:auto;
       display:block;
-      filter: drop-shadow(0 12px 32px rgba(0,0,0,.55));
-      opacity: .98;
+      filter: drop-shadow(0 14px 40px rgba(0,0,0,.62));
     }
 
     .shop-mini{
-      margin-top:18px;
+      margin-top:14px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:8px 18px;
-      border-radius:10px;
+      padding:9px 18px;
+      border-radius:12px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
       color:#0a0a0a;
       font-weight:900;
-      letter-spacing:.12em;
+      letter-spacing:.14em;
       text-transform:uppercase;
       font-size:11px;
       border:1px solid rgba(0,0,0,.35);
@@ -111,22 +109,33 @@
     .shop-mini:hover{ transform:translateY(-1px); filter:brightness(1.03); }
 
     .hero-card{
-      width:min(420px, 100%);
+      width:min(430px, 100%);
       margin-left:auto;
-      border-radius:18px;
-      border:1px solid rgba(233,230,223,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border-radius:24px;
+      border:1px solid rgba(233,230,223,.16);
+      background:
+        radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.10), rgba(255,255,255,0)),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
       box-shadow:var(--shadow);
       overflow:hidden;
-      padding:10px;
+      padding:12px;
     }
 
     .hero-card .imgwrap{
-      border-radius:14px;
+      border-radius:18px;
       overflow:hidden;
       border:1px solid rgba(233,230,223,.12);
-      background:rgba(0,0,0,.35);
+      background:rgba(0,0,0,.30);
       aspect-ratio: 4/5;
+      position:relative;
+    }
+    .hero-card .imgwrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      pointer-events:none;
     }
     .hero-card img{
       width:100%;
@@ -144,133 +153,164 @@
     .divider{
       height:1px;
       background:rgba(233,230,223,.10);
-      margin:26px 0 18px;
+      margin: 18px 0 28px;
     }
 
     /* FEATURED */
     .section-title{
       text-align:center;
       font-family:Cinzel, serif;
-      letter-spacing:.18em;
+      letter-spacing:.22em;
       text-transform:uppercase;
-      font-size:13px;
-      color:rgba(233,230,223,.85);
-      margin:0 0 14px;
+      font-size:14px;
+      color:rgba(233,230,223,.86);
+      margin: 0 0 18px;
     }
 
+    /* Bigger “wow” grid */
     .grid{
-      width:min(760px, 92vw);
+      width:min(1040px, 92vw);
       margin:0 auto;
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:16px;
+      grid-template-columns:repeat(2, 1fr);
+      gap:24px;
       align-items:stretch;
     }
 
     .product{
-      border-radius:14px;
-      border:1px solid rgba(233,230,223,.12);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:22px;
+      border:1px solid rgba(233,230,223,.14);
+      background:
+        radial-gradient(130% 90% at 50% 0%, rgba(255,255,255,.11), rgba(255,255,255,0)),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       box-shadow:var(--shadow2);
       overflow:hidden;
       text-align:center;
+      position:relative;
+      transform:translateY(0);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .product:hover{
+      transform:translateY(-2px);
+      border-color:rgba(233,230,223,.18);
+      box-shadow:0 18px 55px rgba(0,0,0,.60);
     }
 
     .pimg{
-      margin:12px;
-      border-radius:12px;
+      margin:16px;
+      border-radius:18px;
       overflow:hidden;
       border:1px solid rgba(233,230,223,.12);
-      background:rgba(0,0,0,.40);
-      aspect-ratio: 16/10;
+      background:rgba(0,0,0,.28);
+      aspect-ratio: 16/9;
+      position:relative;
+    }
+    .pimg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      pointer-events:none;
     }
     .pimg img{
       width:100%;
       height:100%;
       display:block;
-      object-fit:cover;
+      object-fit:contain;  /* premium catalog look */
+      padding:12px;        /* make product feel bigger/cleaner */
+      transform:scale(1);
+      transition:transform .25s ease, filter .25s ease;
+    }
+    .product:hover .pimg img{
+      transform:scale(1.02);
+      filter:brightness(1.03);
     }
 
     .pmeta{
-      padding: 6px 12px 14px;
+      padding: 10px 16px 20px;
       border-top:1px solid rgba(233,230,223,.10);
-      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18));
+      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.20));
     }
 
     .pname{
       font-family:Cinzel, serif;
-      letter-spacing:.10em;
+      letter-spacing:.14em;
       text-transform:uppercase;
-      font-size:11px;
-      margin:10px 0 6px;
-      opacity:.95;
-      line-height: 1.35;
+      font-size:12px;
+      margin:10px 0 8px;
+      opacity:.96;
+      line-height:1.35;
     }
 
-    /* NEW: price line inside cards */
-    .price{
-      color: rgba(202,164,90,.95);
-      font-weight:800;
+    .pprice{
+      margin:0 0 14px;
+      color:var(--gold);
+      font-weight:900;
+      letter-spacing:.06em;
       font-size:12px;
-      letter-spacing:.04em;
-      margin:0 0 10px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:140px;
-      padding:9px 12px;
-      border-radius:10px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(233,230,223,.14);
-      color:rgba(233,230,223,.90);
-      font-weight:800;
-      letter-spacing:.10em;
+      min-width:170px;
+      padding:11px 16px;
+      border-radius:14px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(233,230,223,.16);
+      color:rgba(233,230,223,.92);
+      font-weight:900;
+      letter-spacing:.12em;
       text-transform:uppercase;
       font-size:10px;
-      transition:transform .2s ease, background .2s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
     }
-    .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.08); }
+    .btn:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.10);
+      border-color:rgba(233,230,223,.22);
+    }
 
     .tagline{
       text-align:center;
-      margin:16px auto 10px;
-      color:rgba(233,230,223,.72);
+      margin: 22px auto 14px;
+      color:rgba(233,230,223,.74);
       font-size:12px;
-      letter-spacing:.06em;
+      letter-spacing:.08em;
       text-transform:uppercase;
     }
 
     .cta{
       display:flex;
       justify-content:center;
-      margin: 10px 0 12px;
+      margin: 12px 0 18px;
     }
 
     .cta .big{
-      min-width:min(520px, 92vw);
-      padding:12px 18px;
-      border-radius:12px;
+      min-width:min(560px, 92vw);
+      padding:13px 20px;
+      border-radius:14px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
       color:#0a0a0a;
       font-weight:900;
-      letter-spacing:.12em;
+      letter-spacing:.14em;
       text-transform:uppercase;
       font-size:11px;
       border:1px solid rgba(0,0,0,.35);
-      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      box-shadow:0 16px 32px rgba(0,0,0,.58);
       text-align:center;
       transition:transform .2s ease, filter .2s ease;
     }
     .cta .big:hover{ transform:translateY(-1px); filter:brightness(1.03); }
 
     .footer{
-      width:min(760px, 92vw);
-      margin:10px auto 0;
+      width:min(820px, 92vw);
+      margin:18px auto 0;
       text-align:center;
-      padding-top:14px;
+      padding-top:16px;
       border-top:1px solid rgba(233,230,223,.10);
     }
 
@@ -280,7 +320,7 @@
       justify-content:center;
       font-size:12px;
       color:rgba(233,230,223,.72);
-      margin-bottom:6px;
+      margin-bottom:8px;
     }
     .footlinks a{
       padding:6px 10px;
@@ -294,17 +334,31 @@
 
     .footnote{
       font-family:Cinzel, serif;
-      letter-spacing:.14em;
+      letter-spacing:.16em;
       text-transform:uppercase;
       font-size:11px;
-      color:rgba(233,230,223,.55);
+      color:rgba(233,230,223,.58);
     }
 
+    /* Responsive */
     @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; gap:22px; }
-      .hero-card{ margin:0 auto; }
-      .grid{ grid-template-columns:1fr; width:min(420px, 92vw); }
-      .cta .big{ min-width:min(420px, 92vw); }
+      .hero{
+        grid-template-columns: 1fr;
+        gap:20px;
+      }
+      .hero-card{
+        margin:0 auto;
+      }
+      .grid{
+        grid-template-columns:1fr;
+        width:min(520px, 92vw);
+      }
+      .cta .big{
+        min-width:min(520px, 92vw);
+      }
+      .logo{
+        width:min(460px, 92%);
+      }
     }
   </style>
 </head>
@@ -332,24 +386,14 @@
     <div class="section-title">Featured Products</div>
 
     <section class="grid">
+
       <div class="product">
         <div class="pimg">
           <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee">
         </div>
         <div class="pmeta">
-          <div class="pname">Driven By Faith<br/>Tee</div>
-          <div class="price">$34.00</div>
-          <a class="btn" href="./shop.html">View in Shop</a>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="pimg">
-          <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle">
-        </div>
-        <div class="pmeta">
-          <div class="pname">Unashamed<br/>Shaker Bottle</div>
-          <div class="price">$24.00</div>
+          <div class="pname">Driven By Faith Tee</div>
+          <div class="pprice">$34.00</div>
           <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
@@ -359,11 +403,12 @@
           <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie">
         </div>
         <div class="pmeta">
-          <div class="pname">Built By Faith<br/>Hoodie</div>
-          <div class="price">$54.00</div>
+          <div class="pname">Built By Faith Hoodie</div>
+          <div class="pprice">$54.00</div>
           <a class="btn" href="./shop.html">View in Shop</a>
         </div>
       </div>
+
     </section>
 
     <div class="tagline">Wear your faith. Train with purpose. Live unashamed.</div>
@@ -372,12 +417,10 @@
       <a class="big" href="./shop.html">Shop Unashamed Strength</a>
     </div>
 
-    <!-- Footer (no email / no contact block) -->
     <div class="footer">
       <div class="footlinks">
         <a href="./shop.html">Shop</a>
         <a href="./about.html">About</a>
-        <a href="./about.html#contact">Contact</a>
       </div>
       <div class="footnote">Faith • Discipline • Purpose</div>
     </div>
