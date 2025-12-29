@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Order Confirmed — Unashamed Strength</title>
+  <style>
+    body{margin:0;background:#000;color:#e9e6df;font-family:system-ui;padding:40px;text-align:center}
+    a{color:#caa45a;text-decoration:none}
+  </style>
+</head>
+<body>
+  <h1>Order Confirmed</h1>
+  <p>Thank you — your payment was successful.</p>
+  <p id="oid"></p>
+  <p><a href="./index.html">Back to Home</a></p>
+  <script>
+    const p = new URLSearchParams(location.search);
+    const oid = p.get("oid");
+    if (oid) document.getElementById("oid").textContent = `Order Reference: ${oid}`;
+    // Clear cart after successful payment
+    localStorage.removeItem("us_cart_v1");
+  </script>
+</body>
+</html>
