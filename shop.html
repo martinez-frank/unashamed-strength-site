@@ -176,8 +176,51 @@
     .price{
       color:var(--gold);
       font-weight:800;
-      margin:0 0 14px;
+      margin:0 0 12px;
       letter-spacing:.02em;
+    }
+
+    /* --- Size picker --- */
+    .size-picker{
+      margin: 6px 0 14px;
+      text-align:center;
+    }
+    .size-label{
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(233,230,223,.72);
+      margin-bottom: 8px;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .size-options{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .size-pill{
+      appearance:none;
+      border:1px solid rgba(202,164,90,.45);
+      background:rgba(0,0,0,.22);
+      color:rgba(233,230,223,.92);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .14s ease, background .14s ease, border-color .14s ease, filter .14s ease;
+      user-select:none;
+    }
+    .size-pill:hover{
+      transform:translateY(-1px);
+      border-color:rgba(202,164,90,.85);
+      filter:brightness(1.03);
+    }
+    .size-pill.is-selected{
+      background:rgba(202,164,90,.18);
+      border-color:rgba(202,164,90,1);
+      color:rgba(255,255,255,1);
     }
 
     .btn{
@@ -195,9 +238,44 @@
       border-radius:12px;
       border:1px solid rgba(0,0,0,.35);
       box-shadow:0 14px 28px rgba(0,0,0,.55);
-      transition:transform .2s ease, filter .2s ease;
+      transition:transform .2s ease, filter .2s ease, opacity .2s ease;
+      cursor:pointer;
     }
     .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
+
+    /* disabled state for "Add to Cart" until size selected */
+    .btn[aria-disabled="true"]{
+      opacity:.55;
+      cursor:not-allowed;
+      filter:saturate(.8);
+      pointer-events:none;
+    }
+
+    /* small “added” toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%);
+      background:rgba(0,0,0,.70);
+      border:1px solid rgba(233,230,223,.16);
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+      color:rgba(233,230,223,.95);
+      padding:12px 14px;
+      border-radius:14px;
+      font-size:13px;
+      letter-spacing:.02em;
+      max-width:min(520px, 92vw);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+      z-index:50;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-2px);
+    }
+    .toast b{color:var(--gold);}
 
     .note{
       margin:34px auto 0;
@@ -242,58 +320,314 @@
     <div class="sub">Wear your faith. Train with purpose. Live unashamed.</div>
 
     <div class="grid">
-      <div class="product">
+      <!-- 1 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee"></div>
-        <div class="meta"><div class="name">Driven By Faith Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Driven By Faith Tee</div>
+          <div class="price">$34.00</div>
+
+          <div class="size-picker" data-product="Driven By Faith Tee" data-price="34.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Driven By Faith Tee">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Driven By Faith Tee" data-price="34.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 2 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee"></div>
-        <div class="meta"><div class="name">Built By Faith Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Built By Faith Tee</div>
+          <div class="price">$34.00</div>
+
+          <div class="size-picker" data-product="Built By Faith Tee" data-price="34.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Built By Faith Tee">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Built By Faith Tee" data-price="34.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 3 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee"></div>
-        <div class="meta"><div class="name">Built To Endure Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Built To Endure Tee</div>
+          <div class="price">$34.00</div>
+
+          <div class="size-picker" data-product="Built To Endure Tee" data-price="34.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Built To Endure Tee">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Built To Endure Tee" data-price="34.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 4 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee"></div>
-        <div class="meta"><div class="name">Faith Over Fear Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Faith Over Fear Tee</div>
+          <div class="price">$34.00</div>
+
+          <div class="size-picker" data-product="Faith Over Fear Tee" data-price="34.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Faith Over Fear Tee">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Faith Over Fear Tee" data-price="34.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 5 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee"></div>
-        <div class="meta"><div class="name">Faith • Strength • Purpose Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Faith • Strength • Purpose Tee</div>
+          <div class="price">$34.00</div>
+
+          <div class="size-picker" data-product="Faith • Strength • Purpose Tee" data-price="34.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Faith Strength Purpose Tee">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Faith • Strength • Purpose Tee" data-price="34.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 6 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee"></div>
-        <div class="meta"><div class="name">Logo Front/Back Tee</div><div class="price">$34.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Logo Front/Back Tee</div>
+          <div class="price">$34.00</div>
+
+          <div class="size-picker" data-product="Logo Front/Back Tee" data-price="34.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Logo Front/Back Tee">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Logo Front/Back Tee" data-price="34.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 7 (no sizes) -->
+      <div class="product" data-has-sizes="false">
         <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle"></div>
-        <div class="meta"><div class="name">Unashamed Shaker Bottle</div><div class="price">$24.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Unashamed Shaker Bottle</div>
+          <div class="price">$24.00</div>
+          <a class="btn add-to-cart" href="#"
+             data-product="Unashamed Shaker Bottle" data-price="24.00"
+             data-nosize="true" aria-disabled="false" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 8 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie"></div>
-        <div class="meta"><div class="name">Built By Faith Hoodie</div><div class="price">$54.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Built By Faith Hoodie</div>
+          <div class="price">$54.00</div>
+
+          <div class="size-picker" data-product="Built By Faith Hoodie" data-price="54.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Built By Faith Hoodie">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Built By Faith Hoodie" data-price="54.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 9 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie"></div>
-        <div class="meta"><div class="name">Unashamed Hoodie</div><div class="price">$54.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Unashamed Hoodie</div>
+          <div class="price">$54.00</div>
+
+          <div class="size-picker" data-product="Unashamed Hoodie" data-price="54.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Hoodie">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Unashamed Hoodie" data-price="54.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
 
-      <div class="product">
+      <!-- 10 -->
+      <div class="product" data-has-sizes="true">
         <div class="imgwrap"><img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie"></div>
-        <div class="meta"><div class="name">Unashamed Unbroken Hoodie</div><div class="price">$54.00</div><a class="btn" href="#" onclick="return false;">Add to Cart</a></div>
+        <div class="meta">
+          <div class="name">Unashamed Unbroken Hoodie</div>
+          <div class="price">$54.00</div>
+
+          <div class="size-picker" data-product="Unashamed Unbroken Hoodie" data-price="54.00">
+            <div class="size-label">Select Size</div>
+            <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Unbroken Hoodie">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
+            </div>
+          </div>
+
+          <a class="btn add-to-cart" href="#"
+             data-product="Unashamed Unbroken Hoodie" data-price="54.00"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
+        </div>
       </div>
     </div>
 
     <div class="note">Faith • Discipline • Purpose</div>
   </div>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script>
+    // --- Simple localStorage cart (static site friendly) ---
+    const CART_KEY = "us_cart_v1";
+
+    function getCart(){
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch { return []; }
+    }
+    function setCart(cart){
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+    function addToCart(item){
+      const cart = getCart();
+      const existing = cart.find(x => x.product === item.product && x.size === item.size);
+      if (existing) existing.qty += 1;
+      else cart.push({ ...item, qty: 1 });
+      setCart(cart);
+      return cart;
+    }
+
+    // --- Toast ---
+    const toast = document.getElementById("toast");
+    let toastTimer = null;
+    function showToast(html){
+      if (!toast) return;
+      toast.innerHTML = html;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    // --- Size selection wiring ---
+    document.querySelectorAll(".product").forEach(card => {
+      const picker = card.querySelector(".size-picker");
+      const btn = card.querySelector(".add-to-cart");
+
+      // If no size picker (e.g., bottle), allow add immediately
+      if (!picker){
+        if (btn){
+          btn.setAttribute("aria-disabled","false");
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const product = btn.getAttribute("data-product") || "Item";
+            const price = Number(btn.getAttribute("data-price") || "0");
+            const updated = addToCart({ product, price, size: "—" });
+            const count = updated.reduce((a,x)=>a + (x.qty||1), 0);
+            showToast(`Added <b>${product}</b>`);
+          });
+        }
+        return;
+      }
+
+      const product = picker.getAttribute("data-product") || (btn ? btn.getAttribute("data-product") : "Item");
+      const price = Number(picker.getAttribute("data-price") || (btn ? btn.getAttribute("data-price") : "0"));
+
+      const pills = picker.querySelectorAll(".size-pill");
+      let selectedSize = null;
+
+      // start disabled
+      if (btn) btn.setAttribute("aria-disabled", "true");
+
+      pills.forEach(pill => {
+        pill.addEventListener("click", () => {
+          pills.forEach(p => p.classList.remove("is-selected"));
+          pill.classList.add("is-selected");
+          selectedSize = pill.getAttribute("data-size");
+          if (btn) btn.setAttribute("aria-disabled","false");
+        });
+      });
+
+      if (btn){
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (btn.getAttribute("aria-disabled") === "true") return;
+          if (!selectedSize) return;
+
+          const updated = addToCart({ product, price, size: selectedSize });
+          const count = updated.reduce((a,x)=>a + (x.qty||1), 0);
+
+          showToast(`Added <b>${product}</b> — Size <b>${selectedSize}</b>`);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
