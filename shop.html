@@ -91,6 +91,28 @@
       color:var(--ink);
     }
 
+    /* Cart badge */
+    .cartlink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .cartbadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:22px;
+      height:22px;
+      padding:0 7px;
+      border-radius:999px;
+      border:1px solid rgba(202,164,90,.55);
+      background:rgba(0,0,0,.28);
+      color:rgba(233,230,223,.96);
+      font-weight:800;
+      font-size:12px;
+      line-height:1;
+    }
+
     .page-title{
       text-align:center;
       margin:10px 0 10px;
@@ -180,7 +202,7 @@
       letter-spacing:.02em;
     }
 
-    /* --- Size picker --- */
+    /* Size picker */
     .size-picker{
       margin: 6px 0 14px;
       text-align:center;
@@ -243,39 +265,12 @@
     }
     .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
 
-    /* disabled state for "Add to Cart" until size selected */
     .btn[aria-disabled="true"]{
       opacity:.55;
       cursor:not-allowed;
       filter:saturate(.8);
       pointer-events:none;
     }
-
-    /* small “added” toast */
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:22px;
-      transform:translateX(-50%);
-      background:rgba(0,0,0,.70);
-      border:1px solid rgba(233,230,223,.16);
-      box-shadow:0 18px 60px rgba(0,0,0,.55);
-      color:rgba(233,230,223,.95);
-      padding:12px 14px;
-      border-radius:14px;
-      font-size:13px;
-      letter-spacing:.02em;
-      max-width:min(520px, 92vw);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .2s ease, transform .2s ease;
-      z-index:50;
-    }
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(-2px);
-    }
-    .toast b{color:var(--gold);}
 
     .note{
       margin:34px auto 0;
@@ -290,6 +285,61 @@
       width:min(920px, 92vw);
     }
 
+    /* Toast w/ View Cart */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%);
+      background:rgba(0,0,0,.70);
+      border:1px solid rgba(233,230,223,.16);
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+      color:rgba(233,230,223,.95);
+      padding:12px 14px;
+      border-radius:14px;
+      font-size:13px;
+      letter-spacing:.02em;
+      max-width:min(620px, 92vw);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+      z-index:50;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-2px);
+      pointer-events:auto;
+    }
+    .toast .msg{
+      line-height:1.35;
+    }
+    .toast b{color:var(--gold);}
+    .toast a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 12px;
+      border-radius:12px;
+      border:1px solid rgba(202,164,90,.55);
+      background:rgba(202,164,90,.16);
+      color:rgba(233,230,223,.98);
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:11px;
+      white-space:nowrap;
+      transition:transform .16s ease, filter .16s ease, background .16s ease;
+    }
+    .toast a:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+      background:rgba(202,164,90,.22);
+    }
+
     @media (max-width:1020px){
       .grid{grid-template-columns:repeat(2, 1fr);}
       .page-title{font-size:52px;}
@@ -300,6 +350,8 @@
       .page-title{font-size:44px;}
       .sub{font-size:19px;}
       .imgwrap{margin:14px;}
+      .toast{gap:10px; padding:12px;}
+      .toast a{padding:9px 10px;}
     }
   </style>
 </head>
@@ -313,6 +365,11 @@
         <a class="active" href="./shop.html">Shop</a>
         <a href="./about.html">About</a>
         <a href="./index.html#contact">Contact</a>
+
+        <!-- NEW: Cart link + live badge -->
+        <a class="cartlink" href="./cart.html" aria-label="View cart">
+          Cart <span class="cartbadge" id="cartCount">0</span>
+        </a>
       </div>
     </div>
 
@@ -321,7 +378,7 @@
 
     <div class="grid">
       <!-- 1 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee"></div>
         <div class="meta">
           <div class="name">Driven By Faith Tee</div>
@@ -344,7 +401,7 @@
       </div>
 
       <!-- 2 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee"></div>
         <div class="meta">
           <div class="name">Built By Faith Tee</div>
@@ -367,7 +424,7 @@
       </div>
 
       <!-- 3 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee"></div>
         <div class="meta">
           <div class="name">Built To Endure Tee</div>
@@ -390,7 +447,7 @@
       </div>
 
       <!-- 4 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee"></div>
         <div class="meta">
           <div class="name">Faith Over Fear Tee</div>
@@ -413,7 +470,7 @@
       </div>
 
       <!-- 5 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee"></div>
         <div class="meta">
           <div class="name">Faith • Strength • Purpose Tee</div>
@@ -436,7 +493,7 @@
       </div>
 
       <!-- 6 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee"></div>
         <div class="meta">
           <div class="name">Logo Front/Back Tee</div>
@@ -459,7 +516,7 @@
       </div>
 
       <!-- 7 (no sizes) -->
-      <div class="product" data-has-sizes="false">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle"></div>
         <div class="meta">
           <div class="name">Unashamed Shaker Bottle</div>
@@ -471,7 +528,7 @@
       </div>
 
       <!-- 8 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie"></div>
         <div class="meta">
           <div class="name">Built By Faith Hoodie</div>
@@ -494,7 +551,7 @@
       </div>
 
       <!-- 9 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie"></div>
         <div class="meta">
           <div class="name">Unashamed Hoodie</div>
@@ -517,7 +574,7 @@
       </div>
 
       <!-- 10 -->
-      <div class="product" data-has-sizes="true">
+      <div class="product">
         <div class="imgwrap"><img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie"></div>
         <div class="meta">
           <div class="name">Unashamed Unbroken Hoodie</div>
@@ -543,7 +600,10 @@
     <div class="note">Faith • Discipline • Purpose</div>
   </div>
 
-  <div class="toast" id="toast" aria-live="polite"></div>
+  <div class="toast" id="toast" aria-live="polite">
+    <div class="msg" id="toastMsg"></div>
+    <a href="./cart.html" aria-label="View cart">View Cart</a>
+  </div>
 
   <script>
     // --- Simple localStorage cart (static site friendly) ---
@@ -564,16 +624,29 @@
       setCart(cart);
       return cart;
     }
+    function cartCount(cart){
+      return (cart || []).reduce((a,x)=>a + (x.qty || 1), 0);
+    }
+
+    // --- Cart badge ---
+    const cartCountEl = document.getElementById("cartCount");
+    function updateCartBadge(){
+      if (!cartCountEl) return;
+      const count = cartCount(getCart());
+      cartCountEl.textContent = String(count);
+    }
 
     // --- Toast ---
     const toast = document.getElementById("toast");
+    const toastMsg = document.getElementById("toastMsg");
     let toastTimer = null;
+
     function showToast(html){
-      if (!toast) return;
-      toast.innerHTML = html;
+      if (!toast || !toastMsg) return;
+      toastMsg.innerHTML = html;
       toast.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
     }
 
     // --- Size selection wiring ---
@@ -590,7 +663,7 @@
             const product = btn.getAttribute("data-product") || "Item";
             const price = Number(btn.getAttribute("data-price") || "0");
             const updated = addToCart({ product, price, size: "—" });
-            const count = updated.reduce((a,x)=>a + (x.qty||1), 0);
+            updateCartBadge();
             showToast(`Added <b>${product}</b>`);
           });
         }
@@ -621,12 +694,19 @@
           if (btn.getAttribute("aria-disabled") === "true") return;
           if (!selectedSize) return;
 
-          const updated = addToCart({ product, price, size: selectedSize });
-          const count = updated.reduce((a,x)=>a + (x.qty||1), 0);
-
+          addToCart({ product, price, size: selectedSize });
+          updateCartBadge();
           showToast(`Added <b>${product}</b> — Size <b>${selectedSize}</b>`);
         });
       }
+    });
+
+    // initialize badge on load
+    updateCartBadge();
+
+    // keep badge in sync if user has multiple tabs open
+    window.addEventListener("storage", (e) => {
+      if (e.key === CART_KEY) updateCartBadge();
     });
   </script>
 </body>
