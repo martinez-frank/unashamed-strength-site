@@ -11,64 +11,67 @@
 
   <style>
     :root{
-      --bg: #000;
-      --ink: #e9e6df;
-      --muted: rgba(233,230,223,.78);
-      --line: rgba(233,230,223,.14);
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.09);
-      --gold: #caa45a;
+      --bg:#000;
+      --ink:#e9e6df;
+      --muted:rgba(233,230,223,.80);
+      --muted2:rgba(233,230,223,.62);
+      --line:rgba(233,230,223,.14);
+
+      --gold:#caa45a;
       --gold2:#b48d45;
-      --shadow: 0 18px 60px rgba(0,0,0,.65);
-      --radius: 18px;
+
+      --radius:20px;
+      --imgRadius:16px;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.62);
+      --shadow2: 0 10px 30px rgba(0,0,0,.55);
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
       color:var(--ink);
-      background: var(--bg);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:var(--bg);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow-x:hidden;
     }
-    a{ color:inherit; text-decoration:none; }
+    a{color:inherit;text-decoration:none;}
 
-    /* Background image layer */
+    /* Background */
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      background: url("./assets/background_element.png") center/cover no-repeat;
-      filter: blur(18px);
-      transform: scale(1.06);
+      background:url("./assets/background_element.png") center/cover no-repeat;
+      filter:blur(18px);
+      transform:scale(1.06);
       opacity:.78;
       z-index:-2;
     }
-    /* Dark vignette overlay */
     body::after{
       content:"";
       position:fixed;
       inset:0;
       background:
-        radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.88));
+        radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
       z-index:-1;
     }
 
     .wrap{
       width:min(1200px, 92vw);
       margin:0 auto;
-      padding:18px 0 60px;
+      padding:18px 0 70px;
     }
 
-    /* Top nav (NO logo / NO brand text) */
+    /* Top nav (clean / minimal) */
     .topbar{
       display:flex;
       justify-content:flex-end;
       align-items:center;
       padding:14px 6px 16px;
       border-bottom:1px solid rgba(233,230,223,.10);
-      margin-bottom:22px;
+      margin-bottom:24px;
     }
     .navlinks{
       display:flex;
@@ -79,140 +82,171 @@
     }
     .navlinks a{
       padding:10px 10px;
-      border-radius:10px;
-      transition: background .2s ease, color .2s ease;
+      border-radius:12px;
+      transition:background .2s ease, color .2s ease, transform .2s ease;
     }
     .navlinks a:hover{
-      background: rgba(255,255,255,.06);
-      color: var(--ink);
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+      transform:translateY(-1px);
     }
 
-    /* Page Title */
+    /* Title */
     .page-title{
       text-align:center;
-      margin: 10px 0 8px;
-      font-family: Cinzel, serif;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      font-size: 64px; /* ~75% bigger feel */
-      line-height: 1.05;
+      margin:10px 0 10px;
+      font-family:Cinzel, serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:64px;
+      line-height:1.03;
       opacity:.98;
+      text-shadow:0 10px 40px rgba(0,0,0,.55);
     }
 
-    /* Subtitle (bigger + Inter to match site) */
+    /* Subtitle (already boosted) */
     .sub{
       text-align:center;
-      margin: 0 auto 26px;
-      color: var(--muted);
-      font-size: 18px; /* ~30% bigger */
-      max-width: 720px;
-      line-height: 1.55;
+      margin:0 auto 30px;
+      color:var(--muted);
+      font-size:24px;
+      max-width:860px;
+      line-height:1.55;
+      text-shadow:0 10px 35px rgba(0,0,0,.55);
     }
 
     /* Grid */
     .grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      align-items: stretch;
+      grid-template-columns:repeat(3, 1fr);
+      gap:24px;
+      align-items:stretch;
     }
 
-    /* Product Card */
+    /* Card */
     .product{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid rgba(233,230,223,.12);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border-radius:var(--radius);
+      border:1px solid rgba(233,230,223,.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
       overflow:hidden;
       position:relative;
+      transform:translateY(0);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .product::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.10), rgba(255,255,255,0));
+      pointer-events:none;
+      opacity:.55;
+    }
+    .product:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow2);
+      border-color:rgba(233,230,223,.18);
     }
 
-    /* Image area: fill the card top, NO inset frame */
+    /* Image: premium “full-bleed” inside one clean frame */
     .imgwrap{
-      margin: 0;
-      border: 0;
-      padding: 0;
-      border-radius: 0;
-      background: rgba(0,0,0,.40);
+      margin:16px;
+      border-radius:var(--imgRadius);
       overflow:hidden;
-      /* Keeps consistent product image block height */
-      aspect-ratio: 16 / 10;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(233,230,223,.12);
+      position:relative;
+      aspect-ratio:16/10;
+    }
+    .imgwrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+      pointer-events:none;
     }
     .imgwrap img{
       width:100%;
       height:100%;
       display:block;
-      object-fit: contain; /* no cropping */
-      background: rgba(255,255,255,.02);
-      border-radius: 0;
-      transition: transform .22s ease, filter .22s ease;
-      transform: scale(1.00);
+      object-fit:cover; /* more retail/premium (fills frame) */
+      background:rgba(255,255,255,.02);
+      transform:scale(1);
+      transition:transform .25s ease, filter .25s ease;
     }
-
-    /* subtle zoom-on-hover */
     .product:hover .imgwrap img{
-      transform: scale(1.03);
-      filter: brightness(1.02);
+      transform:scale(1.04);
+      filter:brightness(1.03);
     }
 
+    /* Meta */
     .meta{
-      padding: 16px 18px 18px;
+      padding:12px 18px 18px;
       text-align:center;
-      border-top: 1px solid rgba(233,230,223,.10);
-      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.22));
+      border-top:1px solid rgba(233,230,223,.10);
+      background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.26));
     }
+
     .name{
-      font-family: Cinzel, serif;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      font-size: 13px;
-      margin: 4px 0 8px;
+      font-family:Cinzel, serif;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:13px;
+      margin:10px 0 8px;
       opacity:.96;
     }
     .price{
-      color: var(--gold);
-      font-weight: 700;
-      margin: 0 0 12px;
+      color:var(--gold);
+      font-weight:800;
+      margin:0 0 14px;
+      letter-spacing:.02em;
     }
 
     .btn{
-      display:inline-block;
-      background: linear-gradient(180deg, var(--gold), var(--gold2));
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:150px;
+      background:linear-gradient(180deg, var(--gold), var(--gold2));
       color:#0a0a0a;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 12px;
-      padding: 11px 18px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,.35);
-      box-shadow: 0 14px 30px rgba(0,0,0,.55);
-      transition: transform .2s ease, filter .2s ease;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+      padding:11px 18px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.35);
+      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      transition:transform .2s ease, filter .2s ease;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-    }
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
 
     .note{
-      margin: 30px auto 0;
+      margin:34px auto 0;
       text-align:center;
-      color: rgba(233,230,223,.70);
-      font-family: Cinzel, serif;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-size: 12px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(233,230,223,.10);
-      width: min(900px, 92vw);
+      color:var(--muted2);
+      font-family:Cinzel, serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+      padding-top:18px;
+      border-top:1px solid rgba(233,230,223,.10);
+      width:min(920px, 92vw);
     }
 
     /* Responsive */
-    @media (max-width: 980px){
-      .wrap{ padding: 14px 0 46px; }
-      .grid{ grid-template-columns: 1fr; }
-      .page-title{ font-size: 46px; }
-      .sub{ font-size: 17px; margin-bottom: 18px; }
+    @media (max-width:1020px){
+      .grid{grid-template-columns:repeat(2, 1fr);}
+      .page-title{font-size:52px;}
+      .sub{font-size:21px;}
+    }
+    @media (max-width:700px){
+      .grid{grid-template-columns:1fr;}
+      .page-title{font-size:44px;}
+      .sub{font-size:19px;}
+      .imgwrap{margin:14px;}
     }
   </style>
 </head>
@@ -236,9 +270,7 @@
 
       <!-- TEES -->
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee">
-        </div>
+        <div class="imgwrap"><img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee"></div>
         <div class="meta">
           <div class="name">Driven By Faith Tee</div>
           <div class="price">$34.00</div>
@@ -247,9 +279,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee">
-        </div>
+        <div class="imgwrap"><img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee"></div>
         <div class="meta">
           <div class="name">Built By Faith Tee</div>
           <div class="price">$34.00</div>
@@ -258,9 +288,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee">
-        </div>
+        <div class="imgwrap"><img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee"></div>
         <div class="meta">
           <div class="name">Built To Endure Tee</div>
           <div class="price">$34.00</div>
@@ -269,9 +297,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee">
-        </div>
+        <div class="imgwrap"><img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee"></div>
         <div class="meta">
           <div class="name">Faith Over Fear Tee</div>
           <div class="price">$34.00</div>
@@ -280,9 +306,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee">
-        </div>
+        <div class="imgwrap"><img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee"></div>
         <div class="meta">
           <div class="name">Faith • Strength • Purpose Tee</div>
           <div class="price">$34.00</div>
@@ -291,9 +315,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee">
-        </div>
+        <div class="imgwrap"><img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee"></div>
         <div class="meta">
           <div class="name">Logo Front/Back Tee</div>
           <div class="price">$34.00</div>
@@ -303,9 +325,7 @@
 
       <!-- SHAKER -->
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle">
-        </div>
+        <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle"></div>
         <div class="meta">
           <div class="name">Unashamed Shaker Bottle</div>
           <div class="price">$24.00</div>
@@ -315,9 +335,7 @@
 
       <!-- HOODIES -->
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie">
-        </div>
+        <div class="imgwrap"><img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie"></div>
         <div class="meta">
           <div class="name">Built By Faith Hoodie</div>
           <div class="price">$54.00</div>
@@ -326,9 +344,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie">
-        </div>
+        <div class="imgwrap"><img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie"></div>
         <div class="meta">
           <div class="name">Unashamed Hoodie</div>
           <div class="price">$54.00</div>
@@ -337,9 +353,7 @@
       </div>
 
       <div class="product">
-        <div class="imgwrap">
-          <img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie">
-        </div>
+        <div class="imgwrap"><img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie"></div>
         <div class="meta">
           <div class="name">Unashamed Unbroken Hoodie</div>
           <div class="price">$54.00</div>
@@ -350,7 +364,6 @@
     </div>
 
     <div class="note">Faith • Discipline • Purpose</div>
-
   </div>
 </body>
 </html>
