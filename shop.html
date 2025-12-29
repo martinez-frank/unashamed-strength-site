@@ -14,94 +14,61 @@
       --bg:#000;
       --ink:#e9e6df;
       --muted: rgba(233,230,223,.72);
-      --line: rgba(233,230,223,.14);
-
-      --gold:#caa45a;
-      --gold2:#b48d45;
-
+      --line: rgba(233,230,223,.12);
       --card: rgba(255,255,255,.06);
       --card2: rgba(255,255,255,.09);
-
+      --gold:#caa45a;
+      --gold2:#b48d45;
       --shadow: 0 18px 60px rgba(0,0,0,.65);
       --radius: 18px;
-      --imgRadius: 16px;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
     body{
       margin:0;
+      color:var(--ink);
       background: var(--bg);
-      color: var(--ink);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
     a{ color:inherit; text-decoration:none; }
 
-    /* Background (visible + blurred) */
-    .page{
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-    .page::before{
+    /* subtle background like home page */
+    body::before{
       content:"";
-      position:absolute;
+      position:fixed;
       inset:0;
       background: url("./assets/background_element.png") center/cover no-repeat;
       filter: blur(18px);
       transform: scale(1.08);
-      opacity: .55; /* make it visible */
-      z-index: 0;
+      opacity:.28;
+      z-index:-2;
     }
-    .page::after{
+    body::after{
       content:"";
-      position:absolute;
+      position:fixed;
       inset:0;
-      background:
-        radial-gradient(70% 85% at 50% 15%, rgba(0,0,0,.35), rgba(0,0,0,.88));
-      z-index: 0;
+      background: radial-gradient(70% 85% at 50% 10%, rgba(0,0,0,.35), rgba(0,0,0,.88));
+      z-index:-1;
     }
 
     .wrap{
-      width: min(1200px, 92vw);
-      margin: 0 auto;
-      padding: 18px 0 70px;
-      position: relative;
-      z-index: 1;
+      width:min(1200px, 92vw);
+      margin:0 auto;
+      padding: 18px 0 60px;
     }
 
-    /* Top nav */
+    /* Top nav (no logo / no brand text) */
     .topbar{
       display:flex;
+      justify-content:flex-end;
       align-items:center;
-      justify-content:space-between;
-      padding: 14px 8px;
+      padding: 14px 0 18px;
       border-bottom: 1px solid rgba(233,230,223,.10);
-      margin-bottom: 22px;
+      margin-bottom: 26px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      opacity:.95;
-    }
-    .brand img{
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,.6));
-    }
-    .brand span{
-      font-family: Cinzel, serif;
-      letter-spacing: .14em;
-      font-size: 13px;
-      text-transform: uppercase;
-      opacity: .92;
-    }
-
     .navlinks{
       display:flex;
-      gap: 16px;
+      gap: 18px;
       font-size: 13px;
       color: var(--muted);
       align-items:center;
@@ -110,32 +77,41 @@
       padding: 10px 10px;
       border-radius: 10px;
       transition: background .2s ease, color .2s ease;
+      text-transform: none;
     }
     .navlinks a:hover{
       background: rgba(255,255,255,.06);
       color: var(--ink);
     }
 
-    /* Page heading */
+    /* Page title */
     .page-title{
       text-align:center;
-      margin: 10px 0 6px;
+      margin: 6px 0 6px;
       font-family: Cinzel, serif;
       letter-spacing: .16em;
       text-transform: uppercase;
-      font-size: 18px;
-      opacity:.95;
+      opacity: .95;
+      font-size: 32px; /* base */
     }
-    .sub{
-      text-align:center;
-      margin: 0 auto 26px;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 680px;
-      line-height: 1.5;
+    /* 75% bigger than typical */
+    .page-title.big{
+      font-size: 56px; /* ~75% bigger feel */
     }
 
-    /* Grid */
+    .sub{
+      text-align:center;
+      margin: 10px auto 26px;
+      max-width: 760px;
+      font-family: Cinzel, serif;              /* match the site vibe */
+      letter-spacing: .10em;                   /* like your headings */
+      text-transform: none;
+      font-size: 14px;
+      color: rgba(233,230,223,.78);
+      line-height: 1.6;
+    }
+
+    /* grid */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -144,68 +120,72 @@
     }
 
     .product{
-      background: linear-gradient(180deg, var(--card2), var(--card));
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border: 1px solid rgba(233,230,223,.12);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+      overflow:hidden;
+      position:relative;
     }
 
-    /* Image window (rounded + no crop) */
     .imgwrap{
       padding: 18px;
       background: rgba(0,0,0,.55);
     }
-    .imgframe{
-      border-radius: var(--imgRadius);
-      overflow: hidden;           /* IMPORTANT: keeps rounded corners visible */
-      border: 1px solid rgba(233,230,223,.10);
-      background: rgba(255,255,255,.02);
-    }
+
+    /* Rounded corners on the actual product image */
     .product img{
-      width: 100%;
-      height: 320px;              /* BIGGER window */
-      object-fit: contain;         /* no cropping */
+      width:100%;
+      height: 300px;
+      object-fit: contain;                     /* keep full product visible */
       display:block;
-      transform: scale(1);         /* baseline */
-      transition: transform .25s ease, filter .25s ease;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(233,230,223,.10);
+      border-radius: 16px;                     /* <-- rounded image corners */
+      padding: 10px;                           /* keeps it from kissing edges */
+      transition: transform .25s ease;
     }
+
+    /* subtle zoom */
     .product:hover img{
-      transform: scale(1.035);     /* subtle zoom */
-      filter: brightness(1.02);
+      transform: scale(1.03);
     }
 
     .meta{
       padding: 16px 18px 18px;
       text-align:center;
+      border-top: 1px solid rgba(233,230,223,.08);
+      background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.30));
     }
+
     .name{
       font-family: Cinzel, serif;
       letter-spacing: .10em;
       text-transform: uppercase;
       font-size: 13px;
+      opacity: .95;
+      margin-bottom: 8px;
       line-height: 1.25;
     }
+
     .price{
-      margin-top: 6px;
       color: var(--gold);
       font-weight: 800;
-      font-size: 13px;
       letter-spacing: .06em;
+      font-size: 13px;
+      margin-bottom: 12px;
     }
 
     .btn{
       display:inline-block;
-      margin-top: 12px;
-      padding: 10px 16px;
-      border-radius: 10px;
       background: linear-gradient(180deg, var(--gold), var(--gold2));
-      color: #0a0a0a;
+      color:#0a0a0a;
       font-weight: 900;
       letter-spacing: .08em;
       text-transform: uppercase;
       font-size: 12px;
+      padding: 11px 18px;
+      border-radius: 10px;
       border: 1px solid rgba(0,0,0,.35);
       box-shadow: 0 14px 30px rgba(0,0,0,.55);
       transition: transform .2s ease, filter .2s ease;
@@ -215,172 +195,168 @@
       filter: brightness(1.03);
     }
 
+    .divider{
+      margin: 26px 0 0;
+      height:1px;
+      background: rgba(233,230,223,.10);
+    }
+
     .note{
-      margin-top: 34px;
       text-align:center;
-      color: rgba(233,230,223,.62);
+      margin-top: 14px;
       font-family: Cinzel, serif;
       letter-spacing: .14em;
       text-transform: uppercase;
       font-size: 12px;
-      border-top: 1px solid rgba(233,230,223,.12);
-      padding-top: 18px;
+      color: rgba(233,230,223,.62);
     }
 
-    /* Responsive */
+    /* responsive */
     @media (max-width: 980px){
       .grid{ grid-template-columns: 1fr; }
-      .product img{ height: 360px; }
-      .topbar{ gap: 10px; flex-wrap: wrap; }
+      .product img{ height: 320px; }
+      .topbar{ justify-content:center; }
+      .page-title.big{ font-size: 44px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <div class="wrap">
+  <div class="wrap">
 
-      <div class="topbar">
-        <a class="brand" href="./index.html">
-          <img src="./assets/unashamed_logo_white.png" alt="Unashamed Strength logo">
-          <span>Unashamed Strength</span>
-        </a>
-
-        <div class="navlinks">
-          <a href="./index.html">Home</a>
-          <a href="./shop.html">Shop</a>
-          <a href="./index.html#about">About</a>
-          <a href="./index.html#contact">Contact</a>
-        </div>
+    <!-- NAV ONLY (no logo / no brand text) -->
+    <div class="topbar">
+      <div class="navlinks">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a href="./index.html#about">About</a>
+        <a href="./index.html#contact">Contact</a>
       </div>
-
-      <div class="page-title">Shop</div>
-      <div class="sub">Wear your faith. Train with purpose. Live unashamed.</div>
-
-      <div class="grid">
-        <!-- TEES -->
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Driven By Faith Tee</div>
-            <div class="price">$34.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Built By Faith Tee</div>
-            <div class="price">$34.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Built To Endure Tee</div>
-            <div class="price">$34.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Faith Over Fear Tee</div>
-            <div class="price">$34.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/faith_strength_purpose_tee.png" alt="Faith • Strength • Purpose Tee">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Faith • Strength • Purpose Tee</div>
-            <div class="price">$34.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Logo Front/Back Tee</div>
-            <div class="price">$34.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <!-- HOODIES -->
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Built By Faith Hoodie</div>
-            <div class="price">$54.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Unashamed Hoodie</div>
-            <div class="price">$54.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="imgwrap">
-            <div class="imgframe">
-              <img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie">
-            </div>
-          </div>
-          <div class="meta">
-            <div class="name">Unashamed Unbroken Hoodie</div>
-            <div class="price">$54.00</div>
-            <a class="btn" href="#" onclick="return false;">Add to Cart</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="note">Faith • Discipline • Purpose</div>
     </div>
+
+    <div class="page-title big">Shop</div>
+    <div class="sub">Wear your faith. Train with purpose. Live unashamed.</div>
+
+    <div class="grid">
+
+      <!-- TEES -->
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/driven_by_faith_tee.png" alt="Driven By Faith Tee">
+        </div>
+        <div class="meta">
+          <div class="name">Driven By Faith Tee</div>
+          <div class="price">$34.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/built_by_faith_tee.png" alt="Built By Faith Tee">
+        </div>
+        <div class="meta">
+          <div class="name">Built By Faith Tee</div>
+          <div class="price">$34.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/built_to_endure_tee.png" alt="Built To Endure Tee">
+        </div>
+        <div class="meta">
+          <div class="name">Built To Endure Tee</div>
+          <div class="price">$34.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/faith_over_fear_tee.png" alt="Faith Over Fear Tee">
+        </div>
+        <div class="meta">
+          <div class="name">Faith Over Fear Tee</div>
+          <div class="price">$34.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/faith_strength_purpose_tee.png" alt="Faith Strength Purpose Tee">
+        </div>
+        <div class="meta">
+          <div class="name">Faith • Strength • Purpose Tee</div>
+          <div class="price">$34.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/logo_front_back_tee.png" alt="Logo Front/Back Tee">
+        </div>
+        <div class="meta">
+          <div class="name">Logo Front/Back Tee</div>
+          <div class="price">$34.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <!-- SHAKER BOTTLE -->
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle">
+        </div>
+        <div class="meta">
+          <div class="name">Unashamed Shaker Bottle</div>
+          <div class="price">$24.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <!-- HOODIES -->
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/built_by_faith_black_hoodie.png" alt="Built By Faith Hoodie">
+        </div>
+        <div class="meta">
+          <div class="name">Built By Faith Hoodie</div>
+          <div class="price">$54.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie">
+        </div>
+        <div class="meta">
+          <div class="name">Unashamed Hoodie</div>
+          <div class="price">$54.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="imgwrap">
+          <img src="./assets/unashamed_unbroken_black_hoodie.png" alt="Unashamed Unbroken Hoodie">
+        </div>
+        <div class="meta">
+          <div class="name">Unashamed Unbroken Hoodie</div>
+          <div class="price">$54.00</div>
+          <a class="btn" href="#" onclick="return false;">Add to Cart</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+    <div class="note">Faith • Discipline • Purpose</div>
+
   </div>
 </body>
 </html>
