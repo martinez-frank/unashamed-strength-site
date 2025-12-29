@@ -13,325 +13,361 @@
     :root{
       --bg:#000;
       --ink:#e9e6df;
-      --muted: rgba(233,230,223,.78);
-      --line: rgba(233,230,223,.14);
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.09);
+      --muted:rgba(233,230,223,.78);
+      --muted2:rgba(233,230,223,.62);
+      --line:rgba(233,230,223,.14);
+
       --gold:#caa45a;
       --gold2:#b48d45;
-      --shadow: 0 18px 60px rgba(0,0,0,.65);
-      --radius: 18px;
+
+      --shadow:0 18px 60px rgba(0,0,0,.65);
+      --shadow2:0 10px 28px rgba(0,0,0,.55);
+
+      --radius:20px;
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x:hidden;
     }
-    a{ color: inherit; text-decoration:none; }
+    a{color:inherit;text-decoration:none;}
 
-    /* background */
-    .bg{
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
-    .bg::before{
+    /* Background */
+    body::before{
       content:"";
-      position:absolute;
+      position:fixed;
       inset:0;
-      background: url("./assets/background_element.png") center/cover no-repeat;
-      filter: blur(18px);
-      transform: scale(1.08);
-      opacity: .78;
-      z-index: 0;
+      background:url("./assets/background_element.png") center/cover no-repeat;
+      filter:blur(18px);
+      transform:scale(1.06);
+      opacity:.78;
+      z-index:-2;
     }
-    .bg::after{
+    body::after{
       content:"";
-      position:absolute;
+      position:fixed;
       inset:0;
-      background: radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.45), rgba(0,0,0,.86));
-      z-index: 0;
+      background:radial-gradient(70% 85% at 50% 25%, rgba(0,0,0,.35), rgba(0,0,0,.90));
+      z-index:-1;
     }
 
     .wrap{
-      width: min(1200px, 92vw);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-      padding: 26px 0 70px;
+      width:min(1100px, 92vw);
+      margin:0 auto;
+      padding:18px 0 70px;
     }
 
-    /* top nav (text only, clean) */
+    /* Top nav */
     .topbar{
       display:flex;
-      align-items:center;
       justify-content:flex-end;
-      gap: 18px;
-      padding: 10px 6px 16px;
-      border-bottom: 1px solid rgba(233,230,223,.10);
-      opacity: .95;
+      align-items:center;
+      padding:14px 6px 16px;
+      border-bottom:1px solid rgba(233,230,223,.10);
+      margin-bottom:26px;
     }
     .navlinks{
       display:flex;
-      gap: 12px;
+      gap:18px;
       align-items:center;
-      font-size: 13px;
-      color: rgba(233,230,223,.78);
+      font-size:13px;
+      color:var(--muted);
     }
     .navlinks a{
-      padding: 10px 10px;
-      border-radius: 10px;
-      transition: background .2s ease, color .2s ease;
+      padding:10px 10px;
+      border-radius:10px;
+      transition:background .2s ease, color .2s ease;
     }
     .navlinks a:hover{
-      background: rgba(255,255,255,.06);
-      color: var(--ink);
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+    }
+    .navlinks a.active{
+      background:rgba(255,255,255,.08);
+      color:var(--ink);
+      border:1px solid rgba(233,230,223,.10);
     }
 
-    /* page header */
-    .header{
-      text-align:center;
-      padding: 44px 0 22px;
-    }
+    /* Header */
     .title{
-      font-family: Cinzel, serif;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      font-size: clamp(34px, 5vw, 58px);
-      margin: 0;
-      opacity: .95;
+      text-align:center;
+      font-family:Cinzel, serif;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      font-size:48px;
+      margin:18px 0 10px;
+      text-shadow:0 18px 60px rgba(0,0,0,.70);
     }
-    .subtitle{
-      margin: 14px auto 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.6;
+    .sub{
+      text-align:center;
+      margin:0 auto 26px;
+      color:rgba(233,230,223,.76);
+      font-size:18px; /* slightly larger */
+      max-width:860px;
+      line-height:1.55;
     }
 
-    /* card */
+    /* Main card */
     .card{
-      margin: 22px auto 0;
-      max-width: 980px;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid rgba(233,230,223,.12);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
+      width:min(920px, 92vw);
+      margin:0 auto;
+      border-radius:var(--radius);
+      border:1px solid rgba(233,230,223,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
       overflow:hidden;
     }
+
     .card-inner{
-      padding: 34px 34px 28px;
+      padding:26px 28px 22px;
     }
 
-    .lede{
-      font-size: 18px;
-      line-height: 1.75;
-      color: rgba(233,230,223,.92);
-      margin: 0 0 18px;
+    /* Story typography (bigger, more premium) */
+    .story{
+      color:rgba(233,230,223,.86);
+      font-size:18px;          /* bigger than before */
+      line-height:1.85;
+      letter-spacing:.01em;
     }
-    .para{
-      font-size: 16px;
-      line-height: 1.85;
-      color: rgba(233,230,223,.82);
-      margin: 0 0 16px;
+    .story p{ margin:0 0 16px; }
+    .story strong{ color:rgba(233,230,223,.96); }
+
+    /* Pull quote */
+    .quote{
+      margin:18px 0 18px;
+      padding:18px 18px;
+      border-radius:14px;
+      border:1px solid rgba(233,230,223,.12);
+      background:linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.38));
+      box-shadow:0 12px 30px rgba(0,0,0,.45);
+    }
+    .quote .qtext{
+      margin:0 0 10px;
+      color:rgba(233,230,223,.88);
+      font-size:16.5px;
+      line-height:1.7;
+    }
+    .quote .ref{
+      font-family:Cinzel, serif;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-size:13px;
     }
 
     .divider{
       height:1px;
-      background: rgba(233,230,223,.12);
-      margin: 22px 0;
+      background:rgba(233,230,223,.10);
+      margin:18px 0 16px;
     }
 
-    .quote{
-      border-left: 3px solid rgba(202,164,90,.75);
-      padding: 10px 16px;
-      background: rgba(0,0,0,.35);
-      border-radius: 14px;
-      margin: 18px 0;
-    }
-    .quote .q{
-      margin:0;
-      color: rgba(233,230,223,.92);
-      font-size: 16px;
-      line-height: 1.8;
-    }
-    .quote .ref{
-      margin-top: 10px;
-      font-family: Cinzel, serif;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(202,164,90,.95);
-      font-size: 13px;
+    .minihead{
+      font-family:Cinzel, serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:13px;
+      color:rgba(233,230,223,.78);
+      margin:4px 0 12px;
     }
 
-    /* mission points */
-    .grid{
+    .values{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 18px;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+      margin-top:10px;
     }
     .pill{
-      background: rgba(0,0,0,.35);
-      border: 1px solid rgba(233,230,223,.12);
-      border-radius: 18px;
-      padding: 14px 14px 12px;
+      border-radius:14px;
+      border:1px solid rgba(233,230,223,.12);
+      background:rgba(0,0,0,.18);
+      padding:12px 12px;
       text-align:center;
     }
-    .pill .k{
-      font-family: Cinzel, serif;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: rgba(233,230,223,.9);
+    .pill .h{
+      font-family:Cinzel, serif;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:6px;
+      color:rgba(233,230,223,.88);
     }
-    .pill .v{
-      margin-top: 8px;
-      color: rgba(233,230,223,.74);
-      font-size: 14px;
-      line-height: 1.55;
+    .pill .t{
+      font-size:13px;
+      line-height:1.45;
+      color:rgba(233,230,223,.70);
     }
 
-    /* CTA */
-    .cta{
+    .actions{
       display:flex;
       justify-content:center;
-      gap: 12px;
-      flex-wrap:wrap;
-      padding: 0 34px 32px;
+      gap:12px;
+      margin-top:18px;
     }
-    .btn{
-      display:inline-block;
-      background: linear-gradient(180deg, var(--gold), var(--gold2));
-      color: #0a0a0a;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 12px;
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,.35);
-      box-shadow: 0 14px 30px rgba(0,0,0,.55);
-      transition: transform .2s ease, filter .2s ease;
+
+    .btn-gold{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 18px;
+      border-radius:12px;
+      background:linear-gradient(180deg, var(--gold), var(--gold2));
+      color:#0a0a0a;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+      border:1px solid rgba(0,0,0,.35);
+      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      transition:transform .2s ease, filter .2s ease;
+      min-width:190px;
     }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .btn-gold:hover{ transform:translateY(-1px); filter:brightness(1.03); }
 
     .btn-ghost{
-      display:inline-block;
-      background: rgba(255,255,255,.06);
-      color: rgba(233,230,223,.92);
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 12px;
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: 1px solid rgba(233,230,223,.14);
-      box-shadow: 0 14px 30px rgba(0,0,0,.45);
-      transition: transform .2s ease, background .2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 18px;
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(233,230,223,.14);
+      color:rgba(233,230,223,.92);
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:11px;
+      box-shadow:0 10px 22px rgba(0,0,0,.45);
+      transition:transform .2s ease, background .2s ease;
+      min-width:190px;
     }
-    .btn-ghost:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
+    .btn-ghost:hover{ transform:translateY(-1px); background:rgba(255,255,255,.08); }
 
-    /* footer */
-    .foot{
+    .footer{
+      width:min(920px, 92vw);
+      margin:18px auto 0;
       text-align:center;
-      margin-top: 28px;
-      color: rgba(233,230,223,.62);
-      font-size: 12px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
+      padding-top:14px;
+      border-top:1px solid rgba(233,230,223,.10);
+    }
+    .footnote{
+      font-family:Cinzel, serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(233,230,223,.55);
     }
 
     @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-      .card-inner{ padding: 26px 18px 22px; }
-      .cta{ padding: 0 18px 26px; }
-      .subtitle{ font-size: 16px; }
+      .title{font-size:38px;}
+      .sub{font-size:16px;}
+      .card-inner{padding:22px 18px;}
+      .story{font-size:17px; line-height:1.8;}
+      .values{grid-template-columns:1fr; gap:10px;}
+      .actions{flex-direction:column; align-items:center;}
+      .btn-gold, .btn-ghost{width:min(420px, 92vw);}
     }
   </style>
 </head>
 
 <body>
-  <div class="bg">
-    <div class="wrap">
+  <div class="wrap">
 
-      <div class="topbar">
-        <div class="navlinks">
-          <a href="./index.html">Home</a>
-          <a href="./shop.html">Shop</a>
-          <a href="./about.html" style="color: var(--ink); background: rgba(255,255,255,.06);">About</a>
-          <a href="./index.html#contact">Contact</a>
-        </div>
+    <div class="topbar">
+      <div class="navlinks">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a class="active" href="./about.html">About</a>
+        <a href="./about.html#contact" onclick="return false;">Contact</a>
       </div>
+    </div>
 
-      <header class="header">
-        <h1 class="title">About</h1>
-        <div class="subtitle">
-          Faith-first training apparel for the ones who refuse to be defined by fear, failure, or the past.
-        </div>
-      </header>
+    <div class="title">About</div>
+    <div class="sub">Faith-first training apparel for the ones who refuse to be defined by fear, failure, or the past.</div>
 
-      <section class="card">
-        <div class="card-inner">
-          <p class="lede">
-            This brand exists to remind people that no matter how broken, weak, or overlooked they feel, they are still chosen by God.
-          </p>
+    <section class="card">
+      <div class="card-inner">
 
-          <p class="para">
-            After walking through battles that tested my faith- including facing life-altering hardship and standing unashamed in the face of fear. I realized my calling was bigger than myself. God didn’t bring me this far to stay silent. He shaped me to lead, inspire, and to help others rise, physically, mentally, spiritually.
-          </p>
+        <div class="story">
+          <p>I was diagnosed with cancer ten years ago, when I was thirty years old.</p>
 
-          <p class="para">
-            Unashamed is for the ones who train not just their bodies, but their character. For those who’ve been knocked down and chose to stand back up. For those who put God first and refuse to be defined by their PAST!
-          </p>
+          <p>What people don’t know is that when I first found out, I didn’t tell anyone. I was embarrassed. I was scared. I was nervous. I had no idea what was going to happen to my life. I didn’t know how bad it was, and I didn’t know how to even say the words out loud.</p>
+
+          <p>So I kept it to myself.</p>
+
+          <p>For almost two years — maybe longer — I carried that weight alone. I went on with life like nothing was wrong, even though everything was. Looking back, I realize how much fear controlled me during that time. I was young. I was healthy. I never once thought cancer would be part of my story. Not even for a second.</p>
+
+          <p>The only person I finally told was my older brother.</p>
+
+          <p>When I told him, I was still embarrassed. Still scared. Still unsure of what was coming. I remember not knowing if I wanted answers or if I was just hoping it would somehow go away. But my brother didn’t sugarcoat anything. He told me something I needed to hear, not something that was easy to hear.</p>
+
+          <p><strong>He told me I had no choice — I had to go get checked before I died.</strong></p>
+
+          <p>So I went to the ER.</p>
+
+          <p>And that’s when everything changed.</p>
+
+          <p><strong>I found out I had Stage IV cancer.</strong></p>
+
+          <p>In a blink of an eye, my entire life stopped. I didn’t know if I was going to live or not. I didn’t know how much time I had left. I didn’t know what was coming next. All I knew was that the future I thought I had was suddenly uncertain.</p>
+
+          <p>What made it even harder was this — I was healthy. I worked out. I took care of myself. I never imagined in my mind that I would have this disease. Cancer wasn’t something I associated with my life, my age, or my body. But there it was, staring me in the face.</p>
+
+          <p>Those were the darkest moments of my life.</p>
+
+          <p>But I didn’t go through them alone.</p>
+
+          <p>My brother stood by me. God carried me. Prayer surrounded me — even when I didn’t have the strength to pray for myself. There were moments when faith was the only thing holding me together. Moments when all I could do was surrender and trust that there was a reason I was still breathing.</p>
 
           <div class="quote">
-            <p class="q">
-              Romans 11:6 reminds us that grace is not earned, it’s GIVEN. And through that grace, we grow stronger.
-            </p>
+            <p class="qtext">I didn’t survive by accident. I’m still here today for a reason — to impact lives, to tell the truth, to spread the Word, to follow Christ, and to do the right thing even when it’s hard.</p>
             <div class="ref">Romans 11:6</div>
           </div>
 
-          <p class="para">
-            My mission is to help people in the gym and in life believe in who God created them to be. To walk in confidence, to live with PURPOSE, to move forward without SHAME.
-          </p>
+          <p>Looking back now, I know I didn’t survive by accident.</p>
 
-          <div class="divider"></div>
+          <p>Cancer didn’t just change my body — it changed my direction. It stripped me down and showed me what really matters.</p>
 
-          <p class="lede" style="margin-bottom: 0;">
-            This isn’t just a gym brand..
-          </p>
-          <p class="lede" style="margin-top: 10px;">
-            It’s a movement a testimony, a declaration of faith!
-          </p>
+          <p><strong>I didn’t survive to stay silent.</strong></p>
 
-          <div class="grid">
-            <div class="pill">
-              <div class="k">Faith</div>
-              <div class="v">God first — always.</div>
-            </div>
-            <div class="pill">
-              <div class="k">Discipline</div>
-              <div class="v">Train your body. Build your character.</div>
-            </div>
-            <div class="pill">
-              <div class="k">Purpose</div>
-              <div class="v">Live unashamed. Lead by example.</div>
-            </div>
+          <p><strong>I survived to live unashamed, to walk in faith, and to remind others that even when life tries to end you, God may still be getting ready to use you.</strong></p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="minihead">What Unashamed Stands For</div>
+
+        <div class="values">
+          <div class="pill">
+            <div class="h">Faith</div>
+            <div class="t">God first — always.</div>
+          </div>
+          <div class="pill">
+            <div class="h">Discipline</div>
+            <div class="t">Train your body. Build your character.</div>
+          </div>
+          <div class="pill">
+            <div class="h">Purpose</div>
+            <div class="t">Live unashamed. Lead by example.</div>
           </div>
         </div>
 
-        <div class="cta">
-          <a class="btn" href="./shop.html">Shop Unashamed</a>
+        <div class="actions">
+          <a class="btn-gold" href="./shop.html">Shop Unashamed</a>
           <a class="btn-ghost" href="./index.html">Back to Home</a>
         </div>
-      </section>
 
-      <div class="foot">Faith • Discipline • Purpose</div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="footnote">Faith • Discipline • Purpose</div>
     </div>
+
   </div>
 </body>
 </html>
