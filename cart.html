@@ -10,199 +10,634 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- SAME STYLES YOU ALREADY HAVE --- */
-    /* (Unchanged for safety & consistency) */
-
     :root{
       --bg:#000;
       --ink:#e9e6df;
       --muted:rgba(233,230,223,.80);
       --muted2:rgba(233,230,223,.62);
+
       --gold:#caa45a;
       --gold2:#b48d45;
+
       --radius:20px;
       --imgRadius:16px;
+
       --shadow: 0 18px 60px rgba(0,0,0,.62);
+      --shadow2: 0 10px 30px rgba(0,0,0,.55);
     }
 
     *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      font-family:Inter,system-ui;
       color:var(--ink);
-      background:#000;
+      background:var(--bg);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none;}
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("./assets/background_element.png") center/cover no-repeat;
+      filter:blur(18px);
+      transform:scale(1.06);
+      opacity:.78;
+      z-index:-2;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background: radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
+      z-index:-1;
     }
 
-    /* (Keeping your existing layout & styling intact) */
+    .wrap{
+      width:min(1100px, 92vw);
+      margin:0 auto;
+      padding:18px 0 70px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      padding:14px 6px 16px;
+      border-bottom:1px solid rgba(233,230,223,.10);
+      margin-bottom:24px;
+    }
+    .navlinks{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .navlinks a{
+      padding:10px 10px;
+      border-radius:12px;
+      transition:background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .navlinks a:hover{
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+      transform:translateY(-1px);
+    }
+    .navlinks a.active{
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+    }
+
+    .cartlink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .cartbadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:22px;
+      height:22px;
+      padding:0 7px;
+      border-radius:999px;
+      border:1px solid rgba(202,164,90,.55);
+      background:rgba(0,0,0,.28);
+      color:rgba(233,230,223,.96);
+      font-weight:800;
+      font-size:12px;
+      line-height:1;
+    }
+
+    .page-title{
+      text-align:center;
+      margin:10px 0 10px;
+      font-family:Cinzel, serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:56px;
+      line-height:1.03;
+      opacity:.98;
+      text-shadow:0 10px 40px rgba(0,0,0,.55);
+    }
+
+    .sub{
+      text-align:center;
+      margin:0 auto 26px;
+      color:var(--muted);
+      font-size:18px;
+      max-width:860px;
+      line-height:1.55;
+      text-shadow:0 10px 35px rgba(0,0,0,.55);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .panel{
+      border-radius:var(--radius);
+      border:1px solid rgba(233,230,223,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:16px 18px;
+      border-bottom:1px solid rgba(233,230,223,.10);
+      background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.26));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .panel-head .h{
+      font-family:Cinzel, serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:13px;
+      opacity:.95;
+    }
+    .panel-head .meta{
+      color:var(--muted2);
+      font-size:12px;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+
+    .items{
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .item{
+      border:1px solid rgba(233,230,223,.12);
+      background:rgba(0,0,0,.18);
+      border-radius:16px;
+      padding:12px 12px;
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:12px;
+      align-items:center;
+    }
+
+    .item-left{
+      min-width:0;
+    }
+    .item-name{
+      font-family:Cinzel, serif;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:13px;
+      margin:0 0 6px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .item-sub{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .pill{
+      border:1px solid rgba(202,164,90,.45);
+      background:rgba(202,164,90,.10);
+      color:rgba(233,230,223,.95);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+    .price{
+      color:var(--gold);
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+
+    .item-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .qty{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(233,230,223,.14);
+      background:rgba(0,0,0,.22);
+      padding:8px 10px;
+      border-radius:14px;
+    }
+    .qbtn{
+      width:28px;
+      height:28px;
+      border-radius:10px;
+      border:1px solid rgba(202,164,90,.45);
+      background:rgba(0,0,0,.22);
+      color:rgba(233,230,223,.95);
+      cursor:pointer;
+      font-weight:900;
+      line-height:1;
+      transition:transform .14s ease, filter .14s ease, border-color .14s ease;
+    }
+    .qbtn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(202,164,90,.85);
+      filter:brightness(1.03);
+    }
+    .qnum{
+      min-width:18px;
+      text-align:center;
+      font-weight:900;
+      color:rgba(233,230,223,.95);
+    }
+
+    .remove{
+      border:1px solid rgba(233,230,223,.14);
+      background:rgba(0,0,0,.18);
+      color:rgba(233,230,223,.9);
+      border-radius:12px;
+      padding:9px 10px;
+      cursor:pointer;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:10px;
+      transition:transform .14s ease, filter .14s ease, border-color .14s ease, background .14s ease;
+    }
+    .remove:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+      border-color:rgba(233,230,223,.22);
+      background:rgba(255,255,255,.06);
+    }
+
+    .summary{
+      padding:14px 14px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .row strong{
+      color:var(--ink);
+      font-weight:900;
+    }
+    .row.total{
+      padding-top:10px;
+      border-top:1px solid rgba(233,230,223,.10);
+      color:var(--ink);
+      font-size:14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      background:linear-gradient(180deg, var(--gold), var(--gold2));
+      color:#0a0a0a;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+      padding:12px 18px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.35);
+      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      transition:transform .2s ease, filter .2s ease, opacity .2s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
+
+    .btn.secondary{
+      background:rgba(0,0,0,.18);
+      color:rgba(233,230,223,.95);
+      border:1px solid rgba(233,230,223,.14);
+      box-shadow:none;
+    }
+
+    .empty{
+      padding:26px 18px 22px;
+      text-align:center;
+      color:var(--muted);
+    }
+    .empty .big{
+      font-family:Cinzel, serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:13px;
+      margin-bottom:8px;
+      color:rgba(233,230,223,.92);
+    }
+    .empty .small{
+      color:var(--muted2);
+      font-size:13px;
+      line-height:1.55;
+      margin-bottom:14px;
+    }
+    .empty a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid rgba(202,164,90,.45);
+      background:rgba(202,164,90,.14);
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+
+    .note{
+      margin:28px auto 0;
+      text-align:center;
+      color:var(--muted2);
+      font-family:Cinzel, serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+      padding-top:18px;
+      border-top:1px solid rgba(233,230,223,.10);
+      width:min(920px, 92vw);
+    }
+
+    @media (max-width:980px){
+      .layout{grid-template-columns:1fr;}
+      .page-title{font-size:48px;}
+    }
+    @media (max-width:520px){
+      .page-title{font-size:42px;}
+      .item{grid-template-columns:1fr; align-items:start;}
+      .item-right{justify-content:space-between;}
+      .panel-head{flex-direction:column; align-items:flex-start;}
+    }
   </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="navlinks">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a href="./about.html">About</a>
+        <a href="./index.html#contact">Contact</a>
 
-  <!-- NAV -->
-  <div class="topbar">
-    <div class="navlinks">
-      <a href="./index.html">Home</a>
-      <a href="./shop.html">Shop</a>
-      <a href="./about.html">About</a>
-      <a href="./index.html#contact">Contact</a>
-      <a class="cartlink active" href="./cart.html">Cart <span class="cartbadge" id="cartCount">0</span></a>
-    </div>
-  </div>
-
-  <div class="page-title">Cart</div>
-  <div class="sub">Review your items before checkout.</div>
-
-  <div class="layout">
-
-    <!-- ITEMS -->
-    <div class="panel">
-      <div class="panel-head">
-        <div class="h">Your Items</div>
-        <a class="btn secondary" href="./shop.html">Continue Shopping</a>
-      </div>
-
-      <div class="items" id="items"></div>
-
-      <div class="empty" id="emptyState" style="display:none;">
-        <div class="big">Your cart is empty</div>
-        <div class="small">Add products to continue.</div>
+        <a class="cartlink active" href="./cart.html" aria-label="View cart">
+          Cart <span class="cartbadge" id="cartCount">0</span>
+        </a>
       </div>
     </div>
 
-    <!-- SUMMARY -->
-    <div class="panel">
-      <div class="panel-head">
-        <div class="h">Summary</div>
-      </div>
+    <div class="page-title">Cart</div>
+    <div class="sub">Review your items below. Update sizes and quantities before checkout.</div>
 
-      <div class="summary">
-        <div class="row">
-          <span>Subtotal</span>
-          <strong id="subtotal">$0.00</strong>
-        </div>
-        <div class="row total">
-          <span>Total</span>
-          <strong id="total">$0.00</strong>
+    <div class="layout">
+      <!-- Items -->
+      <div class="panel" id="itemsPanel">
+        <div class="panel-head">
+          <div class="h">Your Items</div>
+          <div class="meta" id="itemsMeta">0 items</div>
         </div>
 
-        <button class="btn" id="checkoutBtn">Email Order</button>
-        <button class="btn secondary" id="clearBtn">Clear Cart</button>
+        <div class="items" id="items"></div>
+
+        <div class="empty" id="emptyState" style="display:none;">
+          <div class="big">Your cart is empty</div>
+          <div class="small">Head back to the shop and add your gear. Sizes and quantities will save automatically.</div>
+          <a href="./shop.html">Back to Shop</a>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="panel">
+        <div class="panel-head">
+          <div class="h">Summary</div>
+          <div class="meta">Taxes/shipping later</div>
+        </div>
+        <div class="summary">
+          <div class="row">
+            <span>Subtotal</span>
+            <strong id="subtotal">$0.00</strong>
+          </div>
+          <div class="row">
+            <span>Estimated Shipping</span>
+            <span class="muted">—</span>
+          </div>
+          <div class="row total">
+            <span>Total</span>
+            <strong id="total">$0.00</strong>
+          </div>
+
+          <button class="btn" id="checkoutBtn" type="button">Email Order</button>
+          <button class="btn secondary" id="clearBtn" type="button">Clear Cart</button>
+        </div>
       </div>
     </div>
 
+    <div class="note">Faith • Discipline • Purpose</div>
   </div>
-</div>
 
-<script>
-/* ============================
-   CONFIG
-============================ */
-const ORDER_EMAIL = "maresdonny5@gmail.com";
-const CART_KEY = "us_cart_v1";
+  <script>
+    // ✅ Build-phase email target (swap later to orders@yourdomain.com)
+    const ORDER_EMAIL = "maresdonny5@gmail.com";
 
-/* ============================
-   HELPERS
-============================ */
-function getCart() {
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-  catch { return []; }
-}
+    const CART_KEY = "us_cart_v1";
 
-function setCart(cart) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-}
+    function getCart(){
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch { return []; }
+    }
+    function setCart(cart){
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+    function countCart(cart){
+      return (cart || []).reduce((a,x)=>a + (x.qty || 1), 0);
+    }
+    function money(n){
+      return "$" + (Number(n || 0)).toFixed(2);
+    }
 
-function money(n) {
-  return "$" + Number(n || 0).toFixed(2);
-}
+    // DOM
+    const cartCountEl = document.getElementById("cartCount");
+    const itemsEl = document.getElementById("items");
+    const itemsMeta = document.getElementById("itemsMeta");
+    const emptyState = document.getElementById("emptyState");
+    const subtotalEl = document.getElementById("subtotal");
+    const totalEl = document.getElementById("total");
+    const clearBtn = document.getElementById("clearBtn");
+    const checkoutBtn = document.getElementById("checkoutBtn");
 
-function countCart(cart) {
-  return cart.reduce((a, i) => a + (i.qty || 1), 0);
-}
+    function updateBadge(){
+      const cart = getCart();
+      if (cartCountEl) cartCountEl.textContent = String(countCart(cart));
+    }
 
-/* ============================
-   RENDER
-============================ */
-const itemsEl = document.getElementById("items");
-const subtotalEl = document.getElementById("subtotal");
-const totalEl = document.getElementById("total");
-const cartCountEl = document.getElementById("cartCount");
-const emptyState = document.getElementById("emptyState");
+    function calcSubtotal(cart){
+      return (cart || []).reduce((sum, item) => {
+        const price = Number(item.price || 0);
+        const qty = Number(item.qty || 1);
+        return sum + (price * qty);
+      }, 0);
+    }
 
-function render() {
-  const cart = getCart();
-  cartCountEl.textContent = countCart(cart);
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
 
-  if (!cart.length) {
-    itemsEl.innerHTML = "";
-    emptyState.style.display = "block";
-    subtotalEl.textContent = "$0.00";
-    totalEl.textContent = "$0.00";
-    return;
-  }
+    function render(){
+      const cart = getCart();
+      updateBadge();
 
-  emptyState.style.display = "none";
+      const itemCount = countCart(cart);
+      if (itemsMeta) itemsMeta.textContent = `${itemCount} item${itemCount === 1 ? "" : "s"}`;
 
-  itemsEl.innerHTML = cart.map((item, i) => `
-    <div class="item">
-      <div>
-        <strong>${item.product}</strong><br>
-        Size ${item.size} · ${money(item.price)}
-      </div>
-      <div>
-        <button onclick="updateQty(${i}, -1)">−</button>
-        ${item.qty}
-        <button onclick="updateQty(${i}, 1)">+</button>
-        <button onclick="removeItem(${i})">Remove</button>
-      </div>
-    </div>
-  `).join("");
+      // empty vs filled
+      if (!cart.length){
+        if (itemsEl) itemsEl.innerHTML = "";
+        if (emptyState) emptyState.style.display = "block";
+        if (subtotalEl) subtotalEl.textContent = money(0);
+        if (totalEl) totalEl.textContent = money(0);
+        return;
+      } else {
+        if (emptyState) emptyState.style.display = "none";
+      }
 
-  const subtotal = cart.reduce((s,i)=>s + (i.price*i.qty),0);
-  subtotalEl.textContent = money(subtotal);
-  totalEl.textContent = money(subtotal);
-}
+      // items
+      itemsEl.innerHTML = cart.map((item, idx) => {
+        const name = item.product || "Item";
+        const size = item.size || "—";
+        const price = Number(item.price || 0);
+        const qty = Number(item.qty || 1);
 
-function updateQty(i, delta) {
-  const cart = getCart();
-  cart[i].qty += delta;
-  if (cart[i].qty <= 0) cart.splice(i,1);
-  setCart(cart);
-  render();
-}
+        return `
+          <div class="item" data-index="${idx}">
+            <div class="item-left">
+              <div class="item-name" title="${escapeHtml(name)}">${escapeHtml(name)}</div>
+              <div class="item-sub">
+                <span class="pill">Size ${escapeHtml(size)}</span>
+                <span class="price">${money(price)}</span>
+              </div>
+            </div>
 
-function removeItem(i){
-  const cart = getCart();
-  cart.splice(i,1);
-  setCart(cart);
-  render();
-}
+            <div class="item-right">
+              <div class="qty" aria-label="Quantity controls">
+                <button class="qbtn" data-action="dec" type="button" aria-label="Decrease quantity">−</button>
+                <div class="qnum" aria-label="Quantity">${qty}</div>
+                <button class="qbtn" data-action="inc" type="button" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="remove" data-action="remove" type="button">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join("");
 
-/* ============================
-   EMAIL CHECKOUT
-============================ */
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  const cart = getCart();
-  if (!cart.length) return;
+      // totals
+      const sub = calcSubtotal(cart);
+      if (subtotalEl) subtotalEl.textContent = money(sub);
+      if (totalEl) totalEl.textContent = money(sub);
+    }
 
-  if (!ORDER_EMAIL || !ORDER_EMAIL.includes("@")) {
-    alert("Order email is not configured.");
-    return;
-  }
+    // Delegate item actions
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
 
-  const lines = cart.map(i =>
-    `- ${i.product} (Size ${i.size}) x${i.qty} @ ${money(i.price)}`
-  );
+      const itemEl = e.target.closest(".item");
+      const action = btn.getAttribute("data-action");
+      if (!action) return;
+      if (!itemEl) return;
 
-  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+      const idx = Number(itemEl.getAttribute("data-index"));
+      const cart = getCart();
+      if (!cart[idx]) return;
 
-  const subject = `Unashamed Strength Order — ${countCart(cart)} item(s)`;
-  const body =
+      if (action === "inc"){
+        cart[idx].qty = Number(cart[idx].qty || 1) + 1;
+        setCart(cart);
+        render();
+      }
+
+      if (action === "dec"){
+        const next = Number(cart[idx].qty || 1) - 1;
+        if (next <= 0){
+          cart.splice(idx, 1);
+        } else {
+          cart[idx].qty = next;
+        }
+        setCart(cart);
+        render();
+      }
+
+      if (action === "remove"){
+        cart.splice(idx, 1);
+        setCart(cart);
+        render();
+      }
+    });
+
+    // Clear cart
+    clearBtn?.addEventListener("click", () => {
+      localStorage.removeItem(CART_KEY);
+      render();
+    });
+
+    // ✅ Email checkout (with subject prefix)
+    checkoutBtn?.addEventListener("click", () => {
+      const cart = getCart();
+      if (!cart.length) return;
+
+      // Minimal validation: must look like an email
+      if (!ORDER_EMAIL || !ORDER_EMAIL.includes("@")) {
+        alert("Order email is not configured.");
+        return;
+      }
+
+      const subtotal = calcSubtotal(cart);
+
+      const lines = cart.map((item) => {
+        const name = item.product || "Item";
+        const size = item.size && item.size !== "—" ? ` (Size ${item.size})` : "";
+        const qty = Number(item.qty || 1);
+        const price = money(item.price || 0);
+        return `- ${name}${size} x${qty} @ ${price}`;
+      });
+
+      const subject = `Unashamed Strength Order — ${countCart(cart)} item(s)`;
+      const body =
 `Hello Unashamed Strength,
 
-I’d like to place the following order:
+I’d like to place an order:
 
 ${lines.join("\n")}
 
@@ -215,19 +650,17 @@ Phone:
 
 Thank you!`;
 
-  window.location.href =
-    `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-});
+      const mailto = `mailto:${encodeURIComponent(ORDER_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    });
 
-/* ============================
-   CLEAR CART
-============================ */
-document.getElementById("clearBtn").onclick = () => {
-  localStorage.removeItem(CART_KEY);
-  render();
-};
+    // Sync badge if multiple tabs
+    window.addEventListener("storage", (e) => {
+      if (e.key === CART_KEY) render();
+    });
 
-render();
-</script>
+    // Initial render
+    render();
+  </script>
 </body>
 </html>
