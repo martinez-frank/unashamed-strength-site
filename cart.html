@@ -15,27 +15,20 @@
       --ink:#e9e6df;
       --muted:rgba(233,230,223,.80);
       --muted2:rgba(233,230,223,.62);
-
       --gold:#caa45a;
       --gold2:#b48d45;
-
       --radius:20px;
-      --imgRadius:16px;
-
-      --shadow: 0 18px 60px rgba(0,0,0,.62);
-      --shadow2: 0 10px 30px rgba(0,0,0,.55);
+      --shadow:0 18px 60px rgba(0,0,0,.62);
     }
 
     *{box-sizing:border-box;}
-    html,body{height:100%;}
     body{
       margin:0;
+      background:#000;
       color:var(--ink);
-      background:var(--bg);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family:Inter,system-ui;
       overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none;}
 
     body::before{
       content:"";
@@ -43,7 +36,6 @@
       inset:0;
       background:url("./assets/background_element.png") center/cover no-repeat;
       filter:blur(18px);
-      transform:scale(1.06);
       opacity:.78;
       z-index:-2;
     }
@@ -51,616 +43,233 @@
       content:"";
       position:fixed;
       inset:0;
-      background: radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
+      background:radial-gradient(70% 85% at 50% 22%, rgba(0,0,0,.28), rgba(0,0,0,.90));
       z-index:-1;
     }
 
-    .wrap{
-      width:min(1100px, 92vw);
-      margin:0 auto;
-      padding:18px 0 70px;
-    }
+    .wrap{width:min(1100px,92vw);margin:0 auto;padding:20px 0 70px;}
 
-    .topbar{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      padding:14px 6px 16px;
-      border-bottom:1px solid rgba(233,230,223,.10);
-      margin-bottom:24px;
-    }
-    .navlinks{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .navlinks a{
-      padding:10px 10px;
-      border-radius:12px;
-      transition:background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .navlinks a:hover{
-      background:rgba(255,255,255,.06);
-      color:var(--ink);
-      transform:translateY(-1px);
-    }
-    .navlinks a.active{
-      background:rgba(255,255,255,.06);
-      color:var(--ink);
-    }
+    /* NAV */
+    .topbar{display:flex;justify-content:flex-end;padding:14px 6px 16px;border-bottom:1px solid rgba(233,230,223,.1)}
+    .navlinks{display:flex;gap:18px;font-size:13px;color:var(--muted)}
+    .navlinks a{padding:10px;border-radius:12px}
+    .navlinks a:hover,.navlinks a.active{background:rgba(255,255,255,.06);color:var(--ink)}
+    .cartbadge{padding:2px 8px;border-radius:999px;border:1px solid rgba(202,164,90,.5)}
 
-    .cartlink{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-    }
-    .cartbadge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:22px;
-      height:22px;
-      padding:0 7px;
-      border-radius:999px;
-      border:1px solid rgba(202,164,90,.55);
-      background:rgba(0,0,0,.28);
-      color:rgba(233,230,223,.96);
-      font-weight:800;
-      font-size:12px;
-      line-height:1;
-    }
+    .page-title{text-align:center;font-family:Cinzel;letter-spacing:.14em;font-size:56px;margin:10px 0}
+    .sub{text-align:center;color:var(--muted);margin-bottom:30px}
 
-    .page-title{
-      text-align:center;
-      margin:10px 0 10px;
-      font-family:Cinzel, serif;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-size:56px;
-      line-height:1.03;
-      opacity:.98;
-      text-shadow:0 10px 40px rgba(0,0,0,.55);
-    }
-
-    .sub{
-      text-align:center;
-      margin:0 auto 26px;
-      color:var(--muted);
-      font-size:18px;
-      max-width:860px;
-      line-height:1.55;
-      text-shadow:0 10px 35px rgba(0,0,0,.55);
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap:22px;
-      align-items:start;
-    }
+    .layout{display:grid;grid-template-columns:1.4fr .6fr;gap:24px}
 
     .panel{
-      border-radius:var(--radius);
       border:1px solid rgba(233,230,223,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border-radius:20px;
+      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
       box-shadow:var(--shadow);
       overflow:hidden;
     }
 
-    .panel-head{
-      padding:16px 18px;
-      border-bottom:1px solid rgba(233,230,223,.10);
-      background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.26));
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .panel-head .h{
-      font-family:Cinzel, serif;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:13px;
-      opacity:.95;
-    }
-    .panel-head .meta{
-      color:var(--muted2);
-      font-size:12px;
-      letter-spacing:.02em;
-      white-space:nowrap;
-    }
+    .panel-head{padding:16px;border-bottom:1px solid rgba(233,230,223,.1);display:flex;justify-content:space-between}
+    .panel-head .h{font-family:Cinzel;letter-spacing:.12em;font-size:13px}
 
-    .items{
-      padding:10px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
+    /* ITEMS */
+    .items{padding:12px;display:flex;flex-direction:column;gap:12px}
 
     .item{
-      border:1px solid rgba(233,230,223,.12);
-      background:rgba(0,0,0,.18);
-      border-radius:16px;
-      padding:12px 12px;
       display:grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns:72px 1fr auto;
       gap:12px;
-      align-items:center;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(233,230,223,.12);
+      background:rgba(0,0,0,.2);
     }
 
-    .item-left{
-      min-width:0;
-    }
-    .item-name{
-      font-family:Cinzel, serif;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:13px;
-      margin:0 0 6px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .item-sub{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      color:var(--muted2);
-      font-size:12px;
-    }
-    .pill{
-      border:1px solid rgba(202,164,90,.45);
-      background:rgba(202,164,90,.10);
-      color:rgba(233,230,223,.95);
-      padding:6px 10px;
-      border-radius:999px;
-      font-weight:700;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      font-size:11px;
-    }
-    .price{
-      color:var(--gold);
-      font-weight:900;
-      letter-spacing:.02em;
-    }
-
-    .item-right{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .qty{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border:1px solid rgba(233,230,223,.14);
-      background:rgba(0,0,0,.22);
-      padding:8px 10px;
-      border-radius:14px;
-    }
-    .qbtn{
-      width:28px;
-      height:28px;
-      border-radius:10px;
-      border:1px solid rgba(202,164,90,.45);
-      background:rgba(0,0,0,.22);
-      color:rgba(233,230,223,.95);
-      cursor:pointer;
-      font-weight:900;
-      line-height:1;
-      transition:transform .14s ease, filter .14s ease, border-color .14s ease;
-    }
-    .qbtn:hover{
-      transform:translateY(-1px);
-      border-color:rgba(202,164,90,.85);
-      filter:brightness(1.03);
-    }
-    .qnum{
-      min-width:18px;
-      text-align:center;
-      font-weight:900;
-      color:rgba(233,230,223,.95);
-    }
-
-    .remove{
-      border:1px solid rgba(233,230,223,.14);
-      background:rgba(0,0,0,.18);
-      color:rgba(233,230,223,.9);
+    .thumb{
+      width:72px;
+      height:72px;
       border-radius:12px;
-      padding:9px 10px;
-      cursor:pointer;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size:10px;
-      transition:transform .14s ease, filter .14s ease, border-color .14s ease, background .14s ease;
+      overflow:hidden;
+      border:1px solid rgba(233,230,223,.2);
     }
-    .remove:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.05);
-      border-color:rgba(233,230,223,.22);
-      background:rgba(255,255,255,.06);
-    }
+    .thumb img{width:100%;height:100%;object-fit:cover}
 
-    .summary{
-      padding:14px 14px 16px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
+    .item-name{font-family:Cinzel;font-size:13px;letter-spacing:.1em}
+    .item-sub{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+    .pill{border:1px solid rgba(202,164,90,.5);padding:4px 8px;border-radius:999px}
 
-    .row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .row strong{
-      color:var(--ink);
-      font-weight:900;
-    }
-    .row.total{
-      padding-top:10px;
-      border-top:1px solid rgba(233,230,223,.10);
-      color:var(--ink);
-      font-size:14px;
-    }
+    .item-right{display:flex;align-items:center;gap:10px}
+
+    .qty{display:flex;gap:6px;align-items:center}
+    .qbtn{width:26px;height:26px;border-radius:8px;border:1px solid rgba(202,164,90,.5);background:transparent;color:white;cursor:pointer}
+
+    .remove{border:1px solid rgba(233,230,223,.2);background:none;color:white;padding:6px 10px;border-radius:10px;cursor:pointer}
+
+    /* SUMMARY */
+    .summary{padding:16px}
+    .row{display:flex;justify-content:space-between;margin-bottom:10px}
+    .total{border-top:1px solid rgba(233,230,223,.1);padding-top:10px}
 
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
       width:100%;
-      background:linear-gradient(180deg, var(--gold), var(--gold2));
-      color:#0a0a0a;
-      font-weight:900;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:12px;
-      padding:12px 18px;
+      margin-top:10px;
+      padding:12px;
       border-radius:14px;
-      border:1px solid rgba(0,0,0,.35);
-      box-shadow:0 14px 28px rgba(0,0,0,.55);
-      transition:transform .2s ease, filter .2s ease, opacity .2s ease;
+      border:none;
+      background:linear-gradient(180deg,var(--gold),var(--gold2));
+      font-weight:900;
+      letter-spacing:.1em;
       cursor:pointer;
     }
-    .btn:hover{transform:translateY(-1px); filter:brightness(1.03);}
 
-    .btn.secondary{
-      background:rgba(0,0,0,.18);
-      color:rgba(233,230,223,.95);
-      border:1px solid rgba(233,230,223,.14);
-      box-shadow:none;
-    }
+    .btn.secondary{background:none;border:1px solid rgba(233,230,223,.2);color:white}
 
-    .empty{
-      padding:26px 18px 22px;
-      text-align:center;
-      color:var(--muted);
-    }
-    .empty .big{
-      font-family:Cinzel, serif;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:13px;
-      margin-bottom:8px;
-      color:rgba(233,230,223,.92);
-    }
-    .empty .small{
-      color:var(--muted2);
-      font-size:13px;
-      line-height:1.55;
-      margin-bottom:14px;
-    }
-    .empty a{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:11px 14px;
-      border-radius:14px;
-      border:1px solid rgba(202,164,90,.45);
-      background:rgba(202,164,90,.14);
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size:11px;
-    }
-
-    .note{
-      margin:28px auto 0;
-      text-align:center;
-      color:var(--muted2);
-      font-family:Cinzel, serif;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-size:12px;
-      padding-top:18px;
-      border-top:1px solid rgba(233,230,223,.10);
-      width:min(920px, 92vw);
-    }
-
-    @media (max-width:980px){
-      .layout{grid-template-columns:1fr;}
-      .page-title{font-size:48px;}
-    }
-    @media (max-width:520px){
-      .page-title{font-size:42px;}
-      .item{grid-template-columns:1fr; align-items:start;}
-      .item-right{justify-content:space-between;}
-      .panel-head{flex-direction:column; align-items:flex-start;}
-    }
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="navlinks">
-        <a href="./index.html">Home</a>
-        <a href="./shop.html">Shop</a>
-        <a href="./about.html">About</a>
-        <a href="./index.html#contact">Contact</a>
+<div class="wrap">
 
-        <a class="cartlink active" href="./cart.html" aria-label="View cart">
-          Cart <span class="cartbadge" id="cartCount">0</span>
-        </a>
-      </div>
+  <div class="topbar">
+    <div class="navlinks">
+      <a href="./index.html">Home</a>
+      <a href="./shop.html">Shop</a>
+      <a href="./about.html">About</a>
+      <a href="./index.html#contact">Contact</a>
+      <a class="active" href="./cart.html">Cart <span class="cartbadge" id="cartCount">0</span></a>
     </div>
-
-    <div class="page-title">Cart</div>
-    <div class="sub">Review your items below. Update sizes and quantities before checkout.</div>
-
-    <div class="layout">
-      <!-- Items -->
-      <div class="panel" id="itemsPanel">
-        <div class="panel-head">
-          <div class="h">Your Items</div>
-          <div class="meta" id="itemsMeta">0 items</div>
-        </div>
-
-        <div class="items" id="items"></div>
-
-        <div class="empty" id="emptyState" style="display:none;">
-          <div class="big">Your cart is empty</div>
-          <div class="small">Head back to the shop and add your gear. Sizes and quantities will save automatically.</div>
-          <a href="./shop.html">Back to Shop</a>
-        </div>
-      </div>
-
-      <!-- Summary -->
-      <div class="panel">
-        <div class="panel-head">
-          <div class="h">Summary</div>
-          <div class="meta">Taxes/shipping later</div>
-        </div>
-        <div class="summary">
-          <div class="row">
-            <span>Subtotal</span>
-            <strong id="subtotal">$0.00</strong>
-          </div>
-          <div class="row">
-            <span>Estimated Shipping</span>
-            <span class="muted">—</span>
-          </div>
-          <div class="row total">
-            <span>Total</span>
-            <strong id="total">$0.00</strong>
-          </div>
-
-          <button class="btn" id="checkoutBtn" type="button">Email Order</button>
-          <button class="btn secondary" id="clearBtn" type="button">Clear Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="note">Faith • Discipline • Purpose</div>
   </div>
 
-  <script>
-    // ✅ Build-phase email target (swap later to orders@yourdomain.com)
-    const ORDER_EMAIL = "maresdonny5@gmail.com";
+  <div class="page-title">Cart</div>
+  <div class="sub">Review your items below. Update sizes and quantities before checkout.</div>
 
-    const CART_KEY = "us_cart_v1";
+  <div class="layout">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="h">Your Items</div>
+        <div id="itemsMeta"></div>
+      </div>
+      <div class="items" id="items"></div>
+    </div>
 
-    function getCart(){
-      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-      catch { return []; }
-    }
-    function setCart(cart){
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    }
-    function countCart(cart){
-      return (cart || []).reduce((a,x)=>a + (x.qty || 1), 0);
-    }
-    function money(n){
-      return "$" + (Number(n || 0)).toFixed(2);
-    }
+    <div class="panel">
+      <div class="panel-head">
+        <div class="h">Summary</div>
+        <div>Taxes/shipping later</div>
+      </div>
+      <div class="summary">
+        <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+        <div class="row total"><span>Total</span><strong id="total">$0.00</strong></div>
+        <button class="btn" id="checkoutBtn">EMAIL ORDER</button>
+        <button class="btn secondary" id="clearBtn">CLEAR CART</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    // DOM
-    const cartCountEl = document.getElementById("cartCount");
-    const itemsEl = document.getElementById("items");
-    const itemsMeta = document.getElementById("itemsMeta");
-    const emptyState = document.getElementById("emptyState");
-    const subtotalEl = document.getElementById("subtotal");
-    const totalEl = document.getElementById("total");
-    const clearBtn = document.getElementById("clearBtn");
-    const checkoutBtn = document.getElementById("checkoutBtn");
+<script>
+const ORDER_EMAIL = "maresdonny5@gmail.com";
+const CART_KEY = "us_cart_v1";
 
-    function updateBadge(){
-      const cart = getCart();
-      if (cartCountEl) cartCountEl.textContent = String(countCart(cart));
-    }
+const IMAGE_MAP = {
+  "Built By Faith Tee": "./assets/built_by_faith_tee.png",
+  "Driven By Faith Tee": "./assets/driven_by_faith_tee.png",
+  "Built To Endure Tee": "./assets/built_to_endure_tee.png",
+  "Faith Over Fear Tee": "./assets/faith_over_fear_tee.png",
+  "Faith Strength Purpose Tee": "./assets/faith_strength_purpose_tee.png",
+  "Logo Front/Back Tee": "./assets/logo_front_back_tee.png",
+  "Unashamed Shaker Bottle": "./assets/shaker_bottle.png",
+  "Built By Faith Hoodie": "./assets/built_by_faith_black_hoodie.png",
+  "Unashamed Hoodie": "./assets/unashamed_black_white_hoodie.png"
+};
 
-    function calcSubtotal(cart){
-      return (cart || []).reduce((sum, item) => {
-        const price = Number(item.price || 0);
-        const qty = Number(item.qty || 1);
-        return sum + (price * qty);
-      }, 0);
-    }
+const getCart = () => JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+const setCart = c => localStorage.setItem(CART_KEY, JSON.stringify(c));
+const money = n => `$${Number(n).toFixed(2)}`;
 
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
+function render(){
+  const cart = getCart();
+  document.getElementById("cartCount").textContent =
+    cart.reduce((a,i)=>a+i.qty,0);
 
-    function render(){
-      const cart = getCart();
-      updateBadge();
+  document.getElementById("itemsMeta").textContent =
+    `${cart.length} item${cart.length===1?"":"s"}`;
 
-      const itemCount = countCart(cart);
-      if (itemsMeta) itemsMeta.textContent = `${itemCount} item${itemCount === 1 ? "" : "s"}`;
+  const items = document.getElementById("items");
+  items.innerHTML = cart.map((i,idx)=>`
+    <div class="item">
+      <div class="thumb">
+        <img src="${IMAGE_MAP[i.product] || "./assets/placeholder.png"}">
+      </div>
+      <div>
+        <div class="item-name">${i.product}</div>
+        <div class="item-sub">
+          <span class="pill">Size ${i.size}</span>
+          <span>$${i.price}</span>
+        </div>
+      </div>
+      <div class="item-right">
+        <div class="qty">
+          <button class="qbtn" onclick="updateQty(${idx},-1)">−</button>
+          <div>${i.qty}</div>
+          <button class="qbtn" onclick="updateQty(${idx},1)">+</button>
+        </div>
+        <button class="remove" onclick="removeItem(${idx})">Remove</button>
+      </div>
+    </div>
+  `).join("");
 
-      // empty vs filled
-      if (!cart.length){
-        if (itemsEl) itemsEl.innerHTML = "";
-        if (emptyState) emptyState.style.display = "block";
-        if (subtotalEl) subtotalEl.textContent = money(0);
-        if (totalEl) totalEl.textContent = money(0);
-        return;
-      } else {
-        if (emptyState) emptyState.style.display = "none";
-      }
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("subtotal").textContent = money(total);
+  document.getElementById("total").textContent = money(total);
+}
 
-      // items
-      itemsEl.innerHTML = cart.map((item, idx) => {
-        const name = item.product || "Item";
-        const size = item.size || "—";
-        const price = Number(item.price || 0);
-        const qty = Number(item.qty || 1);
+function updateQty(i,delta){
+  const cart = getCart();
+  cart[i].qty += delta;
+  if(cart[i].qty<=0) cart.splice(i,1);
+  setCart(cart);
+  render();
+}
 
-        return `
-          <div class="item" data-index="${idx}">
-            <div class="item-left">
-              <div class="item-name" title="${escapeHtml(name)}">${escapeHtml(name)}</div>
-              <div class="item-sub">
-                <span class="pill">Size ${escapeHtml(size)}</span>
-                <span class="price">${money(price)}</span>
-              </div>
-            </div>
+function removeItem(i){
+  const cart = getCart();
+  cart.splice(i,1);
+  setCart(cart);
+  render();
+}
 
-            <div class="item-right">
-              <div class="qty" aria-label="Quantity controls">
-                <button class="qbtn" data-action="dec" type="button" aria-label="Decrease quantity">−</button>
-                <div class="qnum" aria-label="Quantity">${qty}</div>
-                <button class="qbtn" data-action="inc" type="button" aria-label="Increase quantity">+</button>
-              </div>
-              <button class="remove" data-action="remove" type="button">Remove</button>
-            </div>
-          </div>
-        `;
-      }).join("");
+document.getElementById("clearBtn").onclick=()=>{
+  localStorage.removeItem(CART_KEY);
+  render();
+};
 
-      // totals
-      const sub = calcSubtotal(cart);
-      if (subtotalEl) subtotalEl.textContent = money(sub);
-      if (totalEl) totalEl.textContent = money(sub);
-    }
+document.getElementById("checkoutBtn").onclick=()=>{
+  const cart = getCart();
+  if(!cart.length) return;
 
-    // Delegate item actions
-    document.addEventListener("click", (e) => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
+  const lines = cart.map(i=>`- ${i.product} (Size ${i.size}) x${i.qty}`);
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
 
-      const itemEl = e.target.closest(".item");
-      const action = btn.getAttribute("data-action");
-      if (!action) return;
-      if (!itemEl) return;
+  const subject = `Unashamed Strength Order — ${cart.length} item(s)`;
+  const body = `Hello Unashamed Strength,
 
-      const idx = Number(itemEl.getAttribute("data-index"));
-      const cart = getCart();
-      if (!cart[idx]) return;
-
-      if (action === "inc"){
-        cart[idx].qty = Number(cart[idx].qty || 1) + 1;
-        setCart(cart);
-        render();
-      }
-
-      if (action === "dec"){
-        const next = Number(cart[idx].qty || 1) - 1;
-        if (next <= 0){
-          cart.splice(idx, 1);
-        } else {
-          cart[idx].qty = next;
-        }
-        setCart(cart);
-        render();
-      }
-
-      if (action === "remove"){
-        cart.splice(idx, 1);
-        setCart(cart);
-        render();
-      }
-    });
-
-    // Clear cart
-    clearBtn?.addEventListener("click", () => {
-      localStorage.removeItem(CART_KEY);
-      render();
-    });
-
-    // ✅ Email checkout (with subject prefix)
-    checkoutBtn?.addEventListener("click", () => {
-      const cart = getCart();
-      if (!cart.length) return;
-
-      // Minimal validation: must look like an email
-      if (!ORDER_EMAIL || !ORDER_EMAIL.includes("@")) {
-        alert("Order email is not configured.");
-        return;
-      }
-
-      const subtotal = calcSubtotal(cart);
-
-      const lines = cart.map((item) => {
-        const name = item.product || "Item";
-        const size = item.size && item.size !== "—" ? ` (Size ${item.size})` : "";
-        const qty = Number(item.qty || 1);
-        const price = money(item.price || 0);
-        return `- ${name}${size} x${qty} @ ${price}`;
-      });
-
-      const subject = `Unashamed Strength Order — ${countCart(cart)} item(s)`;
-      const body =
-`Hello Unashamed Strength,
-
-I’d like to place an order:
+I'd like to place an order:
 
 ${lines.join("\n")}
 
-Subtotal: ${money(subtotal)}
-Total: ${money(subtotal)}
+Total: $${total.toFixed(2)}
 
 Name:
 Shipping Address:
-Phone:
+Phone:`;
 
-Thank you!`;
+  window.location.href =
+    `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
 
-      const mailto = `mailto:${encodeURIComponent(ORDER_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-    });
-
-    // Sync badge if multiple tabs
-    window.addEventListener("storage", (e) => {
-      if (e.key === CART_KEY) render();
-    });
-
-    // Initial render
-    render();
-  </script>
+render();
+</script>
 </body>
 </html>
