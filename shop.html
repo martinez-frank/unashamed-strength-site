@@ -15,6 +15,7 @@
       --ink:#e9e6df;
       --muted:rgba(233,230,223,.80);
       --muted2:rgba(233,230,223,.62);
+      --line:rgba(233,230,223,.14);
 
       --gold:#caa45a;
       --gold2:#b48d45;
@@ -35,7 +36,9 @@
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none;}
+
+    /* Force consistent link colors */
+    a, a:visited{ color:inherit; text-decoration:none; }
 
     body::before{
       content:"";
@@ -61,14 +64,28 @@
       padding:18px 0 70px;
     }
 
+    /* =========================
+       TOP NAV (Desktop + Mobile)
+       ========================= */
     .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+
       display:flex;
-      justify-content:flex-end;
       align-items:center;
-      padding:14px 6px 16px;
-      border-bottom:1px solid rgba(233,230,223,.10);
+      justify-content:flex-end;
+
+      padding:10px 2px 16px;
       margin-bottom:24px;
+
+      border-bottom:1px solid rgba(233,230,223,.10);
+
+      background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.18));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
+
     .navlinks{
       display:flex;
       gap:18px;
@@ -80,6 +97,7 @@
       padding:10px 10px;
       border-radius:12px;
       transition:background .2s ease, color .2s ease, transform .2s ease;
+      color:inherit;
     }
     .navlinks a:hover{
       background:rgba(255,255,255,.06);
@@ -113,6 +131,159 @@
       line-height:1;
     }
 
+    /* Mobile hamburger */
+    .menuBtn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:44px;
+      height:40px;
+      border-radius:12px;
+      border:1px solid rgba(233,230,223,.14);
+      background:rgba(0,0,0,.20);
+      cursor:pointer;
+      box-shadow:0 10px 22px rgba(0,0,0,.35);
+      transition:transform .18s ease, filter .18s ease, border-color .18s ease;
+    }
+    .menuBtn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.03);
+      border-color:rgba(233,230,223,.20);
+    }
+
+    .hamburger{
+      width:18px;
+      height:12px;
+      position:relative;
+    }
+    .hamburger span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background:rgba(233,230,223,.86);
+      border-radius:999px;
+      transition:transform .2s ease, top .2s ease, opacity .2s ease;
+    }
+    .hamburger span:nth-child(1){ top:0; }
+    .hamburger span:nth-child(2){ top:5px; }
+    .hamburger span:nth-child(3){ top:10px; }
+
+    .menuBtn[aria-expanded="true"] .hamburger span:nth-child(1){
+      top:5px; transform:rotate(45deg);
+    }
+    .menuBtn[aria-expanded="true"] .hamburger span:nth-child(2){
+      opacity:0;
+    }
+    .menuBtn[aria-expanded="true"] .hamburger span:nth-child(3){
+      top:5px; transform:rotate(-45deg);
+    }
+
+    /* Overlay behind menu */
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:40;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease;
+    }
+    .overlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    /* Mobile dropdown panel */
+    .mobilePanel{
+      display:block;
+      position:absolute;
+      right:0;
+      top:56px;
+      width:min(320px, 92vw);
+      border-radius:18px;
+      border:1px solid rgba(233,230,223,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      opacity:0;
+      transform:translateY(-10px) scale(.985);
+      pointer-events:none;
+      transition:opacity .18s ease, transform .22s cubic-bezier(.2,.9,.2,1);
+      transform-origin: top right;
+    }
+
+    .mobilePanel .panelTop{
+      padding:14px 14px 12px;
+      border-bottom:1px solid rgba(233,230,223,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .mobilePanel .panelTop .label{
+      font-family:Cinzel, serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:rgba(233,230,223,.92);
+    }
+
+    .mobilePanel .panelLinks{
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .mobilePanel a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(233,230,223,.10);
+      background:rgba(0,0,0,.18);
+      color:rgba(233,230,223,.90);
+      font-weight:700;
+      letter-spacing:.02em;
+      transition:transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .mobilePanel a:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+      border-color:rgba(233,230,223,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(233,230,223,.96);
+    }
+    .mobilePanel a .right{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:rgba(233,230,223,.80);
+      font-weight:800;
+    }
+
+    .mobilePanel.open{
+      opacity:1;
+      transform:translateY(0) scale(1);
+      pointer-events:auto;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .mobilePanel, .overlay, .navlinks a, .menuBtn, .btn, .size-pill, .product{
+        transition:none !important;
+      }
+    }
+
+    /* =========================
+       SHOP CONTENT (UNCHANGED)
+       ========================= */
     .page-title{
       text-align:center;
       margin:10px 0 10px;
@@ -303,7 +474,7 @@
       opacity:0;
       pointer-events:none;
       transition:opacity .2s ease, transform .2s ease;
-      z-index:50;
+      z-index:60;
       display:flex;
       gap:12px;
       align-items:center;
@@ -353,25 +524,59 @@
       .toast{gap:10px; padding:12px;}
       .toast a{padding:9px 10px;}
     }
+
+    /* Mobile nav behavior */
+    @media (max-width: 980px){
+      .navlinks{ display:none; }
+      .menuBtn{ display:inline-flex; }
+    }
   </style>
 </head>
 
 <body>
+  <!-- overlay (mobile menu backdrop) -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
   <div class="wrap">
 
-    <div class="topbar">
-      <div class="navlinks">
+    <!-- TOP NAV (Home / Shop / About / Cart only — NO contact) -->
+    <header class="topbar">
+      <nav class="navlinks" aria-label="Primary navigation">
         <a href="./index.html">Home</a>
         <a class="active" href="./shop.html">Shop</a>
         <a href="./about.html">About</a>
-        <a href="./index.html#contact">Contact</a>
 
-        <!-- NEW: Cart link + live badge -->
         <a class="cartlink" href="./cart.html" aria-label="View cart">
           Cart <span class="cartbadge" id="cartCount">0</span>
         </a>
+      </nav>
+
+      <button class="menuBtn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+        <div class="hamburger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+
+      <div class="mobilePanel" id="mobilePanel" role="dialog" aria-modal="false" aria-label="Mobile menu">
+        <div class="panelTop">
+          <div class="label">Menu</div>
+          <div class="cartlink" aria-label="Cart count">
+            <span style="color:rgba(233,230,223,.75); font-size:12px;">Cart</span>
+            <span class="cartbadge" id="cartCountMobile">0</span>
+          </div>
+        </div>
+
+        <div class="panelLinks">
+          <a href="./index.html"><span>Home</span><span class="right">›</span></a>
+          <a href="./shop.html"><span>Shop</span><span class="right">›</span></a>
+          <a href="./about.html"><span>About</span><span class="right">›</span></a>
+          <a href="./cart.html">
+            <span>Cart</span>
+            <span class="right"><span class="cartbadge" id="cartCountMobileLink">0</span></span>
+          </a>
+        </div>
       </div>
-    </div>
+    </header>
 
     <div class="page-title">Shop</div>
     <div class="sub">Wear your faith. Train with purpose. Live unashamed.</div>
@@ -384,7 +589,7 @@
           <div class="name">Driven By Faith Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Driven By Faith Tee" data-price="34.00">
+          <div class="size-picker" data-product="Driven By Faith Tee" data-price="34.00" data-image="./assets/driven_by_faith_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Driven By Faith Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -395,7 +600,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Driven By Faith Tee" data-price="34.00"
+             data-product="Driven By Faith Tee" data-price="34.00" data-image="./assets/driven_by_faith_tee.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -407,7 +612,7 @@
           <div class="name">Built By Faith Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Built By Faith Tee" data-price="34.00">
+          <div class="size-picker" data-product="Built By Faith Tee" data-price="34.00" data-image="./assets/built_by_faith_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Built By Faith Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -418,7 +623,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Built By Faith Tee" data-price="34.00"
+             data-product="Built By Faith Tee" data-price="34.00" data-image="./assets/built_by_faith_tee.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -430,7 +635,7 @@
           <div class="name">Built To Endure Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Built To Endure Tee" data-price="34.00">
+          <div class="size-picker" data-product="Built To Endure Tee" data-price="34.00" data-image="./assets/built_to_endure_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Built To Endure Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -441,7 +646,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Built To Endure Tee" data-price="34.00"
+             data-product="Built To Endure Tee" data-price="34.00" data-image="./assets/built_to_endure_tee.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -453,7 +658,7 @@
           <div class="name">Faith Over Fear Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Faith Over Fear Tee" data-price="34.00">
+          <div class="size-picker" data-product="Faith Over Fear Tee" data-price="34.00" data-image="./assets/faith_over_fear_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Faith Over Fear Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -464,7 +669,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Faith Over Fear Tee" data-price="34.00"
+             data-product="Faith Over Fear Tee" data-price="34.00" data-image="./assets/faith_over_fear_tee.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -476,7 +681,7 @@
           <div class="name">Faith • Strength • Purpose Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Faith • Strength • Purpose Tee" data-price="34.00">
+          <div class="size-picker" data-product="Faith • Strength • Purpose Tee" data-price="34.00" data-image="./assets/faith_strength_purpose_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Faith Strength Purpose Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -487,7 +692,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Faith • Strength • Purpose Tee" data-price="34.00"
+             data-product="Faith • Strength • Purpose Tee" data-price="34.00" data-image="./assets/faith_strength_purpose_tee.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -499,7 +704,7 @@
           <div class="name">Logo Front/Back Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Logo Front/Back Tee" data-price="34.00">
+          <div class="size-picker" data-product="Logo Front/Back Tee" data-price="34.00" data-image="./assets/logo_front_back_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Logo Front/Back Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -510,7 +715,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Logo Front/Back Tee" data-price="34.00"
+             data-product="Logo Front/Back Tee" data-price="34.00" data-image="./assets/logo_front_back_tee.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -522,7 +727,7 @@
           <div class="name">Unashamed Shaker Bottle</div>
           <div class="price">$24.00</div>
           <a class="btn add-to-cart" href="#"
-             data-product="Unashamed Shaker Bottle" data-price="24.00"
+             data-product="Unashamed Shaker Bottle" data-price="24.00" data-image="./assets/shaker_bottle.png"
              data-nosize="true" aria-disabled="false" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -534,7 +739,7 @@
           <div class="name">Built By Faith Hoodie</div>
           <div class="price">$54.00</div>
 
-          <div class="size-picker" data-product="Built By Faith Hoodie" data-price="54.00">
+          <div class="size-picker" data-product="Built By Faith Hoodie" data-price="54.00" data-image="./assets/built_by_faith_black_hoodie.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Built By Faith Hoodie">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -545,7 +750,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Built By Faith Hoodie" data-price="54.00"
+             data-product="Built By Faith Hoodie" data-price="54.00" data-image="./assets/built_by_faith_black_hoodie.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -557,7 +762,7 @@
           <div class="name">Unashamed Hoodie</div>
           <div class="price">$54.00</div>
 
-          <div class="size-picker" data-product="Unashamed Hoodie" data-price="54.00">
+          <div class="size-picker" data-product="Unashamed Hoodie" data-price="54.00" data-image="./assets/unashamed_black_white_hoodie.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Hoodie">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -568,7 +773,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Unashamed Hoodie" data-price="54.00"
+             data-product="Unashamed Hoodie" data-price="54.00" data-image="./assets/unashamed_black_white_hoodie.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -580,7 +785,7 @@
           <div class="name">Unashamed Unbroken Hoodie</div>
           <div class="price">$54.00</div>
 
-          <div class="size-picker" data-product="Unashamed Unbroken Hoodie" data-price="54.00">
+          <div class="size-picker" data-product="Unashamed Unbroken Hoodie" data-price="54.00" data-image="./assets/unashamed_unbroken_black_hoodie.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Unbroken Hoodie">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -591,7 +796,7 @@
           </div>
 
           <a class="btn add-to-cart" href="#"
-             data-product="Unashamed Unbroken Hoodie" data-price="54.00"
+             data-product="Unashamed Unbroken Hoodie" data-price="54.00" data-image="./assets/unashamed_unbroken_black_hoodie.png"
              aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
@@ -616,24 +821,43 @@
     function setCart(cart){
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
     }
+
     function addToCart(item){
       const cart = getCart();
-      const existing = cart.find(x => x.product === item.product && x.size === item.size);
-      if (existing) existing.qty += 1;
-      else cart.push({ ...item, qty: 1 });
+
+      // Normalize expected fields used by cart.html: name, price, qty, size, image, id
+      const name = item.product || item.name || "Item";
+      const size = item.size || "—";
+      const price = Number(item.price || 0);
+      const image = item.image || "./assets/logo.homepage.png";
+      const id = `${name.replace(/\s+/g,"_").toLowerCase()}__${String(size).toLowerCase()}__${String(price)}`;
+
+      const existing = cart.find(x =>
+        (x.id && x.id === id) ||
+        ((x.product === name || x.name === name) && String(x.size||"—") === String(size))
+      );
+
+      if (existing) existing.qty = Number(existing.qty || 1) + 1;
+      else cart.push({ id, name, product: name, price, size, image, qty: 1 });
+
       setCart(cart);
       return cart;
     }
+
     function cartCount(cart){
-      return (cart || []).reduce((a,x)=>a + (x.qty || 1), 0);
+      return (cart || []).reduce((a,x)=>a + (Number(x.qty) || 1), 0);
     }
 
     // --- Cart badge ---
     const cartCountEl = document.getElementById("cartCount");
+    const cartCountMobileEl = document.getElementById("cartCountMobile");
+    const cartCountMobileLinkEl = document.getElementById("cartCountMobileLink");
+
     function updateCartBadge(){
-      if (!cartCountEl) return;
       const count = cartCount(getCart());
-      cartCountEl.textContent = String(count);
+      if (cartCountEl) cartCountEl.textContent = String(count);
+      if (cartCountMobileEl) cartCountMobileEl.textContent = String(count);
+      if (cartCountMobileLinkEl) cartCountMobileLinkEl.textContent = String(count);
     }
 
     // --- Toast ---
@@ -662,7 +886,9 @@
             e.preventDefault();
             const product = btn.getAttribute("data-product") || "Item";
             const price = Number(btn.getAttribute("data-price") || "0");
-            const updated = addToCart({ product, price, size: "—" });
+            const image = btn.getAttribute("data-image") || "./assets/logo.homepage.png";
+
+            addToCart({ product, price, size: "—", image });
             updateCartBadge();
             showToast(`Added <b>${product}</b>`);
           });
@@ -672,6 +898,7 @@
 
       const product = picker.getAttribute("data-product") || (btn ? btn.getAttribute("data-product") : "Item");
       const price = Number(picker.getAttribute("data-price") || (btn ? btn.getAttribute("data-price") : "0"));
+      const image = picker.getAttribute("data-image") || (btn ? btn.getAttribute("data-image") : "./assets/logo.homepage.png");
 
       const pills = picker.querySelectorAll(".size-pill");
       let selectedSize = null;
@@ -694,20 +921,54 @@
           if (btn.getAttribute("aria-disabled") === "true") return;
           if (!selectedSize) return;
 
-          addToCart({ product, price, size: selectedSize });
+          addToCart({ product, price, size: selectedSize, image });
           updateCartBadge();
           showToast(`Added <b>${product}</b> — Size <b>${selectedSize}</b>`);
         });
       }
     });
 
-    // initialize badge on load
-    updateCartBadge();
-
     // keep badge in sync if user has multiple tabs open
     window.addEventListener("storage", (e) => {
       if (e.key === CART_KEY) updateCartBadge();
     });
+
+    // ============
+    // MOBILE MENU
+    // ============
+    const menuBtn = document.getElementById("menuBtn");
+    const mobilePanel = document.getElementById("mobilePanel");
+    const overlay = document.getElementById("overlay");
+
+    function closeMenu(){
+      mobilePanel.classList.remove("open");
+      overlay.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+    function openMenu(){
+      mobilePanel.classList.add("open");
+      overlay.classList.add("open");
+      menuBtn.setAttribute("aria-expanded", "true");
+    }
+    function toggleMenu(){
+      const isOpen = mobilePanel.classList.contains("open");
+      if (isOpen) closeMenu(); else openMenu();
+    }
+
+    menuBtn.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    mobilePanel.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
+      if (link) closeMenu();
+    });
+
+    // init
+    updateCartBadge();
   </script>
 </body>
 </html>
