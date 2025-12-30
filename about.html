@@ -287,7 +287,7 @@
     }
 
     /* =========================
-       ABOUT PAGE (UNCHANGED)
+       ABOUT PAGE
        ========================= */
 
     /* Header */
@@ -304,14 +304,14 @@
       text-align:center;
       margin:0 auto 26px;
       color:rgba(233,230,223,.76);
-      font-size:18px; /* slightly larger */
+      font-size:18px;
       max-width:860px;
       line-height:1.55;
     }
 
     /* Main card */
     .card{
-      width:min(920px, 92vw);
+      width:min(980px, 92vw);
       margin:0 auto;
       border-radius:var(--radius);
       border:1px solid rgba(233,230,223,.12);
@@ -324,17 +324,72 @@
       padding:26px 28px 22px;
     }
 
-    /* Story typography (bigger, more premium) */
+    /* NEW: Image + story framing */
+    .story-hero{
+      display:grid;
+      grid-template-columns: 1fr 0.92fr;
+      gap:18px;
+      align-items:start;
+      margin:2px 0 18px;
+    }
+    .story-hero .kicker{
+      color:rgba(233,230,223,.82);
+      font-size:14px;
+      line-height:1.55;
+      letter-spacing:.02em;
+      padding:14px 14px;
+      border-radius:16px;
+      border:1px solid rgba(233,230,223,.10);
+      background:linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,.28));
+      box-shadow:0 12px 30px rgba(0,0,0,.38);
+    }
+    .story-hero .kicker .label{
+      font-family:Cinzel, serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:rgba(233,230,223,.90);
+      margin-bottom:10px;
+    }
+    .story-hero .kicker b{ color:rgba(233,230,223,.96); }
+
+    .portrait{
+      border-radius:18px;
+      border:1px solid rgba(233,230,223,.12);
+      background:rgba(0,0,0,.22);
+      box-shadow:0 16px 44px rgba(0,0,0,.52);
+      overflow:hidden;
+      position:relative;
+    }
+    .portrait::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:radial-gradient(70% 60% at 50% 30%, rgba(202,164,90,.10), rgba(0,0,0,0));
+      mix-blend-mode:screen;
+      opacity:.9;
+    }
+    .portrait img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:cover;
+      transform:scale(1.01);
+      filter:contrast(1.02) saturate(1.02);
+    }
+
+    /* Story typography (premium) */
     .story{
       color:rgba(233,230,223,.86);
-      font-size:18px;          /* bigger than before */
+      font-size:18px;
       line-height:1.85;
       letter-spacing:.01em;
     }
     .story p{ margin:0 0 16px; }
     .story strong{ color:rgba(233,230,223,.96); }
 
-    /* Pull quote */
+    /* Pull quote (now Romans 1:16 passage) */
     .quote{
       margin:18px 0 18px;
       padding:18px 18px;
@@ -345,7 +400,7 @@
     }
     .quote .qtext{
       margin:0 0 10px;
-      color:rgba(233,230,223,.88);
+      color:rgba(233,230,223,.90);
       font-size:16.5px;
       line-height:1.7;
     }
@@ -467,6 +522,12 @@
       .values{grid-template-columns:1fr; gap:10px;}
       .actions{flex-direction:column; align-items:center;}
       .btn-gold, .btn-ghost{width:min(420px, 92vw);}
+
+      .story-hero{
+        grid-template-columns:1fr;
+        gap:14px;
+        margin-bottom:16px;
+      }
     }
   </style>
 </head>
@@ -522,6 +583,19 @@
     <section class="card">
       <div class="card-inner">
 
+        <!-- NEW: Personal image + brand framing -->
+        <div class="story-hero">
+          <div class="kicker">
+            <div class="label">The Story Behind Unashamed</div>
+            This brand was born from a real fight—where <b>faith</b> became strength, and survival became purpose.
+            The mission is simple: wear your faith, train with discipline, and live unashamed.
+          </div>
+
+          <div class="portrait">
+            <img src="./assets/about.athlete.png" alt="Unashamed Strength athlete portrait">
+          </div>
+        </div>
+
         <div class="story">
           <p>I was diagnosed with cancer ten years ago, when I was thirty years old.</p>
 
@@ -553,9 +627,10 @@
 
           <p>My brother stood by me. God carried me. Prayer surrounded me — even when I didn’t have the strength to pray for myself. There were moments when faith was the only thing holding me together. Moments when all I could do was surrender and trust that there was a reason I was still breathing.</p>
 
+          <!-- UPDATED: Romans 1:16 passage -->
           <div class="quote">
-            <p class="qtext">I didn’t survive by accident. I’m still here today for a reason — to impact lives, to tell the truth, to spread the Word, to follow Christ, and to do the right thing even when it’s hard.</p>
-            <div class="ref">Romans 11:6</div>
+            <p class="qtext">For I am not ashamed of the gospel, because it is the power of God that brings salvation to everyone who believes.</p>
+            <div class="ref">Romans 1:16</div>
           </div>
 
           <p>Looking back now, I know I didn’t survive by accident.</p>
