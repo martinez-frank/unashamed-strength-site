@@ -62,6 +62,54 @@
       padding:34px 0 70px;
     }
 
+    /* ✅ Top Nav (matches site vibe + adds Cart) */
+    .topbar{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      padding:14px 6px 16px;
+      border-bottom:1px solid rgba(233,230,223,.10);
+      margin-bottom:10px;
+    }
+    .navlinks{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .navlinks a{
+      padding:10px 10px;
+      border-radius:12px;
+      transition:background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .navlinks a:hover{
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+      transform:translateY(-1px);
+    }
+
+    .cartlink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .cartbadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:22px;
+      height:22px;
+      padding:0 7px;
+      border-radius:999px;
+      border:1px solid rgba(202,164,90,.55);
+      background:rgba(0,0,0,.28);
+      color:rgba(233,230,223,.96);
+      font-weight:800;
+      font-size:12px;
+      line-height:1;
+    }
+
     /* HERO */
     .hero{
       display:grid;
@@ -305,6 +353,14 @@
       .cta .big{
         min-width:min(560px, 92vw);
       }
+      .topbar{
+        justify-content:center;
+      }
+      .navlinks{
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
     }
   </style>
 </head>
@@ -312,11 +368,25 @@
 <body>
   <div class="wrap">
 
+    <!-- ✅ NAV (added) -->
+    <div class="topbar">
+      <div class="navlinks">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a href="./about.html">About</a>
+        <a href="./index.html#contact">Contact</a>
+        <a class="cartlink" href="./cart.html" aria-label="View cart">
+          Cart <span class="cartbadge" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+
     <!-- HERO -->
     <section class="hero">
 
       <div class="brand">
-        <img class="logo" src="./assets/unashamed_logo_white.png" alt="Unashamed Strength logo">
+        <!-- ✅ UPDATED LOGO FILE (only change here) -->
+        <img class="logo" src="./assets/logo.homepage.png" alt="Unashamed Strength logo">
         <a class="shop-mini" href="./shop.html">Shop</a>
       </div>
 
@@ -368,5 +438,29 @@
     </div>
 
   </div>
+
+  <!-- ✅ Cart count logic (no visual changes elsewhere) -->
+  <script>
+    const CART_KEY = "us_cart_v1";
+
+    function getCart(){
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch { return []; }
+    }
+    function countCart(cart){
+      return (cart || []).reduce((a,x)=>a + (x.qty || 1), 0);
+    }
+    function updateCartBadge(){
+      const el = document.getElementById("cartCount");
+      if (!el) return;
+      el.textContent = String(countCart(getCart()));
+    }
+
+    // update on load + when returning from other tabs/pages
+    updateCartBadge();
+    window.addEventListener("storage", (e) => {
+      if (e.key === CART_KEY) updateCartBadge();
+    });
+  </script>
 </body>
 </html>
