@@ -35,7 +35,9 @@
       font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none;}
+
+    /* Force consistent link colors */
+    a, a:visited{ color:inherit; text-decoration:none; }
 
     /* Background */
     body::before{
@@ -62,15 +64,28 @@
       padding:18px 0 70px;
     }
 
-    /* Top nav */
+    /* =========================
+       TOP NAV (Desktop + Mobile)
+       ========================= */
     .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+
       display:flex;
-      justify-content:flex-end;
       align-items:center;
-      padding:14px 6px 16px;
-      border-bottom:1px solid rgba(233,230,223,.10);
+      justify-content:flex-end;
+
+      padding:10px 2px 16px;
       margin-bottom:26px;
+
+      border-bottom:1px solid rgba(233,230,223,.10);
+
+      background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.18));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
+
     .navlinks{
       display:flex;
       gap:18px;
@@ -80,18 +95,200 @@
     }
     .navlinks a{
       padding:10px 10px;
-      border-radius:10px;
-      transition:background .2s ease, color .2s ease;
+      border-radius:12px;
+      transition:background .2s ease, color .2s ease, transform .2s ease;
+      color:inherit;
     }
     .navlinks a:hover{
       background:rgba(255,255,255,.06);
       color:var(--ink);
+      transform:translateY(-1px);
     }
     .navlinks a.active{
-      background:rgba(255,255,255,.08);
+      background:rgba(255,255,255,.06);
       color:var(--ink);
-      border:1px solid rgba(233,230,223,.10);
     }
+
+    /* Cart badge */
+    .cartlink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .cartbadge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:22px;
+      height:22px;
+      padding:0 7px;
+      border-radius:999px;
+      border:1px solid rgba(202,164,90,.55);
+      background:rgba(0,0,0,.28);
+      color:rgba(233,230,223,.96);
+      font-weight:800;
+      font-size:12px;
+      line-height:1;
+    }
+
+    /* Mobile hamburger */
+    .menuBtn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:44px;
+      height:40px;
+      border-radius:12px;
+      border:1px solid rgba(233,230,223,.14);
+      background:rgba(0,0,0,.20);
+      cursor:pointer;
+      box-shadow:0 10px 22px rgba(0,0,0,.35);
+      transition:transform .18s ease, filter .18s ease, border-color .18s ease;
+    }
+    .menuBtn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.03);
+      border-color:rgba(233,230,223,.20);
+    }
+
+    .hamburger{
+      width:18px;
+      height:12px;
+      position:relative;
+    }
+    .hamburger span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background:rgba(233,230,223,.86);
+      border-radius:999px;
+      transition:transform .2s ease, top .2s ease, opacity .2s ease;
+    }
+    .hamburger span:nth-child(1){ top:0; }
+    .hamburger span:nth-child(2){ top:5px; }
+    .hamburger span:nth-child(3){ top:10px; }
+
+    .menuBtn[aria-expanded="true"] .hamburger span:nth-child(1){
+      top:5px; transform:rotate(45deg);
+    }
+    .menuBtn[aria-expanded="true"] .hamburger span:nth-child(2){
+      opacity:0;
+    }
+    .menuBtn[aria-expanded="true"] .hamburger span:nth-child(3){
+      top:5px; transform:rotate(-45deg);
+    }
+
+    /* Overlay behind menu */
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:40;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .18s ease;
+    }
+    .overlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    /* Mobile dropdown panel */
+    .mobilePanel{
+      display:block;
+      position:absolute;
+      right:0;
+      top:56px;
+      width:min(320px, 92vw);
+      border-radius:18px;
+      border:1px solid rgba(233,230,223,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      opacity:0;
+      transform:translateY(-10px) scale(.985);
+      pointer-events:none;
+      transition:opacity .18s ease, transform .22s cubic-bezier(.2,.9,.2,1);
+      transform-origin: top right;
+    }
+
+    .mobilePanel .panelTop{
+      padding:14px 14px 12px;
+      border-bottom:1px solid rgba(233,230,223,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .mobilePanel .panelTop .label{
+      font-family:Cinzel, serif;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:rgba(233,230,223,.92);
+    }
+
+    .mobilePanel .panelLinks{
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .mobilePanel a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(233,230,223,.10);
+      background:rgba(0,0,0,.18);
+      color:rgba(233,230,223,.90);
+      font-weight:700;
+      letter-spacing:.02em;
+      transition:transform .16s ease, filter .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .mobilePanel a:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+      border-color:rgba(233,230,223,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(233,230,223,.96);
+    }
+    .mobilePanel a .right{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:rgba(233,230,223,.80);
+      font-weight:800;
+    }
+
+    .mobilePanel.open{
+      opacity:1;
+      transform:translateY(0) scale(1);
+      pointer-events:auto;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .mobilePanel, .overlay, .navlinks a, .menuBtn, .btn-gold, .btn-ghost{
+        transition:none !important;
+      }
+    }
+
+    @media (max-width: 980px){
+      .navlinks{ display:none; }
+      .menuBtn{ display:inline-flex; }
+    }
+
+    /* =========================
+       ABOUT PAGE (UNCHANGED)
+       ========================= */
 
     /* Header */
     .title{
@@ -275,16 +472,49 @@
 </head>
 
 <body>
+  <!-- overlay (mobile menu backdrop) -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
   <div class="wrap">
 
-    <div class="topbar">
-      <div class="navlinks">
+    <!-- TOP NAV (Home / Shop / About / Cart only — NO contact) -->
+    <header class="topbar">
+      <nav class="navlinks" aria-label="Primary navigation">
         <a href="./index.html">Home</a>
         <a href="./shop.html">Shop</a>
         <a class="active" href="./about.html">About</a>
-        <a href="./about.html#contact" onclick="return false;">Contact</a>
+
+        <a class="cartlink" href="./cart.html" aria-label="View cart">
+          Cart <span class="cartbadge" id="cartCount">0</span>
+        </a>
+      </nav>
+
+      <button class="menuBtn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobilePanel">
+        <div class="hamburger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+
+      <div class="mobilePanel" id="mobilePanel" role="dialog" aria-modal="false" aria-label="Mobile menu">
+        <div class="panelTop">
+          <div class="label">Menu</div>
+          <div class="cartlink" aria-label="Cart count">
+            <span style="color:rgba(233,230,223,.75); font-size:12px;">Cart</span>
+            <span class="cartbadge" id="cartCountMobile">0</span>
+          </div>
+        </div>
+
+        <div class="panelLinks">
+          <a href="./index.html"><span>Home</span><span class="right">›</span></a>
+          <a href="./shop.html"><span>Shop</span><span class="right">›</span></a>
+          <a href="./about.html"><span>About</span><span class="right">›</span></a>
+          <a href="./cart.html">
+            <span>Cart</span>
+            <span class="right"><span class="cartbadge" id="cartCountMobileLink">0</span></span>
+          </a>
+        </div>
       </div>
-    </div>
+    </header>
 
     <div class="title">About</div>
     <div class="sub">Faith-first training apparel for the ones who refuse to be defined by fear, failure, or the past.</div>
@@ -369,5 +599,68 @@
     </div>
 
   </div>
+
+  <script>
+    // Cart badge sync (matches Home/Shop/Cart)
+    const CART_KEY = "us_cart_v1";
+
+    function getCart(){
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch { return []; }
+    }
+    function cartCount(cart){
+      return (cart || []).reduce((a,x)=>a + (Number(x.qty) || 1), 0);
+    }
+
+    const cartCountEl = document.getElementById("cartCount");
+    const cartCountMobileEl = document.getElementById("cartCountMobile");
+    const cartCountMobileLinkEl = document.getElementById("cartCountMobileLink");
+
+    function updateCartBadge(){
+      const count = cartCount(getCart());
+      if (cartCountEl) cartCountEl.textContent = String(count);
+      if (cartCountMobileEl) cartCountMobileEl.textContent = String(count);
+      if (cartCountMobileLinkEl) cartCountMobileLinkEl.textContent = String(count);
+    }
+
+    window.addEventListener("storage", (e) => {
+      if (e.key === CART_KEY) updateCartBadge();
+    });
+
+    // Mobile menu behavior
+    const menuBtn = document.getElementById("menuBtn");
+    const mobilePanel = document.getElementById("mobilePanel");
+    const overlay = document.getElementById("overlay");
+
+    function closeMenu(){
+      mobilePanel.classList.remove("open");
+      overlay.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+    function openMenu(){
+      mobilePanel.classList.add("open");
+      overlay.classList.add("open");
+      menuBtn.setAttribute("aria-expanded", "true");
+    }
+    function toggleMenu(){
+      const isOpen = mobilePanel.classList.contains("open");
+      if (isOpen) closeMenu(); else openMenu();
+    }
+
+    menuBtn.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    mobilePanel.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
+      if (link) closeMenu();
+    });
+
+    // init
+    updateCartBadge();
+  </script>
 </body>
 </html>
