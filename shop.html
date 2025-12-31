@@ -282,7 +282,7 @@
     }
 
     /* =========================
-       SHOP CONTENT (UNCHANGED)
+       SHOP CONTENT
        ========================= */
     .page-title{
       text-align:center;
@@ -720,18 +720,13 @@
         </div>
       </div>
 
-      <!-- 7 (Water Bottle w/ color options like size pills) -->
+      <!-- 7 (Water Bottle w/ color options) -->
       <div class="product">
         <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Water Bottle"></div>
         <div class="meta">
           <div class="name">Unashamed Water Bottle</div>
           <div class="price">$24.00</div>
 
-          <!-- Uses the SAME pill UI as size. We store the chosen color in the same "size" field so cart.html works. -->
-          <!-- Optional: if you later split images, add:
-               data-image-black="./assets/water_bottle_black.png"
-               data-image-white="./assets/water_bottle_white.png"
-            -->
           <div class="size-picker"
                data-kind="Color"
                data-product="Unashamed Water Bottle"
@@ -773,28 +768,7 @@
         </div>
       </div>
 
-      <!-- 9 -->
-      <div class="product">
-        <div class="imgwrap"><img src="./assets/unashamed_black_white_hoodie.png" alt="Unashamed Hoodie"></div>
-        <div class="meta">
-          <div class="name">Unashamed Hoodie</div>
-          <div class="price">$54.00</div>
-
-          <div class="size-picker" data-kind="Size" data-product="Unashamed Hoodie" data-price="54.00" data-image="./assets/unashamed_black_white_hoodie.png">
-            <div class="size-label">Select Size</div>
-            <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Hoodie">
-              <button type="button" class="size-pill" data-size="S">S</button>
-              <button type="button" class="size-pill" data-size="M">M</button>
-              <button type="button" class="size-pill" data-size="L">L</button>
-              <button type="button" class="size-pill" data-size="XL">XL</button>
-            </div>
-          </div>
-
-          <a class="btn add-to-cart" href="#"
-             data-product="Unashamed Hoodie" data-price="54.00" data-image="./assets/unashamed_black_white_hoodie.png"
-             aria-disabled="true" onclick="return false;">Add to Cart</a>
-        </div>
-      </div>
+      <!-- 9 (REMOVED: Unashamed Hoodie black/white combo) -->
 
       <!-- 10 -->
       <div class="product">
@@ -936,7 +910,6 @@
           if (btn) btn.setAttribute("aria-disabled","false");
 
           // Optional per-variant image swap if attributes exist
-          // (e.g., data-image-black / data-image-white on the picker)
           if (imgEl && kind.toLowerCase() === "color"){
             const key = String(selectedValue || "").trim().toLowerCase();
             const variantImg = picker.getAttribute(`data-image-${key}`);
@@ -959,7 +932,7 @@
 
           const image = btn.getAttribute("data-image") || baseImage;
 
-          // We store selection in "size" field so cart.html doesn't need changes.
+          // Store selection in "size" field so cart.html doesn't need changes.
           addToCart({ product, price, size: selectedValue, image });
           updateCartBadge();
           showToast(`Added <b>${product}</b> — ${kind} <b>${selectedValue}</b>`);
