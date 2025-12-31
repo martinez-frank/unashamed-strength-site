@@ -373,7 +373,7 @@
       letter-spacing:.02em;
     }
 
-    /* Size picker */
+    /* Size / Variant picker (same UI) */
     .size-picker{
       margin: 6px 0 14px;
       text-align:center;
@@ -589,7 +589,7 @@
           <div class="name">Driven By Faith Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Driven By Faith Tee" data-price="34.00" data-image="./assets/driven_by_faith_tee.png">
+          <div class="size-picker" data-kind="Size" data-product="Driven By Faith Tee" data-price="34.00" data-image="./assets/driven_by_faith_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Driven By Faith Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -612,7 +612,7 @@
           <div class="name">Built By Faith Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Built By Faith Tee" data-price="34.00" data-image="./assets/built_by_faith_tee.png">
+          <div class="size-picker" data-kind="Size" data-product="Built By Faith Tee" data-price="34.00" data-image="./assets/built_by_faith_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Built By Faith Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -635,7 +635,7 @@
           <div class="name">Built To Endure Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Built To Endure Tee" data-price="34.00" data-image="./assets/built_to_endure_tee.png">
+          <div class="size-picker" data-kind="Size" data-product="Built To Endure Tee" data-price="34.00" data-image="./assets/built_to_endure_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Built To Endure Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -658,7 +658,7 @@
           <div class="name">Faith Over Fear Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Faith Over Fear Tee" data-price="34.00" data-image="./assets/faith_over_fear_tee.png">
+          <div class="size-picker" data-kind="Size" data-product="Faith Over Fear Tee" data-price="34.00" data-image="./assets/faith_over_fear_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Faith Over Fear Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -681,7 +681,7 @@
           <div class="name">Faith • Strength • Purpose Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Faith • Strength • Purpose Tee" data-price="34.00" data-image="./assets/faith_strength_purpose_tee.png">
+          <div class="size-picker" data-kind="Size" data-product="Faith • Strength • Purpose Tee" data-price="34.00" data-image="./assets/faith_strength_purpose_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Faith Strength Purpose Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -704,7 +704,7 @@
           <div class="name">Logo Front/Back Tee</div>
           <div class="price">$34.00</div>
 
-          <div class="size-picker" data-product="Logo Front/Back Tee" data-price="34.00" data-image="./assets/logo_front_back_tee.png">
+          <div class="size-picker" data-kind="Size" data-product="Logo Front/Back Tee" data-price="34.00" data-image="./assets/logo_front_back_tee.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Logo Front/Back Tee">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -720,15 +720,33 @@
         </div>
       </div>
 
-      <!-- 7 (no sizes) -->
+      <!-- 7 (Water Bottle w/ color options like size pills) -->
       <div class="product">
-        <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Shaker Bottle"></div>
+        <div class="imgwrap"><img src="./assets/shaker_bottle.png" alt="Unashamed Water Bottle"></div>
         <div class="meta">
-          <div class="name">Unashamed Shaker Bottle</div>
+          <div class="name">Unashamed Water Bottle</div>
           <div class="price">$24.00</div>
+
+          <!-- Uses the SAME pill UI as size. We store the chosen color in the same "size" field so cart.html works. -->
+          <!-- Optional: if you later split images, add:
+               data-image-black="./assets/water_bottle_black.png"
+               data-image-white="./assets/water_bottle_white.png"
+            -->
+          <div class="size-picker"
+               data-kind="Color"
+               data-product="Unashamed Water Bottle"
+               data-price="24.00"
+               data-image="./assets/shaker_bottle.png">
+            <div class="size-label">Select Color</div>
+            <div class="size-options" role="radiogroup" aria-label="Select color for Unashamed Water Bottle">
+              <button type="button" class="size-pill" data-size="Black">Black</button>
+              <button type="button" class="size-pill" data-size="White">White</button>
+            </div>
+          </div>
+
           <a class="btn add-to-cart" href="#"
-             data-product="Unashamed Shaker Bottle" data-price="24.00" data-image="./assets/shaker_bottle.png"
-             data-nosize="true" aria-disabled="false" onclick="return false;">Add to Cart</a>
+             data-product="Unashamed Water Bottle" data-price="24.00" data-image="./assets/shaker_bottle.png"
+             aria-disabled="true" onclick="return false;">Add to Cart</a>
         </div>
       </div>
 
@@ -739,7 +757,7 @@
           <div class="name">Built By Faith Hoodie</div>
           <div class="price">$54.00</div>
 
-          <div class="size-picker" data-product="Built By Faith Hoodie" data-price="54.00" data-image="./assets/built_by_faith_black_hoodie.png">
+          <div class="size-picker" data-kind="Size" data-product="Built By Faith Hoodie" data-price="54.00" data-image="./assets/built_by_faith_black_hoodie.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Built By Faith Hoodie">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -762,7 +780,7 @@
           <div class="name">Unashamed Hoodie</div>
           <div class="price">$54.00</div>
 
-          <div class="size-picker" data-product="Unashamed Hoodie" data-price="54.00" data-image="./assets/unashamed_black_white_hoodie.png">
+          <div class="size-picker" data-kind="Size" data-product="Unashamed Hoodie" data-price="54.00" data-image="./assets/unashamed_black_white_hoodie.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Hoodie">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -785,7 +803,7 @@
           <div class="name">Unashamed Unbroken Hoodie</div>
           <div class="price">$54.00</div>
 
-          <div class="size-picker" data-product="Unashamed Unbroken Hoodie" data-price="54.00" data-image="./assets/unashamed_unbroken_black_hoodie.png">
+          <div class="size-picker" data-kind="Size" data-product="Unashamed Unbroken Hoodie" data-price="54.00" data-image="./assets/unashamed_unbroken_black_hoodie.png">
             <div class="size-label">Select Size</div>
             <div class="size-options" role="radiogroup" aria-label="Select size for Unashamed Unbroken Hoodie">
               <button type="button" class="size-pill" data-size="S">S</button>
@@ -873,12 +891,12 @@
       toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
     }
 
-    // --- Size selection wiring ---
+    // --- Size/Variant selection wiring (supports Size + Color) ---
     document.querySelectorAll(".product").forEach(card => {
       const picker = card.querySelector(".size-picker");
       const btn = card.querySelector(".add-to-cart");
 
-      // If no size picker (e.g., bottle), allow add immediately
+      // If no picker, allow add immediately
       if (!picker){
         if (btn){
           btn.setAttribute("aria-disabled","false");
@@ -896,12 +914,16 @@
         return;
       }
 
+      const kind = picker.getAttribute("data-kind") || "Size";
+
       const product = picker.getAttribute("data-product") || (btn ? btn.getAttribute("data-product") : "Item");
       const price = Number(picker.getAttribute("data-price") || (btn ? btn.getAttribute("data-price") : "0"));
-      const image = picker.getAttribute("data-image") || (btn ? btn.getAttribute("data-image") : "./assets/logo.homepage.png");
+      const baseImage = picker.getAttribute("data-image") || (btn ? btn.getAttribute("data-image") : "./assets/logo.homepage.png");
+
+      const imgEl = card.querySelector(".imgwrap img");
 
       const pills = picker.querySelectorAll(".size-pill");
-      let selectedSize = null;
+      let selectedValue = null;
 
       // start disabled
       if (btn) btn.setAttribute("aria-disabled", "true");
@@ -910,8 +932,22 @@
         pill.addEventListener("click", () => {
           pills.forEach(p => p.classList.remove("is-selected"));
           pill.classList.add("is-selected");
-          selectedSize = pill.getAttribute("data-size");
+          selectedValue = pill.getAttribute("data-size"); // reused for Size or Color
           if (btn) btn.setAttribute("aria-disabled","false");
+
+          // Optional per-variant image swap if attributes exist
+          // (e.g., data-image-black / data-image-white on the picker)
+          if (imgEl && kind.toLowerCase() === "color"){
+            const key = String(selectedValue || "").trim().toLowerCase();
+            const variantImg = picker.getAttribute(`data-image-${key}`);
+            if (variantImg){
+              imgEl.src = variantImg;
+              imgEl.alt = `${product} — ${selectedValue}`;
+              if (btn) btn.setAttribute("data-image", variantImg);
+            } else {
+              if (btn) btn.setAttribute("data-image", baseImage);
+            }
+          }
         });
       });
 
@@ -919,11 +955,14 @@
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           if (btn.getAttribute("aria-disabled") === "true") return;
-          if (!selectedSize) return;
+          if (!selectedValue) return;
 
-          addToCart({ product, price, size: selectedSize, image });
+          const image = btn.getAttribute("data-image") || baseImage;
+
+          // We store selection in "size" field so cart.html doesn't need changes.
+          addToCart({ product, price, size: selectedValue, image });
           updateCartBadge();
-          showToast(`Added <b>${product}</b> — Size <b>${selectedSize}</b>`);
+          showToast(`Added <b>${product}</b> — ${kind} <b>${selectedValue}</b>`);
         });
       }
     });
