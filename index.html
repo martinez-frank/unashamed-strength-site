@@ -200,7 +200,7 @@
 
     /* Mobile dropdown panel (animated) */
     .mobilePanel{
-      display:block; /* keep in flow for animation; visibility controls it */
+      display:block;
       position:absolute;
       right:0;
       top:56px;
@@ -278,7 +278,7 @@
 
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
-      .mobilePanel, .overlay, .navlinks a, .menuBtn, .hero-card img, .featured-card, .btn-primary, .shop-mini{
+      .mobilePanel, .overlay, .navlinks a, .menuBtn, .hero-card img, .featured-card, .btn-primary, .shop-mini, .btn-gold{
         transition:none !important;
       }
     }
@@ -301,7 +301,6 @@
       padding:10px 0;
     }
 
-    /* Logo sizing */
     .logo{
       width:min(720px, 98%);
       height:auto;
@@ -309,6 +308,7 @@
       filter: drop-shadow(0 14px 36px rgba(0,0,0,.62));
     }
 
+    /* Keep existing hero Shop button */
     .shop-mini{
       margin-top:18px;
       display:inline-flex;
@@ -327,30 +327,6 @@
       transition:transform .2s ease, filter .2s ease;
     }
     .shop-mini:hover{ transform:translateY(-1px); filter:brightness(1.04); }
-
-    /* NEW: About button (match site gold) */
-    .about-mini{
-      margin-top:10px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:9px 18px;
-      border-radius:10px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(202,164,90,.55);
-      color:rgba(233,230,223,.96);
-      font-weight:900;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-size:11px;
-      box-shadow:0 14px 28px rgba(0,0,0,.45);
-      transition:transform .2s ease, filter .2s ease, background .2s ease;
-    }
-    .about-mini:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.04);
-      background:rgba(202,164,90,.12);
-    }
 
     /* Hero image card */
     .hero-card{
@@ -390,16 +366,15 @@
       font-family:Cinzel, serif;
       letter-spacing:.18em;
       text-transform:uppercase;
-      font-size:14px;
+      font-size:19px; /* was 14px (≈ +35%) */
       color:rgba(233,230,223,.85);
       margin:0 0 18px;
       text-shadow:0 10px 30px rgba(0,0,0,.55);
     }
 
-    /* NEW: Button row above featured products */
+    /* Single ABOUT button row (match Shop Unashamed Strength styling) */
     .feature-actions{
       display:flex;
-      gap:12px;
       justify-content:center;
       align-items:center;
       margin: 6px 0 18px;
@@ -409,45 +384,21 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:11px 18px;
+      padding:13px 18px;
       border-radius:12px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
-      color:#0a0a0a;
+      color:#0a0a0a; /* black font */
       font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
       font-size:11px;
       border:1px solid rgba(0,0,0,.35);
       box-shadow:0 14px 28px rgba(0,0,0,.55);
-      transition:transform .2s ease, filter .2s ease;
-      min-width:170px;
       text-align:center;
+      transition:transform .2s ease, filter .2s ease;
+      min-width:min(560px, 92vw);
     }
     .btn-gold:hover{ transform:translateY(-1px); filter:brightness(1.04); }
-
-    .btn-outline{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:11px 18px;
-      border-radius:12px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(202,164,90,.55);
-      color:rgba(233,230,223,.96);
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:11px;
-      box-shadow:0 14px 28px rgba(0,0,0,.45);
-      transition:transform .2s ease, filter .2s ease, background .2s ease;
-      min-width:170px;
-      text-align:center;
-    }
-    .btn-outline:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.04);
-      background:rgba(202,164,90,.12);
-    }
 
     .featured-grid{
       width:min(980px, 92vw);
@@ -486,12 +437,11 @@
       background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.22));
     }
 
-    /* 40% larger title + price */
     .card-meta .title{
       font-family:Cinzel, serif;
       letter-spacing:.12em;
       text-transform:uppercase;
-      font-size:20px; /* was 14px */
+      font-size:14px;
       margin:8px 0 6px;
       opacity:.96;
     }
@@ -499,7 +449,7 @@
     .card-meta .price{
       color:var(--gold);
       font-weight:800;
-      font-size:21px; /* was 15px */
+      font-size:15px;
       margin:0 0 14px;
       letter-spacing:.02em;
     }
@@ -534,6 +484,7 @@
       text-transform:uppercase;
     }
 
+    /* SINGLE CTA (keep only Shop Unashamed Strength) */
     .cta{
       display:flex;
       justify-content:center;
@@ -564,16 +515,7 @@
       border-top:1px solid rgba(233,230,223,.10);
     }
 
-    /* Removed bottom "About" link; keep Shop only (gold) */
-    .footlinks{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      font-size:12px;
-      color:rgba(233,230,223,.72);
-      margin-bottom:8px;
-    }
-
+    /* Footer now only shows the motto (no extra shop/about links) */
     .footnote{
       font-family:Cinzel, serif;
       letter-spacing:.14em;
@@ -584,7 +526,6 @@
 
     /* Responsive */
     @media (max-width: 980px){
-      /* swap desktop links -> hamburger */
       .navlinks{ display:none; }
       .menuBtn{ display:inline-flex; }
 
@@ -603,13 +544,6 @@
         min-width:min(560px, 92vw);
       }
       .wrap{ padding-top:14px; }
-
-      .feature-actions{
-        flex-direction:column;
-      }
-      .btn-gold, .btn-outline{
-        min-width:min(420px, 92vw);
-      }
     }
   </style>
 </head>
@@ -686,10 +620,9 @@
 
     <div class="divider"></div>
 
-    <!-- NEW: Matching About + Shop buttons above Featured Products -->
-    <div class="feature-actions" aria-label="Primary actions">
-      <a class="btn-outline" href="./about.html">About Donnie</a>
-      <a class="btn-gold" href="./shop.html">Shop</a>
+    <!-- Single ABOUT button (gold, black font) -->
+    <div class="feature-actions" aria-label="About action">
+      <a class="btn-gold" href="./about.html">About</a>
     </div>
 
     <!-- FEATURED PRODUCTS -->
@@ -717,14 +650,12 @@
 
     <div class="tagline">Wear your faith. Train with purpose. Live unashamed.</div>
 
+    <!-- Keep only ONE CTA -->
     <div class="cta">
       <a class="big" href="./shop.html">Shop Unashamed Strength</a>
     </div>
 
     <div class="footer">
-      <div class="footlinks">
-        <a class="btn-gold" href="./shop.html">Shop</a>
-      </div>
       <div class="footnote">Faith • Discipline • Purpose</div>
     </div>
 
