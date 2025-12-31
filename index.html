@@ -278,7 +278,7 @@
 
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
-      .mobilePanel, .overlay, .navlinks a, .menuBtn, .hero-card img, .featured-card, .btn-primary{
+      .mobilePanel, .overlay, .navlinks a, .menuBtn, .hero-card img, .featured-card, .btn-primary, .shop-mini{
         transition:none !important;
       }
     }
@@ -328,6 +328,30 @@
     }
     .shop-mini:hover{ transform:translateY(-1px); filter:brightness(1.04); }
 
+    /* NEW: About button (match site gold) */
+    .about-mini{
+      margin-top:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 18px;
+      border-radius:10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(202,164,90,.55);
+      color:rgba(233,230,223,.96);
+      font-weight:900;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:11px;
+      box-shadow:0 14px 28px rgba(0,0,0,.45);
+      transition:transform .2s ease, filter .2s ease, background .2s ease;
+    }
+    .about-mini:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+      background:rgba(202,164,90,.12);
+    }
+
     /* Hero image card */
     .hero-card{
       width:min(460px, 100%);
@@ -357,7 +381,7 @@
     .divider{
       height:1px;
       background:rgba(233,230,223,.10);
-      margin:26px 0 26px;
+      margin:26px 0 20px;
     }
 
     /* FEATURED */
@@ -370,6 +394,59 @@
       color:rgba(233,230,223,.85);
       margin:0 0 18px;
       text-shadow:0 10px 30px rgba(0,0,0,.55);
+    }
+
+    /* NEW: Button row above featured products */
+    .feature-actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      margin: 6px 0 18px;
+    }
+
+    .btn-gold{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 18px;
+      border-radius:12px;
+      background:linear-gradient(180deg, var(--gold), var(--gold2));
+      color:#0a0a0a;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+      border:1px solid rgba(0,0,0,.35);
+      box-shadow:0 14px 28px rgba(0,0,0,.55);
+      transition:transform .2s ease, filter .2s ease;
+      min-width:170px;
+      text-align:center;
+    }
+    .btn-gold:hover{ transform:translateY(-1px); filter:brightness(1.04); }
+
+    .btn-outline{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 18px;
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(202,164,90,.55);
+      color:rgba(233,230,223,.96);
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+      box-shadow:0 14px 28px rgba(0,0,0,.45);
+      transition:transform .2s ease, filter .2s ease, background .2s ease;
+      min-width:170px;
+      text-align:center;
+    }
+    .btn-outline:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.04);
+      background:rgba(202,164,90,.12);
     }
 
     .featured-grid{
@@ -409,11 +486,12 @@
       background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.22));
     }
 
+    /* 40% larger title + price */
     .card-meta .title{
       font-family:Cinzel, serif;
       letter-spacing:.12em;
       text-transform:uppercase;
-      font-size:14px;
+      font-size:20px; /* was 14px */
       margin:8px 0 6px;
       opacity:.96;
     }
@@ -421,7 +499,7 @@
     .card-meta .price{
       color:var(--gold);
       font-weight:800;
-      font-size:15px;
+      font-size:21px; /* was 15px */
       margin:0 0 14px;
       letter-spacing:.02em;
     }
@@ -486,6 +564,7 @@
       border-top:1px solid rgba(233,230,223,.10);
     }
 
+    /* Removed bottom "About" link; keep Shop only (gold) */
     .footlinks{
       display:flex;
       gap:14px;
@@ -493,15 +572,6 @@
       font-size:12px;
       color:rgba(233,230,223,.72);
       margin-bottom:8px;
-    }
-    .footlinks a{
-      padding:6px 10px;
-      border-radius:10px;
-      transition:background .2s ease, color .2s ease;
-    }
-    .footlinks a:hover{
-      background:rgba(255,255,255,.06);
-      color:rgba(233,230,223,.92);
     }
 
     .footnote{
@@ -533,6 +603,13 @@
         min-width:min(560px, 92vw);
       }
       .wrap{ padding-top:14px; }
+
+      .feature-actions{
+        flex-direction:column;
+      }
+      .btn-gold, .btn-outline{
+        min-width:min(420px, 92vw);
+      }
     }
   </style>
 </head>
@@ -609,6 +686,12 @@
 
     <div class="divider"></div>
 
+    <!-- NEW: Matching About + Shop buttons above Featured Products -->
+    <div class="feature-actions" aria-label="Primary actions">
+      <a class="btn-outline" href="./about.html">About Donnie</a>
+      <a class="btn-gold" href="./shop.html">Shop</a>
+    </div>
+
     <!-- FEATURED PRODUCTS -->
     <div class="section-title">Featured Products</div>
 
@@ -640,8 +723,7 @@
 
     <div class="footer">
       <div class="footlinks">
-        <a href="./shop.html">Shop</a>
-        <a href="./about.html">About</a>
+        <a class="btn-gold" href="./shop.html">Shop</a>
       </div>
       <div class="footnote">Faith • Discipline • Purpose</div>
     </div>
