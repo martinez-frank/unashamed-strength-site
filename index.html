@@ -278,7 +278,7 @@
 
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
-      .mobilePanel, .overlay, .navlinks a, .menuBtn, .hero-card img, .featured-card, .btn-primary, .shop-mini, .btn-gold{
+      .mobilePanel, .overlay, .navlinks a, .menuBtn, .hero-card img, .featured-card, .btn-primary, .cta .big, .btn-gold{
         transition:none !important;
       }
     }
@@ -308,23 +308,25 @@
       filter: drop-shadow(0 14px 36px rgba(0,0,0,.62));
     }
 
-    /* Keep existing hero Shop button */
+    /* Make HERO Shop button match bottom CTA (for consistency) */
     .shop-mini{
       margin-top:18px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:9px 18px;
-      border-radius:10px;
+      padding:13px 18px;
+      border-radius:12px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
-      color:#0a0a0a;
+      color:#0a0a0a; /* black font */
       font-weight:900;
-      letter-spacing:.14em;
+      letter-spacing:.12em;
       text-transform:uppercase;
       font-size:11px;
       border:1px solid rgba(0,0,0,.35);
       box-shadow:0 14px 28px rgba(0,0,0,.55);
       transition:transform .2s ease, filter .2s ease;
+      min-width:220px;
+      text-align:center;
     }
     .shop-mini:hover{ transform:translateY(-1px); filter:brightness(1.04); }
 
@@ -366,24 +368,24 @@
       font-family:Cinzel, serif;
       letter-spacing:.18em;
       text-transform:uppercase;
-      font-size:19px; /* was 14px (≈ +35%) */
+      font-size:26px; /* increased again (~35% from prior 19px) */
       color:rgba(233,230,223,.85);
       margin:0 0 18px;
       text-shadow:0 10px 30px rgba(0,0,0,.55);
     }
 
-    /* Single ABOUT button row (match Shop Unashamed Strength styling) */
+    /* About button row (match bottom CTA exactly) */
     .feature-actions{
       display:flex;
       justify-content:center;
       align-items:center;
       margin: 6px 0 18px;
     }
-
     .btn-gold{
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      min-width:min(560px, 92vw);
       padding:13px 18px;
       border-radius:12px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
@@ -396,7 +398,6 @@
       box-shadow:0 14px 28px rgba(0,0,0,.55);
       text-align:center;
       transition:transform .2s ease, filter .2s ease;
-      min-width:min(560px, 92vw);
     }
     .btn-gold:hover{ transform:translateY(-1px); filter:brightness(1.04); }
 
@@ -495,7 +496,7 @@
       padding:13px 18px;
       border-radius:12px;
       background:linear-gradient(180deg, var(--gold), var(--gold2));
-      color:#0a0a0a;
+      color:#0a0a0a; /* black font */
       font-weight:900;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -515,7 +516,6 @@
       border-top:1px solid rgba(233,230,223,.10);
     }
 
-    /* Footer now only shows the motto (no extra shop/about links) */
     .footnote{
       font-family:Cinzel, serif;
       letter-spacing:.14em;
@@ -620,7 +620,7 @@
 
     <div class="divider"></div>
 
-    <!-- Single ABOUT button (gold, black font) -->
+    <!-- Single ABOUT button (matches bottom CTA) -->
     <div class="feature-actions" aria-label="About action">
       <a class="btn-gold" href="./about.html">About</a>
     </div>
